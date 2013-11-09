@@ -1,8 +1,24 @@
+\ProvidesPackage{msym}
+
+% Read the README for descriptions. tl,dr: this package provides
+% useful macros for lazy mechanicians like myself. 
+% (c) Onur Solmaz 2013
+
+% xspace is required to ensure trailing spaces after macros, when used
+% without curly braces
+
 \usepackage{xspace,bm}
+
+% Redefine \varepsilon, because life is too short
 
 \newcommand{\vareps}{\varepsilon}
 
+% The following set of definitions are to help the typesetting of
+% formatted single letters, which are generally used for denoting
+% vectors, tensors etc. 
+
 % Roman Latin (Inside equations)
+
 \newcommand{\roma}{\ensuremath{\mathrm{a}}\xspace}
 \newcommand{\romb}{\ensuremath{\mathrm{b}}\xspace}
 \newcommand{\romc}{\ensuremath{\mathrm{c}}\xspace}
@@ -57,6 +73,7 @@
 \newcommand{\Romz}{\ensuremath{\mathrm{Z}}\xspace}
 
 % Bold Latin
+
 \newcommand{\boa}{\ensuremath\mathbf{a}\xspace}
 \newcommand{\bob}{\ensuremath\mathbf{b}\xspace}
 \newcommand{\boc}{\ensuremath\mathbf{c}\xspace}
@@ -106,11 +123,12 @@
 \newcommand{\Bou}{\ensuremath\mathbf{U}\xspace}
 \newcommand{\Bov}{\ensuremath\mathbf{V}\xspace}
 \newcommand{\Bow}{\ensuremath\mathbf{W}\xspace}
-\newcommand{\Box}{\ensuremath\mathbf{X}\xspace}
+\newcommand{\Boxx}{\ensuremath\mathbf{X}\xspace}
 \newcommand{\Boy}{\ensuremath\mathbf{Y}\xspace}
 \newcommand{\Boz}{\ensuremath\mathbf{Z}\xspace}
 
 % Bold and Italic Latin
+
 \newcommand{\bola}{\ensuremath{\bm a}\xspace}
 \newcommand{\bolb}{\ensuremath{\bm b}\xspace}
 \newcommand{\bolc}{\ensuremath{\bm c}\xspace}
@@ -165,6 +183,7 @@
 \newcommand{\Bolz}{\ensuremath{\bm Z}\xspace}
 
 % Bold Greek
+
 \newcommand{\balpha  }{\ensuremath\mathbf{alpha  }\xspace}
 \newcommand{\bbeta   }{\ensuremath\mathbf{beta   }\xspace}     
 \newcommand{\bgamma  }{\ensuremath\mathbf{gamma  }\xspace}     
@@ -222,6 +241,7 @@
 \newcommand{\bogamma  }{\ensuremath{\bm\gamma  }\xspace}     
 \newcommand{\bodelta  }{\ensuremath{\bm\delta  }\xspace}     
 \newcommand{\boepsilon}{\ensuremath{\bm\epsilon}\xspace} 
+\newcommand{\bovareps }{\ensuremath{\bm\vareps}\xspace} 
 \newcommand{\bozeta   }{\ensuremath{\bm\zeta   }\xspace}     
 \newcommand{\booeta   }{\ensuremath{\bm\eta    }\xspace}     
 \newcommand{\botheta  }{\ensuremath{\bm\theta  }\xspace}     
@@ -296,29 +316,117 @@
 \newcommand{\Caly}{\ensuremath{\mathcal{Y}}\xspace}
 \newcommand{\Calz}{\ensuremath{\mathcal{Z}}\xspace}
 
-
 % Special
 
-\newcommand{\proj}{\ensuremath{\mathrm{proj}}\xspace}
-\newcommand{\sign}{\ensuremath{\mathrm{sign}}\xspace}
-\newcommand{\sym}{\ensuremath{\mathrm{sym}}\xspace}
-\newcommand{\skw}{\ensuremath{\mathrm{skw}}\xspace}
-\newcommand{\div}{\ensuremath{\mathrm{div}}\xspace}
-\newcommand{\curl}{\ensuremath{\mathrm{curl}}\xspace}
-\newcommand{\rot}{\ensuremath{\mathrm{rot}}\xspace}
+\newcommand{\proj}{\ensuremath{\mathrm{proj}}\xspace}  % projection
+\newcommand{\sign}{\ensuremath{\mathrm{sign}}\xspace}  % sign
+\newcommand{\sym}{\ensuremath{\mathrm{sym}}\xspace}    % symmetric part
+\newcommand{\skw}{\ensuremath{\mathrm{skw}}\xspace}    % skew part
+\newcommand{\dive}{\ensuremath{\mathrm{div}}\xspace}   % divergence
+\newcommand{\curl}{\ensuremath{\mathrm{curl}}\xspace}  % curl
+\newcommand{\rot}{\ensuremath{\mathrm{rot}}\xspace}    % rotation
+\newcommand{\unit}{\ensuremath{\mathrm{unit}}\xspace}  % unit (my invention)
 
-\newcommand{\variation}[2]{\frac{\delta #1}{\delta #2}}
-\newcommand{\partd}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\deriv}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
-\newcommand{\assem}{\bm{\mathsf{A}}}
+\newcommand{\variation}[2]{\frac{\delta #1}{\delta #2}} % variation shorthand
+\newcommand{\partd}[2]{\frac{\partial #1}{\partial #2}} % partial derivative
+\newcommand{\deriv}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}} % derivative
+\newcommand{\assem}{\bm{\mathsf{A}}} % assembly symbol
 \newcommand{\bero}{\mathbf{0}} % bold zero
 \newcommand{\bone}{\mathbf{1}} % bold one
-\newcommand{\Lin}{\mathrm{Lin}\ \xspace}
-\newcommand{\dV}{\ \mathrm{d}V}
-\newcommand{\dA}{\ \mathrm{d}A}
+\newcommand{\Lin}{\mathrm{Lin}\ \xspace} % linearization operator
+\newcommand{\dV}{\ \mathrm{d}V} % differential volume
+\newcommand{\dA}{\ \mathrm{d}A} % differential area
+\newcommand{\dx}{\ \mathrm{d}x} % differential length
 \newcommand{\evat}{\bigg|} % evaluate at
-\newcommand{\onetwo}{\frac{1}{2}}
-\newcommand{\threetwo}{\frac{3}{2}}
+\newcommand{\onetwo}{\frac{1}{2}} % one over two
+\newcommand{\threetwo}{\frac{3}{2}} % three over two
+\newcommand{\degree}{\ensuremath{^{\circ}}\xspace} % degree symbol
 
-\newcommand{\degree}{\ensuremath{^{\circ}}\xspace}
 
+% Following macros are borrowed from the package schule2e. Very useful
+% for typesetting row and column vectors easily.
+% Usage: \cvec{1;2;3;4}. The difference between \cvec and \vcvec (and
+% also \rvec and \vrvec are the type of brackets. 
+
+\makeatletter
+
+\newcommand{\cvec}[2][r]{%
+  \gdef\@VORNE{1}
+  \left[\hskip-\arraycolsep%
+    \begin{array}{#1}\vekSp@lten{#2}\end{array}%
+  \hskip-\arraycolsep\right]}
+
+\newcommand{\vcvec}[2][r]{%
+  \gdef\@VORNE{1}
+  \left|\hskip-\arraycolsep%
+    \begin{array}{#1}\vekSp@lten{#2}\end{array}%
+  \hskip-\arraycolsep\right|}
+
+\def\vekSp@lten#1{\xvekSp@lten#1;vekL@stLine;}
+\def\vekL@stLine{vekL@stLine}
+\def\xvekSp@lten#1;{\def\temp{#1}%
+  \ifx\temp\vekL@stLine
+  \else
+    \ifnum\@VORNE=1\gdef\@VORNE{0}
+    \else\@arraycr\fi%
+    {#1}%
+    \expandafter\xvekSp@lten
+  \fi}
+
+% Same as \cvec, but row vector
+
+\newcommand{\rvec}[2][r]{%
+  \gdef\@VORNE{1}
+  \left[\hskip-\arraycolsep%
+    \begin{array}{#1}\vekZe@lten{#2}\end{array}%
+  \hskip-\arraycolsep\right]}
+
+\newcommand{\vrvec}[2][r]{%
+  \gdef\@VORNE{1}
+  \left|\hskip-\arraycolsep%
+    \begin{array}{#1}\vekZe@lten{#2}\end{array}%
+  \hskip-\arraycolsep\right|}
+
+\def\vekZe@lten#1{\xvekZe@lten#1;vekL@stLinee;}
+\def\vekL@stLinee{vekL@stLinee}
+\def\xvekZe@lten#1;{\def\temp{#1}%
+  \ifx\temp\vekL@stLinee
+  \else
+    \ifnum\@VORNE=1\gdef\@VORNE{0}
+    \else\hskip\col@sep\fi%
+    {#1}%
+    \expandafter\xvekZe@lten
+  \fi}
+\makeatother
+
+% Shortcut macro for vector bases 
+% (e.g. e_i dyadic e_j dyadic ... and so on)
+% Usage: \basis[vector(default is bold e)]{indices}
+
+\makeatletter
+\def\basis{\@ifnextchar[\@basis%
+        {\@basis[\boe]}}
+\def\@basis[#1]#2{%
+        \begingroup
+        \catcode`\ 12
+        \def\@basisvector{#1}
+        \iterbasis#2\relax
+        \endgroup
+}
+\def\iterbasis#1#2\relax{%
+        \if#1\otherspace
+        % do nothing
+        \else
+                {\@basisvector_{#1}}%
+        \fi
+        \ifx\relax#2\relax
+                \let\next\relax 
+        \else
+                \let\next\iterbasis {\,\otimes\,}
+        \fi
+        \next#2\relax
+}
+\catcode`\ 12
+\def\otherspace{ }%
+\catcode`\ 10
+\makeatother
