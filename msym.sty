@@ -325,7 +325,9 @@
 \newcommand{\dive}{\ensuremath{\mathrm{div}}\xspace}   % divergence
 \newcommand{\curl}{\ensuremath{\mathrm{curl}}\xspace}  % curl
 \newcommand{\rot}{\ensuremath{\mathrm{rot}}\xspace}    % rotation
-\newcommand{\unit}{\ensuremath{\mathrm{unit}}\xspace}  % unit (my invention)
+\newcommand{\unit}{\ensuremath{\mathrm{unit}}\xspace}  % unit 
+\newcommand{\tr}{\ensuremath{\mathrm{tr}}\xspace}  % trace
+          
 
 \newcommand{\variation}[2]{\frac{\delta #1}{\delta #2}} % variation shorthand
 \newcommand{\partd}[2]{\frac{\partial #1}{\partial #2}} % partial derivative
@@ -430,3 +432,12 @@
 \def\otherspace{ }%
 \catcode`\ 10
 \makeatother
+
+% Shorthand for equation
+\newcommand{\eqn}[1]{
+  \begin{equation}
+    #1
+  \end{equation}
+}
+
+
