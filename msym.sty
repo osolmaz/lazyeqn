@@ -1,7 +1,7 @@
-\ProvidesPackage{msym}
+\ProvidesPackage{lazyeqn}
 
-% Read the README for descriptions. tl,dr: this package provides
-% useful macros for lazy mechanicians like myself. 
+% Read the README and docs for descriptions. 
+% provides useful macros for typesetting formulas. 
 % (c) Onur Solmaz 2013
 
 % xspace is required to ensure trailing spaces after macros, when used
@@ -16,174 +16,172 @@
 % The following set of definitions are to help the typesetting of
 % formatted single letters, which are generally used for denoting
 % vectors, tensors etc. 
+% These are designed to minimize the number of keystrokes while
+% writing equations
 
-% Roman Latin (Inside equations)
-
-\newcommand{\roma}{\ensuremath{\mathrm{a}}\xspace}
-\newcommand{\romb}{\ensuremath{\mathrm{b}}\xspace}
-\newcommand{\romc}{\ensuremath{\mathrm{c}}\xspace}
-\newcommand{\romd}{\ensuremath{\mathrm{d}}\xspace}
-\newcommand{\rome}{\ensuremath{\mathrm{e}}\xspace}
-\newcommand{\romf}{\ensuremath{\mathrm{f}}\xspace}
-\newcommand{\romg}{\ensuremath{\mathrm{g}}\xspace}
-\newcommand{\romh}{\ensuremath{\mathrm{h}}\xspace}
-\newcommand{\romi}{\ensuremath{\mathrm{i}}\xspace}
-\newcommand{\romj}{\ensuremath{\mathrm{j}}\xspace}
-\newcommand{\romk}{\ensuremath{\mathrm{k}}\xspace}
-\newcommand{\roml}{\ensuremath{\mathrm{l}}\xspace}
-\newcommand{\romm}{\ensuremath{\mathrm{m}}\xspace}
-\newcommand{\romn}{\ensuremath{\mathrm{n}}\xspace}
-\newcommand{\romo}{\ensuremath{\mathrm{o}}\xspace}
-\newcommand{\romp}{\ensuremath{\mathrm{p}}\xspace}
-\newcommand{\romq}{\ensuremath{\mathrm{q}}\xspace}
-\newcommand{\romr}{\ensuremath{\mathrm{r}}\xspace}
-\newcommand{\roms}{\ensuremath{\mathrm{s}}\xspace}
-\newcommand{\romt}{\ensuremath{\mathrm{t}}\xspace}
-\newcommand{\romu}{\ensuremath{\mathrm{u}}\xspace}
-\newcommand{\romv}{\ensuremath{\mathrm{v}}\xspace}
-\newcommand{\romw}{\ensuremath{\mathrm{w}}\xspace}
-\newcommand{\romx}{\ensuremath{\mathrm{x}}\xspace}
-\newcommand{\romy}{\ensuremath{\mathrm{y}}\xspace}
-\newcommand{\romz}{\ensuremath{\mathrm{z}}\xspace}
-\newcommand{\Roma}{\ensuremath{\mathrm{A}}\xspace}
-\newcommand{\Romb}{\ensuremath{\mathrm{B}}\xspace}
-\newcommand{\Romc}{\ensuremath{\mathrm{C}}\xspace}
-\newcommand{\Romd}{\ensuremath{\mathrm{D}}\xspace}
-\newcommand{\Rome}{\ensuremath{\mathrm{E}}\xspace}
-\newcommand{\Romf}{\ensuremath{\mathrm{F}}\xspace}
-\newcommand{\Romg}{\ensuremath{\mathrm{G}}\xspace}
-\newcommand{\Romh}{\ensuremath{\mathrm{H}}\xspace}
-\newcommand{\Romi}{\ensuremath{\mathrm{I}}\xspace}
-\newcommand{\Romj}{\ensuremath{\mathrm{J}}\xspace}
-\newcommand{\Romk}{\ensuremath{\mathrm{K}}\xspace}
-\newcommand{\Roml}{\ensuremath{\mathrm{L}}\xspace}
-\newcommand{\Romm}{\ensuremath{\mathrm{M}}\Xspace}
-\newcommand{\Romn}{\ensuremath{\mathrm{N}}\xspace}
-\newcommand{\Romo}{\ensuremath{\mathrm{O}}\xspace}
-\newcommand{\Romp}{\ensuremath{\mathrm{P}}\xspace}
-\newcommand{\Romq}{\ensuremath{\mathrm{Q}}\xspace}
-\newcommand{\Romr}{\ensuremath{\mathrm{R}}\xspace}
-\newcommand{\Roms}{\ensuremath{\mathrm{S}}\xspace}
-\newcommand{\Romt}{\ensuremath{\mathrm{T}}\xspace}
-\newcommand{\Romu}{\ensuremath{\mathrm{U}}\xspace}
-\newcommand{\Romv}{\ensuremath{\mathrm{V}}\xspace}
-\newcommand{\Romw}{\ensuremath{\mathrm{W}}\xspace}
-\newcommand{\Romx}{\ensuremath{\mathrm{X}}\xspace}
-\newcommand{\Romy}{\ensuremath{\mathrm{Y}}\xspace}
-\newcommand{\Romz}{\ensuremath{\mathrm{Z}}\xspace}
+% Roman Latin
+\newcommand{\rra}{\ensuremath{\mathrm{a}}\xspace}
+\newcommand{\rrb}{\ensuremath{\mathrm{b}}\xspace}
+\newcommand{\rrc}{\ensuremath{\mathrm{c}}\xspace}
+\newcommand{\rrd}{\ensuremath{\mathrm{d}}\xspace}
+\newcommand{\rre}{\ensuremath{\mathrm{e}}\xspace}
+\newcommand{\rrf}{\ensuremath{\mathrm{f}}\xspace}
+\newcommand{\rrg}{\ensuremath{\mathrm{g}}\xspace}
+\newcommand{\rrh}{\ensuremath{\mathrm{h}}\xspace}
+\newcommand{\rri}{\ensuremath{\mathrm{i}}\xspace}
+\newcommand{\rrj}{\ensuremath{\mathrm{j}}\xspace}
+\newcommand{\rrk}{\ensuremath{\mathrm{k}}\xspace}
+\newcommand{\rrl}{\ensuremath{\mathrm{l}}\xspace}
+\newcommand{\rrm}{\ensuremath{\mathrm{m}}\xspace}
+\newcommand{\rrn}{\ensuremath{\mathrm{n}}\xspace}
+\newcommand{\rro}{\ensuremath{\mathrm{o}}\xspace}
+\newcommand{\rrp}{\ensuremath{\mathrm{p}}\xspace}
+\newcommand{\rrq}{\ensuremath{\mathrm{q}}\xspace}
+\newcommand{\rrr}{\ensuremath{\mathrm{r}}\xspace}
+\newcommand{\rrs}{\ensuremath{\mathrm{s}}\xspace}
+\newcommand{\rrt}{\ensuremath{\mathrm{t}}\xspace}
+\newcommand{\rru}{\ensuremath{\mathrm{u}}\xspace}
+\newcommand{\rrv}{\ensuremath{\mathrm{v}}\xspace}
+\newcommand{\rrw}{\ensuremath{\mathrm{w}}\xspace}
+\newcommand{\rrx}{\ensuremath{\mathrm{x}}\xspace}
+\newcommand{\rry}{\ensuremath{\mathrm{y}}\xspace}
+\newcommand{\rrz}{\ensuremath{\mathrm{z}}\xspace}
+\newcommand{\rrA}{\ensuremath{\mathrm{A}}\xspace}
+\newcommand{\rrB}{\ensuremath{\mathrm{B}}\xspace}
+\newcommand{\rrC}{\ensuremath{\mathrm{C}}\xspace}
+\newcommand{\rrD}{\ensuremath{\mathrm{D}}\xspace}
+\newcommand{\rrE}{\ensuremath{\mathrm{E}}\xspace}
+\newcommand{\rrF}{\ensuremath{\mathrm{F}}\xspace}
+\newcommand{\rrG}{\ensuremath{\mathrm{G}}\xspace}
+\newcommand{\rrH}{\ensuremath{\mathrm{H}}\xspace}
+\newcommand{\rrI}{\ensuremath{\mathrm{I}}\xspace}
+\newcommand{\rrJ}{\ensuremath{\mathrm{J}}\xspace}
+\newcommand{\rrK}{\ensuremath{\mathrm{K}}\xspace}
+\newcommand{\rrL}{\ensuremath{\mathrm{L}}\xspace}
+\newcommand{\rrM}{\ensuremath{\mathrm{M}}\Xspace}
+\newcommand{\rrN}{\ensuremath{\mathrm{N}}\xspace}
+\newcommand{\rrO}{\ensuremath{\mathrm{O}}\xspace}
+\newcommand{\rrP}{\ensuremath{\mathrm{P}}\xspace}
+\newcommand{\rrQ}{\ensuremath{\mathrm{Q}}\xspace}
+\newcommand{\rrR}{\ensuremath{\mathrm{R}}\xspace}
+\newcommand{\rrS}{\ensuremath{\mathrm{S}}\xspace}
+\newcommand{\rrT}{\ensuremath{\mathrm{T}}\xspace}
+\newcommand{\rrU}{\ensuremath{\mathrm{U}}\xspace}
+\newcommand{\rrV}{\ensuremath{\mathrm{V}}\xspace}
+\newcommand{\rrW}{\ensuremath{\mathrm{W}}\xspace}
+\newcommand{\rrX}{\ensuremath{\mathrm{X}}\xspace}
+\newcommand{\rrY}{\ensuremath{\mathrm{Y}}\xspace}
+\newcommand{\rrZ}{\ensuremath{\mathrm{Z}}\xspace}
 
 % Bold Latin
-
-\newcommand{\boa}{\ensuremath\mathbf{a}\xspace}
-\newcommand{\bob}{\ensuremath\mathbf{b}\xspace}
-\newcommand{\boc}{\ensuremath\mathbf{c}\xspace}
-\newcommand{\bod}{\ensuremath\mathbf{d}\xspace}
-\newcommand{\boe}{\ensuremath\mathbf{e}\xspace}
-\newcommand{\bof}{\ensuremath\mathbf{f}\xspace}
-\newcommand{\bog}{\ensuremath\mathbf{g}\xspace}
-\newcommand{\boh}{\ensuremath\mathbf{h}\xspace}
-\newcommand{\boi}{\ensuremath\mathbf{i}\xspace}
-\newcommand{\boj}{\ensuremath\mathbf{j}\xspace}
-\newcommand{\bok}{\ensuremath\mathbf{k}\xspace}
-\newcommand{\bol}{\ensuremath\mathbf{l}\xspace}
-\newcommand{\bom}{\ensuremath\mathbf{m}\xspace}
-\newcommand{\bon}{\ensuremath\mathbf{n}\xspace}
-\newcommand{\boo}{\ensuremath\mathbf{o}\xspace}
-\newcommand{\bop}{\ensuremath\mathbf{p}\xspace}
-\newcommand{\boq}{\ensuremath\mathbf{q}\xspace}
-\newcommand{\bor}{\ensuremath\mathbf{r}\xspace}
-\newcommand{\bos}{\ensuremath\mathbf{s}\xspace}
-\newcommand{\bott}{\ensuremath\mathbf{t}\xspace}
-\newcommand{\bou}{\ensuremath\mathbf{u}\xspace}
-\newcommand{\bov}{\ensuremath\mathbf{v}\xspace}
-\newcommand{\bow}{\ensuremath\mathbf{w}\xspace}
-\newcommand{\boxx}{\ensuremath\mathbf{x}\xspace}
-\newcommand{\boy}{\ensuremath\mathbf{y}\xspace}
-\newcommand{\boz}{\ensuremath\mathbf{z}\xspace}   
-\newcommand{\Boa}{\ensuremath\mathbf{A}\xspace}
-\newcommand{\Bob}{\ensuremath\mathbf{B}\xspace}
-\newcommand{\Boc}{\ensuremath\mathbf{C}\xspace}
-\newcommand{\Bod}{\ensuremath\mathbf{D}\xspace}
-\newcommand{\Boe}{\ensuremath\mathbf{E}\xspace}
-\newcommand{\Bof}{\ensuremath\mathbf{F}\xspace}
-\newcommand{\Bog}{\ensuremath\mathbf{G}\xspace}
-\newcommand{\Boh}{\ensuremath\mathbf{H}\xspace}
-\newcommand{\Boi}{\ensuremath\mathbf{I}\xspace}
-\newcommand{\Boj}{\ensuremath\mathbf{J}\xspace}
-\newcommand{\Bok}{\ensuremath\mathbf{K}\xspace}
-\newcommand{\Bol}{\ensuremath\mathbf{L}\xspace}
-\newcommand{\Bom}{\ensuremath\mathbf{M}\Xspace}
-\newcommand{\Bon}{\ensuremath\mathbf{N}\xspace}
-\newcommand{\Boo}{\ensuremath\mathbf{O}\xspace}
-\newcommand{\Bop}{\ensuremath\mathbf{P}\xspace}
-\newcommand{\Boq}{\ensuremath\mathbf{Q}\xspace}
-\newcommand{\Bor}{\ensuremath\mathbf{R}\xspace}
-\newcommand{\Bos}{\ensuremath\mathbf{S}\xspace}
-\newcommand{\Bot}{\ensuremath\mathbf{T}\xspace}
-\newcommand{\Bou}{\ensuremath\mathbf{U}\xspace}
-\newcommand{\Bov}{\ensuremath\mathbf{V}\xspace}
-\newcommand{\Bow}{\ensuremath\mathbf{W}\xspace}
-\newcommand{\Boxx}{\ensuremath\mathbf{X}\xspace}
-\newcommand{\Boy}{\ensuremath\mathbf{Y}\xspace}
-\newcommand{\Boz}{\ensuremath\mathbf{Z}\xspace}
+\newcommand{\bba}{\ensuremath\mathbf{a}\xspace}
+\newcommand{\bbb}{\ensuremath\mathbf{b}\xspace}
+\newcommand{\bbc}{\ensuremath\mathbf{c}\xspace}
+\newcommand{\bbd}{\ensuremath\mathbf{d}\xspace}
+\newcommand{\bbe}{\ensuremath\mathbf{e}\xspace}
+\newcommand{\bbf}{\ensuremath\mathbf{f}\xspace}
+\newcommand{\bbg}{\ensuremath\mathbf{g}\xspace}
+\newcommand{\bbh}{\ensuremath\mathbf{h}\xspace}
+\newcommand{\bbi}{\ensuremath\mathbf{i}\xspace}
+\newcommand{\bbj}{\ensuremath\mathbf{j}\xspace}
+\newcommand{\bbk}{\ensuremath\mathbf{k}\xspace}
+\newcommand{\bbl}{\ensuremath\mathbf{l}\xspace}
+\newcommand{\bbm}{\ensuremath\mathbf{m}\xspace}
+\newcommand{\bbn}{\ensuremath\mathbf{n}\xspace}
+\newcommand{\bbo}{\ensuremath\mathbf{o}\xspace}
+\newcommand{\bbp}{\ensuremath\mathbf{p}\xspace}
+\newcommand{\bbq}{\ensuremath\mathbf{q}\xspace}
+\newcommand{\bbr}{\ensuremath\mathbf{r}\xspace}
+\newcommand{\bbs}{\ensuremath\mathbf{s}\xspace}
+\newcommand{\bbt}{\ensuremath\mathbf{t}\xspace} % \bot is already defined
+\newcommand{\bbu}{\ensuremath\mathbf{u}\xspace}
+\newcommand{\bbv}{\ensuremath\mathbf{v}\xspace}
+\newcommand{\bbw}{\ensuremath\mathbf{w}\xspace}
+\newcommand{\bbx}{\ensuremath\mathbf{x}\xspace} % \box is already defined
+\newcommand{\bby}{\ensuremath\mathbf{y}\xspace}
+\newcommand{\bbz}{\ensuremath\mathbf{z}\xspace}   
+\newcommand{\bbA}{\ensuremath\mathbf{A}\xspace}
+\newcommand{\bbB}{\ensuremath\mathbf{B}\xspace}
+\newcommand{\bbC}{\ensuremath\mathbf{C}\xspace}
+\newcommand{\bbD}{\ensuremath\mathbf{D}\xspace}
+\newcommand{\bbE}{\ensuremath\mathbf{E}\xspace}
+\newcommand{\bbF}{\ensuremath\mathbf{F}\xspace}
+\newcommand{\bbG}{\ensuremath\mathbf{G}\xspace}
+\newcommand{\bbH}{\ensuremath\mathbf{H}\xspace}
+\newcommand{\bbI}{\ensuremath\mathbf{I}\xspace}
+\newcommand{\bbJ}{\ensuremath\mathbf{J}\xspace}
+\newcommand{\bbK}{\ensuremath\mathbf{K}\xspace}
+\newcommand{\bbL}{\ensuremath\mathbf{L}\xspace}
+\newcommand{\bbM}{\ensuremath\mathbf{M}\Xspace}
+\newcommand{\bbN}{\ensuremath\mathbf{N}\xspace}
+\newcommand{\bbO}{\ensuremath\mathbf{O}\xspace}
+\newcommand{\bbP}{\ensuremath\mathbf{P}\xspace}
+\newcommand{\bbQ}{\ensuremath\mathbf{Q}\xspace}
+\newcommand{\bbR}{\ensuremath\mathbf{R}\xspace}
+\newcommand{\bbS}{\ensuremath\mathbf{S}\xspace}
+\newcommand{\bbT}{\ensuremath\mathbf{T}\xspace}
+\newcommand{\bbU}{\ensuremath\mathbf{U}\xspace}
+\newcommand{\bbV}{\ensuremath\mathbf{V}\xspace}
+\newcommand{\bbW}{\ensuremath\mathbf{W}\xspace}
+\newcommand{\bbX}{\ensuremath\mathbf{X}\xspace} % \box is already defined
+\newcommand{\bbY}{\ensuremath\mathbf{Y}\xspace}
+\newcommand{\bbZ}{\ensuremath\mathbf{Z}\xspace}
 
 % Bold and Italic Latin
-
-\newcommand{\bola}{\ensuremath{\bm a}\xspace}
-\newcommand{\bolb}{\ensuremath{\bm b}\xspace}
-\newcommand{\bolc}{\ensuremath{\bm c}\xspace}
-\newcommand{\boldd}{\ensuremath{\bm d}\xspace}
-\newcommand{\bole}{\ensuremath{\bm e}\xspace}
-\newcommand{\bolf}{\ensuremath{\bm f}\xspace}
-\newcommand{\bolg}{\ensuremath{\bm g}\xspace}
-\newcommand{\bolh}{\ensuremath{\bm h}\xspace}
-\newcommand{\boli}{\ensuremath{\bm i}\xspace}
-\newcommand{\bolj}{\ensuremath{\bm j}\xspace}
-\newcommand{\bolk}{\ensuremath{\bm k}\xspace}
-\newcommand{\boll}{\ensuremath{\bm l}\xspace}
-\newcommand{\bolm}{\ensuremath{\bm m}\xspace}
-\newcommand{\boln}{\ensuremath{\bm n}\xspace}
-\newcommand{\bolo}{\ensuremath{\bm o}\xspace}
-\newcommand{\bolp}{\ensuremath{\bm p}\xspace}
-\newcommand{\bolq}{\ensuremath{\bm q}\xspace}
-\newcommand{\bolr}{\ensuremath{\bm r}\xspace}
-\newcommand{\bols}{\ensuremath{\bm s}\xspace}
-\newcommand{\bolt}{\ensuremath{\bm t}\xspace}
-\newcommand{\bolu}{\ensuremath{\bm u}\xspace}
-\newcommand{\bolv}{\ensuremath{\bm v}\xspace}
-\newcommand{\bolw}{\ensuremath{\bm w}\xspace}
-\newcommand{\bolx}{\ensuremath{\bm x}\xspace}
-\newcommand{\boly}{\ensuremath{\bm y}\xspace}
-\newcommand{\bolz}{\ensuremath{\bm z}\xspace}   
-\newcommand{\Bola}{\ensuremath{\bm A}\xspace}
-\newcommand{\Bolb}{\ensuremath{\bm B}\xspace}
-\newcommand{\Bolc}{\ensuremath{\bm C}\xspace}
-\newcommand{\Bold}{\ensuremath{\bm D}\xspace}
-\newcommand{\Bole}{\ensuremath{\bm E}\xspace}
-\newcommand{\Bolf}{\ensuremath{\bm F}\xspace}
-\newcommand{\Bolg}{\ensuremath{\bm G}\xspace}
-\newcommand{\Bolh}{\ensuremath{\bm H}\xspace}
-\newcommand{\Boli}{\ensuremath{\bm I}\xspace}
-\newcommand{\Bolj}{\ensuremath{\bm J}\xspace}
-\newcommand{\Bolk}{\ensuremath{\bm K}\xspace}
-\newcommand{\Boll}{\ensuremath{\bm L}\xspace}
-\newcommand{\Bolm}{\ensuremath{\bm M}\Xspace}
-\newcommand{\Boln}{\ensuremath{\bm N}\xspace}
-\newcommand{\Bolo}{\ensuremath{\bm O}\xspace}
-\newcommand{\Bolp}{\ensuremath{\bm P}\xspace}
-\newcommand{\Bolq}{\ensuremath{\bm Q}\xspace}
-\newcommand{\Bolr}{\ensuremath{\bm R}\xspace}
-\newcommand{\Bols}{\ensuremath{\bm S}\xspace}
-\newcommand{\Bolt}{\ensuremath{\bm T}\xspace}
-\newcommand{\Bolu}{\ensuremath{\bm U}\xspace}
-\newcommand{\Bolv}{\ensuremath{\bm V}\xspace}
-\newcommand{\Bolw}{\ensuremath{\bm W}\xspace}
-\newcommand{\Bolx}{\ensuremath{\bm X}\xspace}
-\newcommand{\Boly}{\ensuremath{\bm Y}\xspace}
-\newcommand{\Bolz}{\ensuremath{\bm Z}\xspace}
+\newcommand{\bbba}{\ensuremath{\bm a}\xspace}
+\newcommand{\bbbb}{\ensuremath{\bm b}\xspace}
+\newcommand{\bbbc}{\ensuremath{\bm c}\xspace}
+\newcommand{\bbbd}{\ensuremath{\bm d}\xspace}
+\newcommand{\bbbe}{\ensuremath{\bm e}\xspace}
+\newcommand{\bbbf}{\ensuremath{\bm f}\xspace}
+\newcommand{\bbbg}{\ensuremath{\bm g}\xspace}
+\newcommand{\bbbh}{\ensuremath{\bm h}\xspace}
+\newcommand{\bbbi}{\ensuremath{\bm i}\xspace}
+\newcommand{\bbbj}{\ensuremath{\bm j}\xspace}
+\newcommand{\bbbk}{\ensuremath{\bm k}\xspace}
+\newcommand{\bbbl}{\ensuremath{\bm l}\xspace}
+\newcommand{\bbbm}{\ensuremath{\bm m}\xspace}
+\newcommand{\bbbn}{\ensuremath{\bm n}\xspace}
+\newcommand{\bbbo}{\ensuremath{\bm o}\xspace}
+\newcommand{\bbbp}{\ensuremath{\bm p}\xspace}
+\newcommand{\bbbq}{\ensuremath{\bm q}\xspace}
+\newcommand{\bbbr}{\ensuremath{\bm r}\xspace}
+\newcommand{\bbbs}{\ensuremath{\bm s}\xspace}
+\newcommand{\bbbt}{\ensuremath{\bm t}\xspace}
+\newcommand{\bbbu}{\ensuremath{\bm u}\xspace}
+\newcommand{\bbbv}{\ensuremath{\bm v}\xspace}
+\newcommand{\bbbw}{\ensuremath{\bm w}\xspace}
+\newcommand{\bbbx}{\ensuremath{\bm x}\xspace}
+\newcommand{\bbby}{\ensuremath{\bm y}\xspace}
+\newcommand{\bbbz}{\ensuremath{\bm z}\xspace}   
+\newcommand{\bbbA}{\ensuremath{\bm A}\xspace}
+\newcommand{\bbbB}{\ensuremath{\bm B}\xspace}
+\newcommand{\bbbC}{\ensuremath{\bm C}\xspace}
+\newcommand{\bbbD}{\ensuremath{\bm D}\xspace}
+\newcommand{\bbbE}{\ensuremath{\bm E}\xspace}
+\newcommand{\bbbF}{\ensuremath{\bm F}\xspace}
+\newcommand{\bbbG}{\ensuremath{\bm G}\xspace}
+\newcommand{\bbbH}{\ensuremath{\bm H}\xspace}
+\newcommand{\bbbI}{\ensuremath{\bm I}\xspace}
+\newcommand{\bbbJ}{\ensuremath{\bm J}\xspace}
+\newcommand{\bbbK}{\ensuremath{\bm K}\xspace}
+\newcommand{\bbbL}{\ensuremath{\bm L}\xspace}
+\newcommand{\bbbM}{\ensuremath{\bm M}\Xspace}
+\newcommand{\bbbN}{\ensuremath{\bm N}\xspace}
+\newcommand{\bbbO}{\ensuremath{\bm O}\xspace}
+\newcommand{\bbbP}{\ensuremath{\bm P}\xspace}
+\newcommand{\bbbQ}{\ensuremath{\bm Q}\xspace}
+\newcommand{\bbbR}{\ensuremath{\bm R}\xspace}
+\newcommand{\bbbS}{\ensuremath{\bm S}\xspace}
+\newcommand{\bbbT}{\ensuremath{\bm T}\xspace}
+\newcommand{\bbbU}{\ensuremath{\bm U}\xspace}
+\newcommand{\bbbV}{\ensuremath{\bm V}\xspace}
+\newcommand{\bbbW}{\ensuremath{\bm W}\xspace}
+\newcommand{\bbbX}{\ensuremath{\bm X}\xspace}
+\newcommand{\bbbY}{\ensuremath{\bm Y}\xspace}
+\newcommand{\bbbZ}{\ensuremath{\bm Z}\xspace}
 
 % Bold Greek
-
 \newcommand{\balpha  }{\ensuremath\mathbf{alpha  }\xspace}
 \newcommand{\bbeta   }{\ensuremath\mathbf{beta   }\xspace}     
 \newcommand{\bgamma  }{\ensuremath\mathbf{gamma  }\xspace}     
@@ -208,7 +206,6 @@
 \newcommand{\bchi    }{\ensuremath\mathbf{chi    }\xspace}     
 \newcommand{\bpsi    }{\ensuremath\mathbf{psi    }\xspace}     
 \newcommand{\bomega  }{\ensuremath\mathbf{omega  }\xspace}     
-
 \newcommand{\Balpha  }{\ensuremath\mathbf{Alpha  }\xspace}
 \newcommand{\Bbeta   }{\ensuremath\mathbf{Beta   }\xspace}     
 \newcommand{\Bgamma  }{\ensuremath\mathbf{Gamma  }\xspace}     
@@ -235,89 +232,85 @@
 \newcommand{\Bomega  }{\ensuremath\mathbf{Omega  }\xspace}
 
 % Bold and italic Greek
+\newcommand{\bbalpha  }{\ensuremath{\bm\alpha  }\xspace}
+\newcommand{\bbbeta   }{\ensuremath{\bm\beta   }\xspace}     
+\newcommand{\bbgamma  }{\ensuremath{\bm\gamma  }\xspace}     
+\newcommand{\bbdelta  }{\ensuremath{\bm\delta  }\xspace}     
+\newcommand{\bbepsilon}{\ensuremath{\bm\epsilon}\xspace} 
+\newcommand{\bbvareps }{\ensuremath{\bm\vareps}\xspace} 
+\newcommand{\bbzeta   }{\ensuremath{\bm\zeta   }\xspace}     
+\newcommand{\bboeta   }{\ensuremath{\bm\eta    }\xspace}     
+\newcommand{\bbtheta  }{\ensuremath{\bm\theta  }\xspace}     
+\newcommand{\bbiota   }{\ensuremath{\bm\iota   }\xspace}     
+\newcommand{\bbkappa  }{\ensuremath{\bm\kappa  }\xspace}     
+\newcommand{\bblambda }{\ensuremath{\bm\lambda }\xspace}	
+\newcommand{\bbmu     }{\ensuremath{\bm\mu     }\xspace}   
+\newcommand{\bbnu     }{\ensuremath{\bm\nu     }\xspace}   
+\newcommand{\bbxi     }{\ensuremath{\bm\xi     }\xspace}   
+\newcommand{\bbomicron}{\ensuremath{\bm\omicron}\xspace} 
+\newcommand{\bbpi     }{\ensuremath{\bm\pi     }\xspace}   
+\newcommand{\bbrho    }{\ensuremath{\bm\rho    }\xspace}     
+\newcommand{\bbsigma  }{\ensuremath{\bm\sigma  }\xspace}     
+\newcommand{\bbtau    }{\ensuremath{\bm\tau    }\xspace}     
+\newcommand{\bbupsilon}{\ensuremath{\bm\upsilon}\xspace} 
+\newcommand{\bbphi    }{\ensuremath{\bm\phi    }\xspace}     
+\newcommand{\bbchi    }{\ensuremath{\bm\chi    }\xspace}     
+\newcommand{\bbpsi    }{\ensuremath{\bm\psi    }\xspace}     
+\newcommand{\bbomega  }{\ensuremath{\bm\omega  }\xspace}     
+\newcommand{\BBalpha  }{\ensuremath{\bm\Alpha  }\xspace}
+\newcommand{\BBbeta   }{\ensuremath{\bm\Beta   }\xspace}     
+\newcommand{\BBgamma  }{\ensuremath{\bm\Gamma  }\xspace}     
+\newcommand{\BBdelta  }{\ensuremath{\bm\Delta  }\xspace}     
+\newcommand{\BBepsilon}{\ensuremath{\bm\Epsilon}\xspace} 
+\newcommand{\BBzeta   }{\ensuremath{\bm\Zeta   }\xspace}     
+\newcommand{\BBeta    }{\ensuremath{\bm\Eta    }\xspace}     
+\newcommand{\BBtheta  }{\ensuremath{\bm\Theta  }\xspace}     
+\newcommand{\BBiota   }{\ensuremath{\bm\Iota   }\xspace}     
+\newcommand{\BBkappa  }{\ensuremath{\bm\Kappa  }\xspace}     
+\newcommand{\BBlambda }{\ensuremath{\bm\Lambda }\xspace}	
+\newcommand{\BBmu     }{\ensuremath{\bm\Mu     }\xspace}   
+\newcommand{\BBnu     }{\ensuremath{\bm\Nu     }\xspace}   
+\newcommand{\BBxi     }{\ensuremath{\bm\Xi     }\xspace}   
+\newcommand{\BBomicron}{\ensuremath{\bm\Omicron}\xspace} 
+\newcommand{\BBpi     }{\ensuremath{\bm\Pi     }\xspace}   
+\newcommand{\BBrho    }{\ensuremath{\bm\Rho    }\xspace}     
+\newcommand{\BBsigma  }{\ensuremath{\bm\Zigma  }\xspace}     
+\newcommand{\BBtau    }{\ensuremath{\bm\Tau    }\xspace}     
+\newcommand{\BBupsilon}{\ensuremath{\bm\Upsilon}\xspace} 
+\newcommand{\BBphi    }{\ensuremath{\bm\Phi    }\xspace}     
+\newcommand{\BBchi    }{\ensuremath{\bm\Chi    }\xspace}     
+\newcommand{\BBpsi    }{\ensuremath{\bm\Psi    }\xspace}     
+\newcommand{\BBomega  }{\ensuremath{\bm\Omega  }\xspace}  
 
-\newcommand{\boalpha  }{\ensuremath{\bm\alpha  }\xspace}
-\newcommand{\bobeta   }{\ensuremath{\bm\beta   }\xspace}     
-\newcommand{\bogamma  }{\ensuremath{\bm\gamma  }\xspace}     
-\newcommand{\bodelta  }{\ensuremath{\bm\delta  }\xspace}     
-\newcommand{\boepsilon}{\ensuremath{\bm\epsilon}\xspace} 
-\newcommand{\bovareps }{\ensuremath{\bm\vareps}\xspace} 
-\newcommand{\bozeta   }{\ensuremath{\bm\zeta   }\xspace}     
-\newcommand{\booeta   }{\ensuremath{\bm\eta    }\xspace}     
-\newcommand{\botheta  }{\ensuremath{\bm\theta  }\xspace}     
-\newcommand{\boiota   }{\ensuremath{\bm\iota   }\xspace}     
-\newcommand{\bokappa  }{\ensuremath{\bm\kappa  }\xspace}     
-\newcommand{\bolambda }{\ensuremath{\bm\lambda }\xspace}	
-\newcommand{\bomu     }{\ensuremath{\bm\mu     }\xspace}   
-\newcommand{\bonu     }{\ensuremath{\bm\nu     }\xspace}   
-\newcommand{\boxi     }{\ensuremath{\bm\xi     }\xspace}   
-\newcommand{\boomicron}{\ensuremath{\bm\omicron}\xspace} 
-\newcommand{\bopi     }{\ensuremath{\bm\pi     }\xspace}   
-\newcommand{\borho    }{\ensuremath{\bm\rho    }\xspace}     
-\newcommand{\bosigma  }{\ensuremath{\bm\sigma  }\xspace}     
-\newcommand{\botau    }{\ensuremath{\bm\tau    }\xspace}     
-\newcommand{\boupsilon}{\ensuremath{\bm\upsilon}\xspace} 
-\newcommand{\bophi    }{\ensuremath{\bm\phi    }\xspace}     
-\newcommand{\bochi    }{\ensuremath{\bm\chi    }\xspace}     
-\newcommand{\bopsi    }{\ensuremath{\bm\psi    }\xspace}     
-\newcommand{\boomega  }{\ensuremath{\bm\omega  }\xspace}     
-
-\newcommand{\Boalpha  }{\ensuremath{\bm\Alpha  }\xspace}
-\newcommand{\Bobeta   }{\ensuremath{\bm\Beta   }\xspace}     
-\newcommand{\Bogamma  }{\ensuremath{\bm\Gamma  }\xspace}     
-\newcommand{\Bodelta  }{\ensuremath{\bm\Delta  }\xspace}     
-\newcommand{\Boepsilon}{\ensuremath{\bm\Epsilon}\xspace} 
-\newcommand{\Bozeta   }{\ensuremath{\bm\Zeta   }\xspace}     
-\newcommand{\Boeta    }{\ensuremath{\bm\Eta    }\xspace}     
-\newcommand{\Botheta  }{\ensuremath{\bm\Theta  }\xspace}     
-\newcommand{\Boiota   }{\ensuremath{\bm\Iota   }\xspace}     
-\newcommand{\Bokappa  }{\ensuremath{\bm\Kappa  }\xspace}     
-\newcommand{\Bolambda }{\ensuremath{\bm\Lambda }\xspace}	
-\newcommand{\Bomu     }{\ensuremath{\bm\Mu     }\xspace}   
-\newcommand{\Bonu     }{\ensuremath{\bm\Nu     }\xspace}   
-\newcommand{\Boxi     }{\ensuremath{\bm\Xi     }\xspace}   
-\newcommand{\Boomicron}{\ensuremath{\bm\Omicron}\xspace} 
-\newcommand{\Bopi     }{\ensuremath{\bm\Pi     }\xspace}   
-\newcommand{\Borho    }{\ensuremath{\bm\Rho    }\xspace}     
-\newcommand{\Bosigma  }{\ensuremath{\bm\Zigma  }\xspace}     
-\newcommand{\Botau    }{\ensuremath{\bm\Tau    }\xspace}     
-\newcommand{\Boupsilon}{\ensuremath{\bm\Upsilon}\xspace} 
-\newcommand{\Bophi    }{\ensuremath{\bm\Phi    }\xspace}     
-\newcommand{\Bochi    }{\ensuremath{\bm\Chi    }\xspace}     
-\newcommand{\Bopsi    }{\ensuremath{\bm\Psi    }\xspace}     
-\newcommand{\Boomega  }{\ensuremath{\bm\Omega  }\xspace}  
-
-% Calligraphic
-
-\newcommand{\Cala}{\ensuremath{\mathcal{A}}\xspace}
-\newcommand{\Calb}{\ensuremath{\mathcal{B}}\xspace}
-\newcommand{\Calc}{\ensuremath{\mathcal{C}}\xspace}
-\newcommand{\Cald}{\ensuremath{\mathcal{D}}\xspace}
-\newcommand{\Cale}{\ensuremath{\mathcal{E}}\xspace}
-\newcommand{\Calf}{\ensuremath{\mathcal{F}}\xspace}
-\newcommand{\Calg}{\ensuremath{\mathcal{G}}\xspace}
-\newcommand{\Calh}{\ensuremath{\mathcal{H}}\xspace}
-\newcommand{\Cali}{\ensuremath{\mathcal{I}}\xspace}
-\newcommand{\Calj}{\ensuremath{\mathcal{J}}\xspace}
-\newcommand{\Calk}{\ensuremath{\mathcal{K}}\xspace}
-\newcommand{\Call}{\ensuremath{\mathcal{L}}\xspace}
-\newcommand{\Calm}{\ensuremath{\mathcal{M}}\Xspace}
-\newcommand{\Caln}{\ensuremath{\mathcal{N}}\xspace}
-\newcommand{\Calo}{\ensuremath{\mathcal{O}}\xspace}
-\newcommand{\Calp}{\ensuremath{\mathcal{P}}\xspace}
-\newcommand{\Calq}{\ensuremath{\mathcal{Q}}\xspace}
-\newcommand{\Calr}{\ensuremath{\mathcal{R}}\xspace}
-\newcommand{\Cals}{\ensuremath{\mathcal{S}}\xspace}
-\newcommand{\Calt}{\ensuremath{\mathcal{T}}\xspace}
-\newcommand{\Calu}{\ensuremath{\mathcal{U}}\xspace}
-\newcommand{\Calv}{\ensuremath{\mathcal{V}}\xspace}
-\newcommand{\Calw}{\ensuremath{\mathcal{W}}\xspace}
-\newcommand{\Calx}{\ensuremath{\mathcal{X}}\xspace}
-\newcommand{\Caly}{\ensuremath{\mathcal{Y}}\xspace}
-\newcommand{\Calz}{\ensuremath{\mathcal{Z}}\xspace}
+% Calligraphic (only uppercase)
+\newcommand{\cca}{\ensuremath{\mathcal{A}}\xspace}
+\newcommand{\ccb}{\ensuremath{\mathcal{B}}\xspace}
+\newcommand{\ccc}{\ensuremath{\mathcal{C}}\xspace}
+\newcommand{\ccd}{\ensuremath{\mathcal{D}}\xspace}
+\newcommand{\cce}{\ensuremath{\mathcal{E}}\xspace}
+\newcommand{\ccf}{\ensuremath{\mathcal{F}}\xspace}
+\newcommand{\ccg}{\ensuremath{\mathcal{G}}\xspace}
+\newcommand{\cch}{\ensuremath{\mathcal{H}}\xspace}
+\newcommand{\cci}{\ensuremath{\mathcal{I}}\xspace}
+\newcommand{\ccj}{\ensuremath{\mathcal{J}}\xspace}
+\newcommand{\cck}{\ensuremath{\mathcal{K}}\xspace}
+\newcommand{\ccl}{\ensuremath{\mathcal{L}}\xspace}
+\newcommand{\ccm}{\ensuremath{\mathcal{M}}\Xspace}
+\newcommand{\ccn}{\ensuremath{\mathcal{N}}\xspace}
+\newcommand{\cco}{\ensuremath{\mathcal{O}}\xspace}
+\newcommand{\ccp}{\ensuremath{\mathcal{P}}\xspace}
+\newcommand{\ccq}{\ensuremath{\mathcal{Q}}\xspace}
+\newcommand{\ccr}{\ensuremath{\mathcal{R}}\xspace}
+\newcommand{\ccs}{\ensuremath{\mathcal{S}}\xspace}
+\newcommand{\cct}{\ensuremath{\mathcal{T}}\xspace}
+\newcommand{\ccu}{\ensuremath{\mathcal{U}}\xspace}
+\newcommand{\ccv}{\ensuremath{\mathcal{V}}\xspace}
+\newcommand{\ccw}{\ensuremath{\mathcal{W}}\xspace}
+\newcommand{\ccx}{\ensuremath{\mathcal{X}}\xspace}
+\newcommand{\ccy}{\ensuremath{\mathcal{Y}}\xspace}
+\newcommand{\ccz}{\ensuremath{\mathcal{Z}}\xspace}
 
 % Special
-
 \newcommand{\proj}{\ensuremath{\mathrm{proj}}\xspace}  % projection
 \newcommand{\sign}{\ensuremath{\mathrm{sign}}\xspace}  % sign
 \newcommand{\sym}{\ensuremath{\mathrm{sym}}\xspace}    % symmetric part
@@ -330,6 +323,7 @@
           
 
 \newcommand{\variation}[2]{\frac{\delta #1}{\delta #2}} % variation shorthand
+\newcommand{\cpartd}[2]{\cfrac{\partial #1}{\partial #2}} % partial derivative
 \newcommand{\partd}[2]{\frac{\partial #1}{\partial #2}} % partial derivative
 \newcommand{\deriv}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}} % derivative
 \newcommand{\assem}{\bm{\mathsf{A}}} % assembly symbol
