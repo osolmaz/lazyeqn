@@ -1,0 +1,239 @@
+\documentclass[DIV15]{scrartcl}
+\usepackage{lazyeqn}
+\usepackage{booktabs}
+\makeatletter
+% \texttt{\textbackslash\expandafter\@gobble\string#1}
+% \newcommand{\showcasemath}[1]{\expandafter\verb+#1+ & $#1$}
+\makeatother
+
+
+\makeatletter
+\newcommand{\myverb}{%
+    \begingroup
+    % deactivate special characters
+    \let\do\@makeother
+    \dospecials
+    % change '{' and '}' back to normal
+    \catcode`\{=1
+    \catcode`\}=2
+    \@myverb%
+}
+\def\@myverb#1{%
+    \endgroup%
+    \texttt{#1}%
+}
+\newcommand{\scm}[3]{%
+  % \vspace{2.1ex}
+  \noindent
+  \def\tmpp{#1}%
+  \def\tmp{#3}\fbox{%
+  \begin{minipage}{\linewidth}\vspace{0.5ex}
+  \begin{minipage}[t]{0.17\linewidth}
+    \texttt{\expandafter\foo\meaning\tmpp}
+  \end{minipage}
+  \begin{minipage}[t]{0.37\linewidth}%
+    #2
+  \end{minipage}
+  \begin{minipage}[t]{0.24\linewidth}%
+    \texttt{\expandafter\foo\meaning\tmp}
+  \end{minipage}
+  \begin{minipage}[t]{0.20\linewidth}
+    #3
+  \end{minipage}\vspace{0.5ex}
+  \end{minipage}}\newline\noindent
+}
+\makeatother
+\def\foo#1>{}
+\makeatletter
+\newcommand{\showcasemath}{%
+    \begingroup
+    % deactivate special characters
+    \let\do\@makeother
+    \dospecials
+    % change '{' and '}' back to normal
+    \catcode`\{=1
+    \catcode`\}=2
+    \@myverb%
+}
+\makeatother
+
+\title{\texttt{lazyeqn}\textnormal{ --- equation macros for \LaTeXe}}
+\author{Onur Solmaz}
+\begin{document}
+\maketitle
+\section{Symbols}
+
+This package aims to make typing of symbols much easier by providing some macros
+prefixing conventions for different math alphabets. For example to type in a
+upright bold A, one can use the \verb+\VA+ macro which prefixes the letter A
+with the macro character \verb+\+ and the letter \verb+V+, which has been chosen
+as the convention for ``upright bold'' math symbols.
+
+These conventions have been chosen to reduce the number of characters typed,
+whereas also to make sure the equations stay readable in code. For example, one might guess
+the letter B might stand for bold and I might stand for italic in some prefixes,
+but the prefixes don't have to make sense for all alphabets.
+For the list of all prefixes for
+specific alphabets, please refer to Table~\ref{tb:math}.
+
+Normal Greek letters are slanted in lowercase and upright in uppercase. To
+obtain bold Greek letters, use the \verb+\B+ prefix, e.g. \verb+\BXi+ for
+uppercase xi and \verb+\Bxi+ for lowercase xi.
+
+Also, \verb+\vareps+ and \verb+\varthe+ macros are defined as shortcuts to \verb+\varepsilon+ and \verb+\vartheta+
+
+For numbers, the written forms can be prefixed to obtain corresponding symbols,
+like \verb+\Vone+ and \verb+\Izero+. Observe the samples in Table~\ref{tb:math}
+for alphabets in which this is possible.
+
+
+\begin{table}[htbp]
+  \centering
+\begin{tabular}{p{14em} l l l}
+  \toprule
+  Name & \LaTeX{} package & Prefix & Sample \\
+  \midrule
+  Italic letters & none & none & $ABCdef$ \\
+  Upright letters & none & \verb+\U+ & $\UA\UB\UC\Ud\Ue\Uf$\\
+  Italic bold letters & none & \verb+\B+ & $\BA\BB\BC\Bd\Be\Bf\Bone\Btwo\Bthree$ \\
+  Upright bold letters & none & \verb+\V+ & $\VA\VB\VC\Vd\Ve\Vf\Vone\Vtwo\Vthree$ \\
+  Calligraphic letters (uppercase only) & none & \verb+\C+ & $\CA\CB\CC$ \\
+  Calligraphic bold letters (uppercase only) & none & \verb+\CB+ & $\CBA\CBB\CBC$ \\
+  AMS blackboard bold (uppercase only) & \texttt{amsfonts} & \verb+\I+ & $\IA\IB\IC$ \\
+  \texttt{bbold} blackboard bold & \texttt{bbold},\texttt{mathbbol} & \verb+\II+ & $\IIA\IIB\IIC\IId\IIe\IIf\IIone\IItwo\IIthree$ \\
+  \texttt{bbm} blackboard bold sans & \texttt{bbm} & \verb+\BB+ & $\BBA\BBB\BBC\BBd\BBe\BBf$ \\
+  \texttt{bbm} blackboard bold serif & \texttt{bbm} & \verb+\bB+ & $\bBA\bBB\bBC\bBd\bBe\bBf$\\
+  \texttt{bbm} blackboard bold sans italic & \texttt{bbm} & \verb+\IB+ & $\IBA\IBB\IBC\IBd\IBe\IBf$\\
+  \texttt{bbm} blackboard bold serif italic & \texttt{bbm} & \verb+\iB+ & $\iBA\iBB\iBC\iBd\iBe\iBf$\\
+  Raph Smith’s Formal Script (uppercase only) & \texttt{rsfs} & \verb+\RS+ & $\RSA\RSB\RSC$\\
+  Raph Smith’s Formal Script bold (uppercase only) & \texttt{rsfs} & \verb+\BS+ & $\BSA\BSB\BSC$\\
+  \texttt{euscript} cursive (uppercase only) & \texttt{euscript} & \verb+\eul+ & $\eulA\eulB\eulC$\\
+  \texttt{euscript} cursive bold (uppercase only) & \texttt{euscript} & \verb+\Beul+ & $\BeulA\BeulB\BeulC$\\
+  Fraktur & \texttt{yfonts} & \verb+\frak+ & $\frakA\frakB\frakC\fraka\frakb\frakc$\\
+  Fraktur bold & \texttt{yfonts} & \verb+\Bfrak+ & $\BfrakA\BfrakB\BfrakC\Bfraka\Bfrakb\Bfrakc$\\
+  \bottomrule
+\end{tabular}
+\caption{Guide for symbol prefixes for latin letters. For more information about math alphabets,
+  please refer to {\em Table 213 -- Math Alphabets} of The
+  Comprehensive \LaTeX{} Symbol List by Scott Pakin.}
+\label{tb:math}
+\end{table}
+
+\section{Macros}
+
+\subsection{Braces}
+
+\scm{\jump}{Double square braces}{$\jumpi{\VA}$} % maybe use rrbracket-llbracket from stmaryd?
+\scm{\rbr}{Round braces}{$\rbr{\VA}$}
+\scm{\sbr}{Square brackets}{$\sbr{\VA}$}
+\scm{\cbr}{Curly braces}{$\cbr{\VA}$}
+\scm{\ave}{Amgles}{$\rbr{\VA}$}
+
+\subsection{Operators}
+
+% \begin{table}[H]
+%   \centering
+%   \begin{tabular}{l l l l}
+%     \toprule
+%     Macro & Explanation & Example usage & Result \\
+%     \midrule
+%     \verb+\tra+ & Transpose & &  \\
+%     \verb+\variation{}{}+ & Variation & \verb+\variation{a}{b}+ & $\variation{a}{b}$  \\
+%     \verb+\partd{}{}+ & Partial derivative & & \\
+%     \verb+\partdb{}{}+ & Partial derivative with brackets & & \\
+%     \verb+\cpartd{}{}+ & Partial derivative using \verb+\cfrac+ & & \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
+
+% \scm{Macro}{Explanation}{Example usage}
+%
+\scm{\tra}{Transpose}{$\tra$}
+\scm{\tra[]}{Transpose with preceding argument}{$\tra[-]$}
+\scm{\tratop{}}{Transpose with argument on top}{$\tratop{23}$}
+\scm{\variation}{Variation}{$\variation{a}{b}$}
+\scm{\partd}{Partial derivative}{$\partd{a}{b}$}
+\scm{\partdrb}{Partial derivative, round braces}{$\partdrb{a}{b}$}
+\scm{\partdsb}{Partial derivative, square brackets}{$\partdsb{a}{b}$}
+\scm{\cpartd}{Partial derivative with \texttt{cfrac}}{$\cpartd{a}{b}$}
+\scm{\deriv}{Derivative}{$\deriv{a}{b}$}
+\scm{\assem}{Assembly symbol}{$\assem$}
+\scm{\evat}{Evaluated at}{$a\evat_{b=0}$}
+\scm{\degree}{Degree symbol}{\degree{}C}
+\scm{\linedot}{Time integral with overline}{$\linedot{\UA}$}
+\scm{\DIV}{DIVergence}{$\DIV\VA$}
+\scm{\Div}{DIVergence}{$\Div\VA$}
+\scm{\div}{Divergence}{$\div\VA$}
+\scm{\curl}{Curl}{$\curl\VA$}
+\scm{\rot}{Rotation}{$\rot\VA$}
+\scm{\proj}{Projection}{$\proj\VA$}
+\scm{\sign}{Sign function}{$\sign\VA$}
+\scm{\unit}{Unit function}{$\unit\VA$}
+\scm{\arg}{arg}{$\arg\VA$}
+\scm{\Arg}{Arg}{$\Arg\VA$}
+\scm{\sym}{Symmetric}{$\sym\VA$}
+\scm{\TR}{TRace}{$\TR\VA$}
+\scm{\tr}{trace}{$\tr\VA$}
+\scm{\trial}{Trial function}{$\trial\VA$}
+\scm{\DEV}{DEViatoric}{$\DEV\VA$}
+\scm{\dev}{deviatoric}{$\dev\VA$}
+\scm{\GRAD}{GRADient}{$\GRAD\VA$}
+\scm{\Grad}{Gradient}{$\Grad\VA$}
+\scm{\grad}{gradient}{$\grad\VA$}
+\scm{\Lin}{Linearization}{$\Lin\VA$}
+\scm{\lin}{linearization}{$\lin\VA$}
+\scm{\skw}{Skew}{$\skw\VA$}
+\scm{\loc}{loc}{$\loc\VA$}
+\scm{\cof}{Cofactor}{$\cof\VA$}
+\scm{\reac}{reac}{$\reac\VA$}
+\scm{\pind}{pind}{$\pind\VA$}
+\scm{\ndim}{ndim}{$\ndim$}
+\scm{\diag}{diag}{$\diag\VA$}
+\scm{\veci{}}{Indexed list representation}{$\veci{a}$}
+\scm{\dV}{Volume element}{$\dV$}
+\scm{\dA}{Area element}{$\dA$}
+\scm{\dS}{Surface element}{$\dS$}
+\scm{\dx}{Line element}{$\dx$}
+% \scm{\jumpl}{}{$\jumpl$}
+% \scm{\jumpr}{}{$\jumpr$}
+\scm{\Abs{}}{Absolute value}{$\Abs{\VA}$}
+\scm{\Norm{}}{Norm}{$\Norm{\VA}$}
+\scm{\basis{}}{Vector bases}{$\basis{ijkl}$}
+% \scm{\rve}{}{\rve}
+% \scm{\rpg}{}{$\rpg$}
+% \scm{\ehs}{}{$\ehs$}
+% \scm{\so}{}{$\so$}
+% \scm{\mo}{}{$\mo$}
+% \scm{\othree}{}{$\othree$}
+% \scm{\sothree}{}{$\sothree$}
+% \scm{\slthree}{}{$\slthree$}
+% \scm{\AND}{}{$\AND$}
+% \scm{\WITH}{}{$\WITH$}
+% \scm{\UND}{}{$\UND$}
+% \scm{\MIT}{}{$\MIT$}
+% \scm{\com}{}{$\com$}
+
+\subsection{Fractions and roots}
+\scm{\half}{Half}{$\half$}
+\scm{\third}{Third}{$\third$}
+\scm{\fourth}{Fourth}{$\fourth$}
+\scm{\fifth}{Fifth}{$\fifth$}
+\scm{\sixth}{Sixth}{$\sixth$}
+\scm{\seventh}{Seventh}{$\seventh$}
+\scm{\eighth}{Eighth}{$\eighth$}
+\scm{\ninth}{Ninth}{$\ninth$}
+\scm{\tenth}{Tenth}{$\tenth$}
+\scm{\twothree}{Twothree}{$\twothree$}
+\scm{\threetwo}{Threetwo}{$\threetwo$}
+\scm{\sqonetwo}{Sqonetwo}{$\sqonetwo$}
+\scm{\sqonethree}{Sqonethree}{$\sqonethree$}
+\scm{\sqtwothree}{Sqtwothree}{$\sqtwothree$}
+\scm{\sqthreetwo}{Sqthreetwo}{$\sqthreetwo$}
+
+\subsection{Vectors}
+\scm{\cvec{}}{Column vector}{$\cvec{1;2;3;4}$}
+\scm{\vcvec{}}{Column vector with straight braces}{$\vcvec{1;2;3;4}$}
+\scm{\rvec{}}{Row vector}{$\rvec{1;2;3;4}$}
+\scm{\vrvec{}}{Row vector with straight braces}{$\vrvec{1;2;3;4}$}
+
+\end{document}

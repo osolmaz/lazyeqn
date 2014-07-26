@@ -1,348 +1,1031 @@
 \ProvidesPackage{lazyeqn}
 
-% Read the README and docs for descriptions. 
-% provides useful macros for typesetting formulas. 
+% Read the README and docs for descriptions.
+% provides useful macros for typesetting formulas.
 % (c) Onur Solmaz 2013
 
 % xspace is required to ensure trailing spaces after macros, when used
 % without curly braces
+% \usepackage{amsmath, amssymb, amscd, MnSymbol,mathrsfs}
+% \usepackage{amsmath,amsbsy}
+\usepackage{xspace}
+\usepackage{relsize}
+\usepackage{amsmath}
+\usepackage{tabularx}
 
-\usepackage{xspace,bm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Different math symbols, latin and greek %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Redefine \varepsilon, because life is too short
+\AtBeginDocument{%
+   \@ifundefined{pmb}{\def\pmb{\pmbi}}{}%
+   \@ifundefined{boldsymbol}{\def\boldsymbol{\boldsymboli}}{}%
+}
+
+\def\pmbi{\ifmmode\else\expandafter\pmbii\fi\mathpalette\pmbiii}
+\def\pmbii#1#2#3{%
+   \leavevmode\setbox0\hbox{#3}%
+   \kern-.024em\copy0\kern-\wd0%
+   \kern+.024em\raise+.012em\copy0\kern-\wd0%
+   \kern+.024em\copy0\kern-\wd0%
+   \kern-.024em\raise-.012em\box0%
+}
+\def\pmbiii#1#2{%
+   \setbox0\hbox{$\mathsurround0pt#1\mkern.3mu$}%
+   \setbox1\hbox{$\mathsurround0pt#1{#2}$}%
+   \mkern-.4mu\copy1\kern-\wd1%
+   \mkern+.4mu\raise+\wd0\copy1\kern-\wd1%
+   \mkern+.4mu\copy1\kern-\wd1%
+   \mkern-.4mu\raise-\wd0\box1%
+}%
+
+\def\boldsymboli#1{{%
+   \let\@nomath\@gobble\mathversion{bold}%
+   \mathchoice%
+      {\hbox{$\mathsurround0pt\displaystyle#1$}}%
+      {\hbox{$\mathsurround0pt\textstyle#1$}}%
+      {\hbox{$\mathsurround0pt\scriptstyle#1$}}%
+      {\hbox{$\mathsurround0pt\scriptscriptstyle#1$}}%
+}}
 
 \newcommand{\vareps}{\varepsilon}
+\newcommand{\varthe}{\vartheta}
+
+\DeclareSymbolFont{sfoperators}{OT1}{cmss}{m}{n}
+\DeclareSymbolFontAlphabet{\mathsf}{sfoperators}
+
+\makeatletter
+\def\operator@font{\mathgroup\symsfoperators}
+\makeatother
 
 % The following set of definitions are to help the typesetting of
 % formatted single letters, which are generally used for denoting
-% vectors, tensors etc. 
+% vectors, tensors etc.
 % These are designed to minimize the number of keystrokes while
 % writing equations
 
-% Roman Latin
-\newcommand{\rra}{\ensuremath{\mathrm{a}}\xspace}
-\newcommand{\rrb}{\ensuremath{\mathrm{b}}\xspace}
-\newcommand{\rrc}{\ensuremath{\mathrm{c}}\xspace}
-\newcommand{\rrd}{\ensuremath{\mathrm{d}}\xspace}
-\newcommand{\rre}{\ensuremath{\mathrm{e}}\xspace}
-\newcommand{\rrf}{\ensuremath{\mathrm{f}}\xspace}
-\newcommand{\rrg}{\ensuremath{\mathrm{g}}\xspace}
-\newcommand{\rrh}{\ensuremath{\mathrm{h}}\xspace}
-\newcommand{\rri}{\ensuremath{\mathrm{i}}\xspace}
-\newcommand{\rrj}{\ensuremath{\mathrm{j}}\xspace}
-\newcommand{\rrk}{\ensuremath{\mathrm{k}}\xspace}
-\newcommand{\rrl}{\ensuremath{\mathrm{l}}\xspace}
-\newcommand{\rrm}{\ensuremath{\mathrm{m}}\xspace}
-\newcommand{\rrn}{\ensuremath{\mathrm{n}}\xspace}
-\newcommand{\rro}{\ensuremath{\mathrm{o}}\xspace}
-\newcommand{\rrp}{\ensuremath{\mathrm{p}}\xspace}
-\newcommand{\rrq}{\ensuremath{\mathrm{q}}\xspace}
-\newcommand{\rrr}{\ensuremath{\mathrm{r}}\xspace}
-\newcommand{\rrs}{\ensuremath{\mathrm{s}}\xspace}
-\newcommand{\rrt}{\ensuremath{\mathrm{t}}\xspace}
-\newcommand{\rru}{\ensuremath{\mathrm{u}}\xspace}
-\newcommand{\rrv}{\ensuremath{\mathrm{v}}\xspace}
-\newcommand{\rrw}{\ensuremath{\mathrm{w}}\xspace}
-\newcommand{\rrx}{\ensuremath{\mathrm{x}}\xspace}
-\newcommand{\rry}{\ensuremath{\mathrm{y}}\xspace}
-\newcommand{\rrz}{\ensuremath{\mathrm{z}}\xspace}
-\newcommand{\rrA}{\ensuremath{\mathrm{A}}\xspace}
-\newcommand{\rrB}{\ensuremath{\mathrm{B}}\xspace}
-\newcommand{\rrC}{\ensuremath{\mathrm{C}}\xspace}
-\newcommand{\rrD}{\ensuremath{\mathrm{D}}\xspace}
-\newcommand{\rrE}{\ensuremath{\mathrm{E}}\xspace}
-\newcommand{\rrF}{\ensuremath{\mathrm{F}}\xspace}
-\newcommand{\rrG}{\ensuremath{\mathrm{G}}\xspace}
-\newcommand{\rrH}{\ensuremath{\mathrm{H}}\xspace}
-\newcommand{\rrI}{\ensuremath{\mathrm{I}}\xspace}
-\newcommand{\rrJ}{\ensuremath{\mathrm{J}}\xspace}
-\newcommand{\rrK}{\ensuremath{\mathrm{K}}\xspace}
-\newcommand{\rrL}{\ensuremath{\mathrm{L}}\xspace}
-\newcommand{\rrM}{\ensuremath{\mathrm{M}}\Xspace}
-\newcommand{\rrN}{\ensuremath{\mathrm{N}}\xspace}
-\newcommand{\rrO}{\ensuremath{\mathrm{O}}\xspace}
-\newcommand{\rrP}{\ensuremath{\mathrm{P}}\xspace}
-\newcommand{\rrQ}{\ensuremath{\mathrm{Q}}\xspace}
-\newcommand{\rrR}{\ensuremath{\mathrm{R}}\xspace}
-\newcommand{\rrS}{\ensuremath{\mathrm{S}}\xspace}
-\newcommand{\rrT}{\ensuremath{\mathrm{T}}\xspace}
-\newcommand{\rrU}{\ensuremath{\mathrm{U}}\xspace}
-\newcommand{\rrV}{\ensuremath{\mathrm{V}}\xspace}
-\newcommand{\rrW}{\ensuremath{\mathrm{W}}\xspace}
-\newcommand{\rrX}{\ensuremath{\mathrm{X}}\xspace}
-\newcommand{\rrY}{\ensuremath{\mathrm{Y}}\xspace}
-\newcommand{\rrZ}{\ensuremath{\mathrm{Z}}\xspace}
-
-% Bold Latin
-\newcommand{\bba}{\ensuremath\mathbf{a}\xspace}
-\newcommand{\bbb}{\ensuremath\mathbf{b}\xspace}
-\newcommand{\bbc}{\ensuremath\mathbf{c}\xspace}
-\newcommand{\bbd}{\ensuremath\mathbf{d}\xspace}
-\newcommand{\bbe}{\ensuremath\mathbf{e}\xspace}
-\newcommand{\bbf}{\ensuremath\mathbf{f}\xspace}
-\newcommand{\bbg}{\ensuremath\mathbf{g}\xspace}
-\newcommand{\bbh}{\ensuremath\mathbf{h}\xspace}
-\newcommand{\bbi}{\ensuremath\mathbf{i}\xspace}
-\newcommand{\bbj}{\ensuremath\mathbf{j}\xspace}
-\newcommand{\bbk}{\ensuremath\mathbf{k}\xspace}
-\newcommand{\bbl}{\ensuremath\mathbf{l}\xspace}
-\newcommand{\bbm}{\ensuremath\mathbf{m}\xspace}
-\newcommand{\bbn}{\ensuremath\mathbf{n}\xspace}
-\newcommand{\bbo}{\ensuremath\mathbf{o}\xspace}
-\newcommand{\bbp}{\ensuremath\mathbf{p}\xspace}
-\newcommand{\bbq}{\ensuremath\mathbf{q}\xspace}
-\newcommand{\bbr}{\ensuremath\mathbf{r}\xspace}
-\newcommand{\bbs}{\ensuremath\mathbf{s}\xspace}
-\newcommand{\bbt}{\ensuremath\mathbf{t}\xspace} % \bot is already defined
-\newcommand{\bbu}{\ensuremath\mathbf{u}\xspace}
-\newcommand{\bbv}{\ensuremath\mathbf{v}\xspace}
-\newcommand{\bbw}{\ensuremath\mathbf{w}\xspace}
-\newcommand{\bbx}{\ensuremath\mathbf{x}\xspace} % \box is already defined
-\newcommand{\bby}{\ensuremath\mathbf{y}\xspace}
-\newcommand{\bbz}{\ensuremath\mathbf{z}\xspace}   
-\newcommand{\bbA}{\ensuremath\mathbf{A}\xspace}
-\newcommand{\bbB}{\ensuremath\mathbf{B}\xspace}
-\newcommand{\bbC}{\ensuremath\mathbf{C}\xspace}
-\newcommand{\bbD}{\ensuremath\mathbf{D}\xspace}
-\newcommand{\bbE}{\ensuremath\mathbf{E}\xspace}
-\newcommand{\bbF}{\ensuremath\mathbf{F}\xspace}
-\newcommand{\bbG}{\ensuremath\mathbf{G}\xspace}
-\newcommand{\bbH}{\ensuremath\mathbf{H}\xspace}
-\newcommand{\bbI}{\ensuremath\mathbf{I}\xspace}
-\newcommand{\bbJ}{\ensuremath\mathbf{J}\xspace}
-\newcommand{\bbK}{\ensuremath\mathbf{K}\xspace}
-\newcommand{\bbL}{\ensuremath\mathbf{L}\xspace}
-\newcommand{\bbM}{\ensuremath\mathbf{M}\Xspace}
-\newcommand{\bbN}{\ensuremath\mathbf{N}\xspace}
-\newcommand{\bbO}{\ensuremath\mathbf{O}\xspace}
-\newcommand{\bbP}{\ensuremath\mathbf{P}\xspace}
-\newcommand{\bbQ}{\ensuremath\mathbf{Q}\xspace}
-\newcommand{\bbR}{\ensuremath\mathbf{R}\xspace}
-\newcommand{\bbS}{\ensuremath\mathbf{S}\xspace}
-\newcommand{\bbT}{\ensuremath\mathbf{T}\xspace}
-\newcommand{\bbU}{\ensuremath\mathbf{U}\xspace}
-\newcommand{\bbV}{\ensuremath\mathbf{V}\xspace}
-\newcommand{\bbW}{\ensuremath\mathbf{W}\xspace}
-\newcommand{\bbX}{\ensuremath\mathbf{X}\xspace} % \box is already defined
-\newcommand{\bbY}{\ensuremath\mathbf{Y}\xspace}
-\newcommand{\bbZ}{\ensuremath\mathbf{Z}\xspace}
-
-% Bold and Italic Latin
-\newcommand{\bbba}{\ensuremath{\bm a}\xspace}
-\newcommand{\bbbb}{\ensuremath{\bm b}\xspace}
-\newcommand{\bbbc}{\ensuremath{\bm c}\xspace}
-\newcommand{\bbbd}{\ensuremath{\bm d}\xspace}
-\newcommand{\bbbe}{\ensuremath{\bm e}\xspace}
-\newcommand{\bbbf}{\ensuremath{\bm f}\xspace}
-\newcommand{\bbbg}{\ensuremath{\bm g}\xspace}
-\newcommand{\bbbh}{\ensuremath{\bm h}\xspace}
-\newcommand{\bbbi}{\ensuremath{\bm i}\xspace}
-\newcommand{\bbbj}{\ensuremath{\bm j}\xspace}
-\newcommand{\bbbk}{\ensuremath{\bm k}\xspace}
-\newcommand{\bbbl}{\ensuremath{\bm l}\xspace}
-\newcommand{\bbbm}{\ensuremath{\bm m}\xspace}
-\newcommand{\bbbn}{\ensuremath{\bm n}\xspace}
-\newcommand{\bbbo}{\ensuremath{\bm o}\xspace}
-\newcommand{\bbbp}{\ensuremath{\bm p}\xspace}
-\newcommand{\bbbq}{\ensuremath{\bm q}\xspace}
-\newcommand{\bbbr}{\ensuremath{\bm r}\xspace}
-\newcommand{\bbbs}{\ensuremath{\bm s}\xspace}
-\newcommand{\bbbt}{\ensuremath{\bm t}\xspace}
-\newcommand{\bbbu}{\ensuremath{\bm u}\xspace}
-\newcommand{\bbbv}{\ensuremath{\bm v}\xspace}
-\newcommand{\bbbw}{\ensuremath{\bm w}\xspace}
-\newcommand{\bbbx}{\ensuremath{\bm x}\xspace}
-\newcommand{\bbby}{\ensuremath{\bm y}\xspace}
-\newcommand{\bbbz}{\ensuremath{\bm z}\xspace}   
-\newcommand{\bbbA}{\ensuremath{\bm A}\xspace}
-\newcommand{\bbbB}{\ensuremath{\bm B}\xspace}
-\newcommand{\bbbC}{\ensuremath{\bm C}\xspace}
-\newcommand{\bbbD}{\ensuremath{\bm D}\xspace}
-\newcommand{\bbbE}{\ensuremath{\bm E}\xspace}
-\newcommand{\bbbF}{\ensuremath{\bm F}\xspace}
-\newcommand{\bbbG}{\ensuremath{\bm G}\xspace}
-\newcommand{\bbbH}{\ensuremath{\bm H}\xspace}
-\newcommand{\bbbI}{\ensuremath{\bm I}\xspace}
-\newcommand{\bbbJ}{\ensuremath{\bm J}\xspace}
-\newcommand{\bbbK}{\ensuremath{\bm K}\xspace}
-\newcommand{\bbbL}{\ensuremath{\bm L}\xspace}
-\newcommand{\bbbM}{\ensuremath{\bm M}\Xspace}
-\newcommand{\bbbN}{\ensuremath{\bm N}\xspace}
-\newcommand{\bbbO}{\ensuremath{\bm O}\xspace}
-\newcommand{\bbbP}{\ensuremath{\bm P}\xspace}
-\newcommand{\bbbQ}{\ensuremath{\bm Q}\xspace}
-\newcommand{\bbbR}{\ensuremath{\bm R}\xspace}
-\newcommand{\bbbS}{\ensuremath{\bm S}\xspace}
-\newcommand{\bbbT}{\ensuremath{\bm T}\xspace}
-\newcommand{\bbbU}{\ensuremath{\bm U}\xspace}
-\newcommand{\bbbV}{\ensuremath{\bm V}\xspace}
-\newcommand{\bbbW}{\ensuremath{\bm W}\xspace}
-\newcommand{\bbbX}{\ensuremath{\bm X}\xspace}
-\newcommand{\bbbY}{\ensuremath{\bm Y}\xspace}
-\newcommand{\bbbZ}{\ensuremath{\bm Z}\xspace}
+% Roman (upright) Latin
+\newcommand{\Ua}{\ensuremath{\mathrm{a}}\xspace}
+\newcommand{\Ub}{\ensuremath{\mathrm{b}}\xspace}
+\newcommand{\Uc}{\ensuremath{\mathrm{c}}\xspace}
+\newcommand{\Ud}{\ensuremath{\mathrm{d}}\xspace}
+\newcommand{\Ue}{\ensuremath{\mathrm{e}}\xspace}
+\newcommand{\Uf}{\ensuremath{\mathrm{f}}\xspace}
+\newcommand{\Ug}{\ensuremath{\mathrm{g}}\xspace}
+\newcommand{\Uh}{\ensuremath{\mathrm{h}}\xspace}
+\newcommand{\Ui}{\ensuremath{\mathrm{i}}\xspace}
+\newcommand{\Uj}{\ensuremath{\mathrm{j}}\xspace}
+\newcommand{\Uk}{\ensuremath{\mathrm{k}}\xspace}
+\newcommand{\Ul}{\ensuremath{\mathrm{l}}\xspace}
+\newcommand{\Um}{\ensuremath{\mathrm{m}}\xspace}
+\newcommand{\Un}{\ensuremath{\mathrm{n}}\xspace}
+\newcommand{\Uo}{\ensuremath{\mathrm{o}}\xspace}
+\newcommand{\Up}{\ensuremath{\mathrm{p}}\xspace}
+\newcommand{\Uq}{\ensuremath{\mathrm{q}}\xspace}
+\newcommand{\Ur}{\ensuremath{\mathrm{r}}\xspace}
+\newcommand{\Us}{\ensuremath{\mathrm{s}}\xspace}
+\newcommand{\Ut}{\ensuremath{\mathrm{t}}\xspace}
+\newcommand{\Uu}{\ensuremath{\mathrm{u}}\xspace}
+\newcommand{\Uv}{\ensuremath{\mathrm{v}}\xspace}
+\newcommand{\Uw}{\ensuremath{\mathrm{w}}\xspace}
+\newcommand{\Ux}{\ensuremath{\mathrm{x}}\xspace}
+\newcommand{\Uy}{\ensuremath{\mathrm{y}}\xspace}
+\newcommand{\Uz}{\ensuremath{\mathrm{z}}\xspace}
+\newcommand{\UA}{\ensuremath{\mathrm{A}}\xspace}
+\newcommand{\UB}{\ensuremath{\mathrm{B}}\xspace}
+\newcommand{\UC}{\ensuremath{\mathrm{C}}\xspace}
+\newcommand{\UD}{\ensuremath{\mathrm{D}}\xspace}
+\newcommand{\UE}{\ensuremath{\mathrm{E}}\xspace}
+\newcommand{\UF}{\ensuremath{\mathrm{F}}\xspace}
+\newcommand{\UG}{\ensuremath{\mathrm{G}}\xspace}
+\newcommand{\UH}{\ensuremath{\mathrm{H}}\xspace}
+\newcommand{\UI}{\ensuremath{\mathrm{I}}\xspace}
+\newcommand{\UJ}{\ensuremath{\mathrm{J}}\xspace}
+\newcommand{\UK}{\ensuremath{\mathrm{K}}\xspace}
+\newcommand{\UL}{\ensuremath{\mathrm{L}}\xspace}
+\newcommand{\UM}{\ensuremath{\mathrm{M}}\Xspace}
+\newcommand{\UN}{\ensuremath{\mathrm{N}}\xspace}
+\newcommand{\UO}{\ensuremath{\mathrm{O}}\xspace}
+\newcommand{\UP}{\ensuremath{\mathrm{P}}\xspace}
+\newcommand{\UQ}{\ensuremath{\mathrm{Q}}\xspace}
+\newcommand{\UR}{\ensuremath{\mathrm{R}}\xspace}
+\newcommand{\US}{\ensuremath{\mathrm{S}}\xspace}
+\newcommand{\UT}{\ensuremath{\mathrm{T}}\xspace}
+\newcommand{\UU}{\ensuremath{\mathrm{U}}\xspace}
+\newcommand{\UV}{\ensuremath{\mathrm{V}}\xspace}
+\newcommand{\UW}{\ensuremath{\mathrm{W}}\xspace}
+\newcommand{\UX}{\ensuremath{\mathrm{X}}\xspace}
+\newcommand{\UY}{\ensuremath{\mathrm{Y}}\xspace}
+\newcommand{\UZ}{\ensuremath{\mathrm{Z}}\xspace}
 
 % Bold Greek
-\newcommand{\balpha  }{\ensuremath\mathbf{alpha  }\xspace}
-\newcommand{\bbeta   }{\ensuremath\mathbf{beta   }\xspace}     
-\newcommand{\bgamma  }{\ensuremath\mathbf{gamma  }\xspace}     
-\newcommand{\bdelta  }{\ensuremath\mathbf{delta  }\xspace}     
-\newcommand{\bepsilon}{\ensuremath\mathbf{epsilon}\xspace} 
-\newcommand{\bzeta   }{\ensuremath\mathbf{zeta   }\xspace}     
-\newcommand{\boeta   }{\ensuremath\mathbf{eta    }\xspace}     
-\newcommand{\btheta  }{\ensuremath\mathbf{theta  }\xspace}     
-\newcommand{\biota   }{\ensuremath\mathbf{iota   }\xspace}     
-\newcommand{\bkappa  }{\ensuremath\mathbf{kappa  }\xspace}     
-\newcommand{\blambda }{\ensuremath\mathbf{lambda }\xspace}	
-\newcommand{\bmu     }{\ensuremath\mathbf{mu     }\xspace}   
-\newcommand{\bnu     }{\ensuremath\mathbf{nu     }\xspace}   
-\newcommand{\bxi     }{\ensuremath\mathbf{xi     }\xspace}   
-\newcommand{\bomicron}{\ensuremath\mathbf{omicron}\xspace} 
-\newcommand{\bpi     }{\ensuremath\mathbf{pi     }\xspace}   
-\newcommand{\brho    }{\ensuremath\mathbf{rho    }\xspace}     
-\newcommand{\bsigma  }{\ensuremath\mathbf{sigma  }\xspace}     
-\newcommand{\btau    }{\ensuremath\mathbf{tau    }\xspace}     
-\newcommand{\bupsilon}{\ensuremath\mathbf{upsilon}\xspace} 
-\newcommand{\bphi    }{\ensuremath\mathbf{phi    }\xspace}     
-\newcommand{\bchi    }{\ensuremath\mathbf{chi    }\xspace}     
-\newcommand{\bpsi    }{\ensuremath\mathbf{psi    }\xspace}     
-\newcommand{\bomega  }{\ensuremath\mathbf{omega  }\xspace}     
-\newcommand{\Balpha  }{\ensuremath\mathbf{Alpha  }\xspace}
-\newcommand{\Bbeta   }{\ensuremath\mathbf{Beta   }\xspace}     
-\newcommand{\Bgamma  }{\ensuremath\mathbf{Gamma  }\xspace}     
-\newcommand{\Bdelta  }{\ensuremath\mathbf{Delta  }\xspace}     
-\newcommand{\Bepsilon}{\ensuremath\mathbf{Epsilon}\xspace} 
-\newcommand{\Bzeta   }{\ensuremath\mathbf{Zeta   }\xspace}     
-\newcommand{\Beta    }{\ensuremath\mathbf{Eta    }\xspace}     
-\newcommand{\Btheta  }{\ensuremath\mathbf{Theta  }\xspace}     
-\newcommand{\Biota   }{\ensuremath\mathbf{Iota   }\xspace}     
-\newcommand{\Bkappa  }{\ensuremath\mathbf{Kappa  }\xspace}     
-\newcommand{\Blambda }{\ensuremath\mathbf{Lambda }\xspace}	
-\newcommand{\Bmu     }{\ensuremath\mathbf{Mu     }\xspace}
-\newcommand{\Bnu     }{\ensuremath\mathbf{Nu     }\xspace}
-\newcommand{\Bxi     }{\ensuremath\mathbf{Xi     }\xspace}
-\newcommand{\Bomicron}{\ensuremath\mathbf{Omicron}\xspace}
-\newcommand{\Bpi     }{\ensuremath\mathbf{Pi     }\xspace}
-\newcommand{\Brho    }{\ensuremath\mathbf{Rho    }\xspace}
-\newcommand{\Bsigma  }{\ensuremath\mathbf{Zigma  }\xspace}
-\newcommand{\Btau    }{\ensuremath\mathbf{Tau    }\xspace}
-\newcommand{\Bupsilon}{\ensuremath\mathbf{Upsilon}\xspace}
-\newcommand{\Bphi    }{\ensuremath\mathbf{Phi    }\xspace}
-\newcommand{\Bchi    }{\ensuremath\mathbf{Chi    }\xspace}
-\newcommand{\Bpsi    }{\ensuremath\mathbf{Psi    }\xspace}
-\newcommand{\Bomega  }{\ensuremath\mathbf{Omega  }\xspace}
+\newcommand{\Balpha  }{\ensuremath \boldsymbol \alpha      \xspace}
+\newcommand{\Bbeta   }{\ensuremath \boldsymbol \beta       \xspace}
+\newcommand{\Bgamma  }{\ensuremath \boldsymbol \gamma      \xspace}
+\newcommand{\Bdelta  }{\ensuremath \boldsymbol \delta      \xspace}
+\newcommand{\Bepsilon}{\ensuremath \boldsymbol \epsilon    \xspace}
+\newcommand{\Bvareps }{\ensuremath \boldsymbol \varepsilon \xspace}
+\newcommand{\Bzeta   }{\ensuremath \boldsymbol \zeta       \xspace}
+\newcommand{\Beta    }{\ensuremath \boldsymbol \eta        \xspace}
+\newcommand{\Btheta  }{\ensuremath \boldsymbol \theta      \xspace}
+\newcommand{\Bvarthe }{\ensuremath \boldsymbol \vartheta   \xspace}
+\newcommand{\Biota   }{\ensuremath \boldsymbol \iota       \xspace}
+\newcommand{\Bkappa  }{\ensuremath \boldsymbol \kappa      \xspace}
+\newcommand{\Blambda }{\ensuremath \boldsymbol \lambda     \xspace}
+\newcommand{\Bmu     }{\ensuremath \boldsymbol \mu         \xspace}
+\newcommand{\Bnu     }{\ensuremath \boldsymbol \nu         \xspace}
+\newcommand{\Bxi     }{\ensuremath \boldsymbol \xi         \xspace}
+\newcommand{\Bpi     }{\ensuremath \boldsymbol \pi         \xspace}
+\newcommand{\Brho    }{\ensuremath \boldsymbol \rho        \xspace}
+\newcommand{\Bvrho   }{\ensuremath \boldsymbol \varrho     \xspace}
+\newcommand{\Bsigma  }{\ensuremath \boldsymbol \sigma      \xspace}
+\newcommand{\Bvsigma }{\ensuremath \boldsymbol \varsigma   \xspace}
+\newcommand{\Btau    }{\ensuremath \boldsymbol \tau        \xspace}
+\newcommand{\Bupsilon}{\ensuremath \boldsymbol \upsilon    \xspace}
+\newcommand{\Bphi    }{\ensuremath \boldsymbol \phi        \xspace}
+\newcommand{\Bvarphi }{\ensuremath \boldsymbol \varphi     \xspace}
+\newcommand{\Bchi    }{\ensuremath \boldsymbol \chi        \xspace}
+\newcommand{\Bpsi    }{\ensuremath \boldsymbol \psi        \xspace}
+\newcommand{\Bomega  }{\ensuremath \boldsymbol \omega      \xspace}
+\newcommand{\BGamma  }{\ensuremath \boldsymbol \Gamma      \xspace}
+\newcommand{\BDelta  }{\ensuremath \boldsymbol \Delta      \xspace}
+\newcommand{\BTheta  }{\ensuremath \boldsymbol \Theta      \xspace}
+\newcommand{\BLambda }{\ensuremath \boldsymbol \Lambda     \xspace}
+\newcommand{\BXi     }{\ensuremath \boldsymbol \Xi         \xspace}
+\newcommand{\BPi     }{\ensuremath \boldsymbol \Pi         \xspace}
+\newcommand{\BSigma  }{\ensuremath \boldsymbol \Sigma      \xspace}
+\newcommand{\BUpsilon}{\ensuremath \boldsymbol \Upsilon    \xspace}
+\newcommand{\BPhi    }{\ensuremath \boldsymbol \Phi        \xspace}
+\newcommand{\BPsi    }{\ensuremath \boldsymbol \Psi        \xspace}
+\newcommand{\BOmega  }{\ensuremath \boldsymbol \Omega      \xspace}
 
-% Bold and italic Greek
-\newcommand{\bbalpha  }{\ensuremath{\bm\alpha  }\xspace}
-\newcommand{\bbbeta   }{\ensuremath{\bm\beta   }\xspace}     
-\newcommand{\bbgamma  }{\ensuremath{\bm\gamma  }\xspace}     
-\newcommand{\bbdelta  }{\ensuremath{\bm\delta  }\xspace}     
-\newcommand{\bbepsilon}{\ensuremath{\bm\epsilon}\xspace} 
-\newcommand{\bbvareps }{\ensuremath{\bm\vareps}\xspace} 
-\newcommand{\bbzeta   }{\ensuremath{\bm\zeta   }\xspace}     
-\newcommand{\bboeta   }{\ensuremath{\bm\eta    }\xspace}     
-\newcommand{\bbtheta  }{\ensuremath{\bm\theta  }\xspace}     
-\newcommand{\bbiota   }{\ensuremath{\bm\iota   }\xspace}     
-\newcommand{\bbkappa  }{\ensuremath{\bm\kappa  }\xspace}     
-\newcommand{\bblambda }{\ensuremath{\bm\lambda }\xspace}	
-\newcommand{\bbmu     }{\ensuremath{\bm\mu     }\xspace}   
-\newcommand{\bbnu     }{\ensuremath{\bm\nu     }\xspace}   
-\newcommand{\bbxi     }{\ensuremath{\bm\xi     }\xspace}   
-\newcommand{\bbomicron}{\ensuremath{\bm\omicron}\xspace} 
-\newcommand{\bbpi     }{\ensuremath{\bm\pi     }\xspace}   
-\newcommand{\bbrho    }{\ensuremath{\bm\rho    }\xspace}     
-\newcommand{\bbsigma  }{\ensuremath{\bm\sigma  }\xspace}     
-\newcommand{\bbtau    }{\ensuremath{\bm\tau    }\xspace}     
-\newcommand{\bbupsilon}{\ensuremath{\bm\upsilon}\xspace} 
-\newcommand{\bbphi    }{\ensuremath{\bm\phi    }\xspace}     
-\newcommand{\bbchi    }{\ensuremath{\bm\chi    }\xspace}     
-\newcommand{\bbpsi    }{\ensuremath{\bm\psi    }\xspace}     
-\newcommand{\bbomega  }{\ensuremath{\bm\omega  }\xspace}     
-\newcommand{\BBalpha  }{\ensuremath{\bm\Alpha  }\xspace}
-\newcommand{\BBbeta   }{\ensuremath{\bm\Beta   }\xspace}     
-\newcommand{\BBgamma  }{\ensuremath{\bm\Gamma  }\xspace}     
-\newcommand{\BBdelta  }{\ensuremath{\bm\Delta  }\xspace}     
-\newcommand{\BBepsilon}{\ensuremath{\bm\Epsilon}\xspace} 
-\newcommand{\BBzeta   }{\ensuremath{\bm\Zeta   }\xspace}     
-\newcommand{\BBeta    }{\ensuremath{\bm\Eta    }\xspace}     
-\newcommand{\BBtheta  }{\ensuremath{\bm\Theta  }\xspace}     
-\newcommand{\BBiota   }{\ensuremath{\bm\Iota   }\xspace}     
-\newcommand{\BBkappa  }{\ensuremath{\bm\Kappa  }\xspace}     
-\newcommand{\BBlambda }{\ensuremath{\bm\Lambda }\xspace}	
-\newcommand{\BBmu     }{\ensuremath{\bm\Mu     }\xspace}   
-\newcommand{\BBnu     }{\ensuremath{\bm\Nu     }\xspace}   
-\newcommand{\BBxi     }{\ensuremath{\bm\Xi     }\xspace}   
-\newcommand{\BBomicron}{\ensuremath{\bm\Omicron}\xspace} 
-\newcommand{\BBpi     }{\ensuremath{\bm\Pi     }\xspace}   
-\newcommand{\BBrho    }{\ensuremath{\bm\Rho    }\xspace}     
-\newcommand{\BBsigma  }{\ensuremath{\bm\Zigma  }\xspace}     
-\newcommand{\BBtau    }{\ensuremath{\bm\Tau    }\xspace}     
-\newcommand{\BBupsilon}{\ensuremath{\bm\Upsilon}\xspace} 
-\newcommand{\BBphi    }{\ensuremath{\bm\Phi    }\xspace}     
-\newcommand{\BBchi    }{\ensuremath{\bm\Chi    }\xspace}     
-\newcommand{\BBpsi    }{\ensuremath{\bm\Psi    }\xspace}     
-\newcommand{\BBomega  }{\ensuremath{\bm\Omega  }\xspace}  
+% Bold italic letters
+\newcommand{\BA}{{\boldsymbol{\mathnormal A}}}
+\newcommand{\BB}{{\boldsymbol{\mathnormal B}}}
+\newcommand{\BC}{{\boldsymbol{\mathnormal C}}}
+\newcommand{\BD}{{\boldsymbol{\mathnormal D}}}
+\newcommand{\BE}{{\boldsymbol{\mathnormal E}}}
+\newcommand{\BF}{{\boldsymbol{\mathnormal F}}}
+\newcommand{\BG}{{\boldsymbol{\mathnormal G}}}
+\newcommand{\BH}{{\boldsymbol{\mathnormal H}}}
+\newcommand{\BI}{{\boldsymbol{\mathnormal I}}}
+\newcommand{\BJ}{{\boldsymbol{\mathnormal J}}}
+\newcommand{\BK}{{\boldsymbol{\mathnormal K}}}
+\newcommand{\BL}{{\boldsymbol{\mathnormal L}}}
+\newcommand{\BM}{{\boldsymbol{\mathnormal M}}}
+\newcommand{\BN}{{\boldsymbol{\mathnormal N}}}
+\newcommand{\BO}{{\boldsymbol{\mathnormal O}}}
+\newcommand{\BP}{{\boldsymbol{\mathnormal P}}}
+\newcommand{\BQ}{{\boldsymbol{\mathnormal Q}}}
+\newcommand{\BR}{{\boldsymbol{\mathnormal R}}}
+\newcommand{\BS}{{\boldsymbol{\mathnormal S}}}
+\newcommand{\BT}{{\boldsymbol{\mathnormal T}}}
+\newcommand{\BU}{{\boldsymbol{\mathnormal U}}}
+\newcommand{\BV}{{\boldsymbol{\mathnormal V}}}
+\newcommand{\BW}{{\boldsymbol{\mathnormal W}}}
+\newcommand{\BX}{{\boldsymbol{\mathnormal X}}}
+\newcommand{\BY}{{\boldsymbol{\mathnormal Y}}}
+\newcommand{\BZ}{{\boldsymbol{\mathnormal Z}}}
+\newcommand{\Ba}{{\boldsymbol{\mathnormal a}}}
+\newcommand{\bB}{{\boldsymbol{\mathnormal b}}}
+\newcommand{\Bc}{{\boldsymbol{\mathnormal c}}}
+\newcommand{\Bd}{{\boldsymbol{\mathnormal d}}}
+\newcommand{\Be}{{\boldsymbol{\mathnormal e}}}
+\newcommand{\Bf}{{\boldsymbol{\mathnormal f}}}
+\newcommand{\Bg}{{\boldsymbol{\mathnormal g}}}
+\newcommand{\Bh}{{\boldsymbol{\mathnormal h}}}
+\newcommand{\iB}{{\boldsymbol{\mathnormal i}}}
+\newcommand{\Bj}{{\boldsymbol{\mathnormal j}}}
+\newcommand{\Bk}{{\boldsymbol{\mathnormal k}}}
+\newcommand{\Bl}{{\boldsymbol{\mathnormal l}}}
+\newcommand{\Bm}{{\boldsymbol{\mathnormal m}}}
+\newcommand{\Bn}{{\boldsymbol{\mathnormal n}}}
+\newcommand{\Bo}{{\boldsymbol{\mathnormal o}}}
+\newcommand{\Bp}{{\boldsymbol{\mathnormal p}}}
+\newcommand{\Bq}{{\boldsymbol{\mathnormal q}}}
+\newcommand{\Br}{{\boldsymbol{\mathnormal r}}}
+\newcommand{\Bs}{{\boldsymbol{\mathnormal s}}}
+\newcommand{\Bt}{{\boldsymbol{\mathnormal t}}}
+\newcommand{\Bu}{{\boldsymbol{\mathnormal u}}}
+\newcommand{\Bv}{{\boldsymbol{\mathnormal v}}}
+\newcommand{\Bw}{{\boldsymbol{\mathnormal w}}}
+\newcommand{\Bx}{{\boldsymbol{\mathnormal x}}}
+\newcommand{\By}{{\boldsymbol{\mathnormal y}}}
+\newcommand{\Bz}{{\boldsymbol{\mathnormal z}}}
 
-% Calligraphic (only uppercase)
-\newcommand{\cca}{\ensuremath{\mathcal{A}}\xspace}
-\newcommand{\ccb}{\ensuremath{\mathcal{B}}\xspace}
-\newcommand{\ccc}{\ensuremath{\mathcal{C}}\xspace}
-\newcommand{\ccd}{\ensuremath{\mathcal{D}}\xspace}
-\newcommand{\cce}{\ensuremath{\mathcal{E}}\xspace}
-\newcommand{\ccf}{\ensuremath{\mathcal{F}}\xspace}
-\newcommand{\ccg}{\ensuremath{\mathcal{G}}\xspace}
-\newcommand{\cch}{\ensuremath{\mathcal{H}}\xspace}
-\newcommand{\cci}{\ensuremath{\mathcal{I}}\xspace}
-\newcommand{\ccj}{\ensuremath{\mathcal{J}}\xspace}
-\newcommand{\cck}{\ensuremath{\mathcal{K}}\xspace}
-\newcommand{\ccl}{\ensuremath{\mathcal{L}}\xspace}
-\newcommand{\ccm}{\ensuremath{\mathcal{M}}\Xspace}
-\newcommand{\ccn}{\ensuremath{\mathcal{N}}\xspace}
-\newcommand{\cco}{\ensuremath{\mathcal{O}}\xspace}
-\newcommand{\ccp}{\ensuremath{\mathcal{P}}\xspace}
-\newcommand{\ccq}{\ensuremath{\mathcal{Q}}\xspace}
-\newcommand{\ccr}{\ensuremath{\mathcal{R}}\xspace}
-\newcommand{\ccs}{\ensuremath{\mathcal{S}}\xspace}
-\newcommand{\cct}{\ensuremath{\mathcal{T}}\xspace}
-\newcommand{\ccu}{\ensuremath{\mathcal{U}}\xspace}
-\newcommand{\ccv}{\ensuremath{\mathcal{V}}\xspace}
-\newcommand{\ccw}{\ensuremath{\mathcal{W}}\xspace}
-\newcommand{\ccx}{\ensuremath{\mathcal{X}}\xspace}
-\newcommand{\ccy}{\ensuremath{\mathcal{Y}}\xspace}
-\newcommand{\ccz}{\ensuremath{\mathcal{Z}}\xspace}
+% Upright bold letters
+\newcommand{\VA}{{\boldsymbol{\mathrm A}}}
+\newcommand{\VB}{{\boldsymbol{\mathrm B}}}
+\newcommand{\VC}{{\boldsymbol{\mathrm C}}}
+\newcommand{\VD}{{\boldsymbol{\mathrm D}}}
+\newcommand{\VE}{{\boldsymbol{\mathrm E}}}
+\newcommand{\VF}{{\boldsymbol{\mathrm F}}}
+\newcommand{\VG}{{\boldsymbol{\mathrm G}}}
+\newcommand{\VH}{{\boldsymbol{\mathrm H}}}
+\newcommand{\VI}{{\boldsymbol{\mathrm I}}}
+\newcommand{\VJ}{{\boldsymbol{\mathrm J}}}
+\newcommand{\VK}{{\boldsymbol{\mathrm K}}}
+\newcommand{\VL}{{\boldsymbol{\mathrm L}}}
+\newcommand{\VM}{{\boldsymbol{\mathrm M}}}
+\newcommand{\VN}{{\boldsymbol{\mathrm N}}}
+\newcommand{\VO}{{\boldsymbol{\mathrm O}}}
+\newcommand{\VP}{{\boldsymbol{\mathrm P}}}
+\newcommand{\VQ}{{\boldsymbol{\mathrm Q}}}
+\newcommand{\VR}{{\boldsymbol{\mathrm R}}}
+\newcommand{\VS}{{\boldsymbol{\mathrm S}}}
+\newcommand{\VT}{{\boldsymbol{\mathrm T}}}
+\newcommand{\VU}{{\boldsymbol{\mathrm U}}}
+\newcommand{\VV}{{\boldsymbol{\mathrm V}}}
+\newcommand{\VW}{{\boldsymbol{\mathrm W}}}
+\newcommand{\VX}{{\boldsymbol{\mathrm X}}}
+\newcommand{\VY}{{\boldsymbol{\mathrm Y}}}
+\newcommand{\VZ}{{\boldsymbol{\mathrm Z}}}
+\newcommand{\Va}{{\boldsymbol{\mathrm a}}}
+\newcommand{\Vb}{{\boldsymbol{\mathrm b}}}
+\newcommand{\Vc}{{\boldsymbol{\mathrm c}}}
+\newcommand{\Vd}{{\boldsymbol{\mathrm d}}}
+\newcommand{\Ve}{{\boldsymbol{\mathrm e}}}
+\newcommand{\Vf}{{\boldsymbol{\mathrm f}}}
+\newcommand{\Vg}{{\boldsymbol{\mathrm g}}}
+\newcommand{\Vh}{{\boldsymbol{\mathrm h}}}
+\newcommand{\Vi}{{\boldsymbol{\mathrm i}}}
+\newcommand{\Vj}{{\boldsymbol{\mathrm j}}}
+\newcommand{\Vk}{{\boldsymbol{\mathrm k}}}
+\newcommand{\Vl}{{\boldsymbol{\mathrm l}}}
+\newcommand{\Vm}{{\boldsymbol{\mathrm m}}}
+\newcommand{\Vn}{{\boldsymbol{\mathrm n}}}
+\newcommand{\Vo}{{\boldsymbol{\mathrm o}}}
+\newcommand{\Vp}{{\boldsymbol{\mathrm p}}}
+\newcommand{\Vq}{{\boldsymbol{\mathrm q}}}
+\newcommand{\Vr}{{\boldsymbol{\mathrm r}}}
+\newcommand{\Vs}{{\boldsymbol{\mathrm s}}}
+\newcommand{\Vt}{{\boldsymbol{\mathrm t}}}
+\newcommand{\Vu}{{\boldsymbol{\mathrm u}}}
+\newcommand{\Vv}{{\boldsymbol{\mathrm v}}}
+\newcommand{\Vw}{{\boldsymbol{\mathrm w}}}
+\newcommand{\Vx}{{\boldsymbol{\mathrm x}}}
+\newcommand{\Vy}{{\boldsymbol{\mathrm y}}}
+\newcommand{\Vz}{{\boldsymbol{\mathrm z}}}
 
-% Special
-\newcommand{\proj}{\ensuremath{\mathrm{proj}}\xspace}  % projection
-\newcommand{\sign}{\ensuremath{\mathrm{sign}}\xspace}  % sign
-\newcommand{\sym}{\ensuremath{\mathrm{sym}}\xspace}    % symmetric part
-\newcommand{\skw}{\ensuremath{\mathrm{skw}}\xspace}    % skew part
-\newcommand{\dive}{\ensuremath{\mathrm{div}}\xspace}   % divergence
-\newcommand{\curl}{\ensuremath{\mathrm{curl}}\xspace}  % curl
-\newcommand{\rot}{\ensuremath{\mathrm{rot}}\xspace}    % rotation
-\newcommand{\unit}{\ensuremath{\mathrm{unit}}\xspace}  % unit 
-\newcommand{\tr}{\ensuremath{\mathrm{tr}}\xspace}  % trace
-          
+% AMS blackboard bold
+\DeclareMathAlphabet{\amsbbold}{U}{msb}{m}{n}
+\newcommand{\IA}{{\amsbbold A}}
+\newcommand{\IB}{{\amsbbold B}}
+\newcommand{\IC}{{\amsbbold C}}
+\newcommand{\ID}{{\amsbbold D}}
+\newcommand{\IE}{{\amsbbold E}}
+\newcommand{\IF}{{\amsbbold F}}
+\newcommand{\IG}{{\amsbbold G}}
+\newcommand{\IH}{{\amsbbold H}}
+\newcommand{\II}{{\amsbbold I}}
+\renewcommand{\IJ}{{\amsbbold J}}
+\newcommand{\IK}{{\amsbbold K}}
+\newcommand{\IL}{{\amsbbold L}}
+\newcommand{\IM}{{\amsbbold M}}
+\newcommand{\IN}{{\amsbbold N}}
+\newcommand{\IO}{{\amsbbold O}}
+\newcommand{\IP}{{\amsbbold P}}
+\newcommand{\IQ}{{\amsbbold Q}}
+\newcommand{\IR}{{\amsbbold R}}
+\newcommand{\IS}{{\amsbbold S}}
+\newcommand{\IT}{{\amsbbold T}}
+\newcommand{\IU}{{\amsbbold U}}
+\newcommand{\IV}{{\amsbbold V}}
+\newcommand{\IW}{{\amsbbold W}}
+\newcommand{\IX}{{\amsbbold X}}
+\newcommand{\IY}{{\amsbbold Y}}
+\newcommand{\IZ}{{\amsbbold Z}}
 
+% bbold blackboard bold
+\DeclareMathAlphabet{\bboldbbold}{U}{bbold}{m}{n}
+\newcommand{\IIA}{{\bboldbbold A}}
+\newcommand{\IIB}{{\bboldbbold B}}
+\newcommand{\IIC}{{\bboldbbold C}}
+\newcommand{\IID}{{\bboldbbold D}}
+\newcommand{\IIE}{{\bboldbbold E}}
+\newcommand{\IIF}{{\bboldbbold F}}
+\newcommand{\IIG}{{\bboldbbold G}}
+\newcommand{\IIH}{{\bboldbbold H}}
+\newcommand{\III}{{\bboldbbold I}}
+\newcommand{\IIJ}{{\bboldbbold J}}
+\newcommand{\IIK}{{\bboldbbold K}}
+\newcommand{\IIL}{{\bboldbbold L}}
+\newcommand{\IIM}{{\bboldbbold M}}
+\newcommand{\IIN}{{\bboldbbold N}}
+\newcommand{\IIO}{{\bboldbbold O}}
+\newcommand{\IIP}{{\bboldbbold P}}
+\newcommand{\IIQ}{{\bboldbbold Q}}
+\newcommand{\IIR}{{\bboldbbold R}}
+\newcommand{\IIS}{{\bboldbbold S}}
+\newcommand{\IIT}{{\bboldbbold T}}
+\newcommand{\IIU}{{\bboldbbold U}}
+\newcommand{\IIV}{{\bboldbbold V}}
+\newcommand{\IIW}{{\bboldbbold W}}
+\newcommand{\IIX}{{\bboldbbold X}}
+\newcommand{\IIY}{{\bboldbbold Y}}
+\newcommand{\IIZ}{{\bboldbbold Z}}
+\newcommand{\IIa}{{\bboldbbold a}}
+\newcommand{\IIb}{{\bboldbbold b}}
+\newcommand{\IIc}{{\bboldbbold c}}
+\newcommand{\IId}{{\bboldbbold d}}
+\newcommand{\IIe}{{\bboldbbold e}}
+\newcommand{\IIf}{{\bboldbbold f}}
+\newcommand{\IIg}{{\bboldbbold g}}
+\newcommand{\IIh}{{\bboldbbold h}}
+\newcommand{\IIi}{{\bboldbbold i}}
+\newcommand{\IIj}{{\bboldbbold j}}
+\newcommand{\IIk}{{\bboldbbold k}}
+\newcommand{\IIl}{{\bboldbbold l}}
+\newcommand{\IIm}{{\bboldbbold m}}
+\newcommand{\IIn}{{\bboldbbold n}}
+\newcommand{\IIo}{{\bboldbbold o}}
+\newcommand{\IIp}{{\bboldbbold p}}
+\newcommand{\IIq}{{\bboldbbold q}}
+\newcommand{\IIr}{{\bboldbbold r}}
+\newcommand{\IIs}{{\bboldbbold s}}
+\newcommand{\IIt}{{\bboldbbold t}}
+\newcommand{\IIu}{{\bboldbbold u}}
+\newcommand{\IIv}{{\bboldbbold v}}
+\newcommand{\IIw}{{\bboldbbold w}}
+\newcommand{\IIx}{{\bboldbbold x}}
+\newcommand{\IIy}{{\bboldbbold y}}
+\newcommand{\IIz}{{\bboldbbold z}}
+
+% bbm blackboard bold serif
+\DeclareMathAlphabet{\bbmbboldserif}{U}{bbm}{m}{n}
+\newcommand{\bBA}{{\bbmbboldserif A}}
+\newcommand{\bBB}{{\bbmbboldserif B}}
+\newcommand{\bBC}{{\bbmbboldserif C}}
+\newcommand{\bBD}{{\bbmbboldserif D}}
+\newcommand{\bBE}{{\bbmbboldserif E}}
+\newcommand{\bBF}{{\bbmbboldserif F}}
+\newcommand{\bBG}{{\bbmbboldserif G}}
+\newcommand{\bBH}{{\bbmbboldserif H}}
+\newcommand{\bBI}{{\bbmbboldserif I}}
+\newcommand{\bBJ}{{\bbmbboldserif J}}
+\newcommand{\bBK}{{\bbmbboldserif K}}
+\newcommand{\bBL}{{\bbmbboldserif L}}
+\newcommand{\bBM}{{\bbmbboldserif M}}
+\newcommand{\bBN}{{\bbmbboldserif N}}
+\newcommand{\bBO}{{\bbmbboldserif O}}
+\newcommand{\bBP}{{\bbmbboldserif P}}
+\newcommand{\bBQ}{{\bbmbboldserif Q}}
+\newcommand{\bBR}{{\bbmbboldserif R}}
+\newcommand{\bBS}{{\bbmbboldserif S}}
+\newcommand{\bBT}{{\bbmbboldserif T}}
+\newcommand{\bBU}{{\bbmbboldserif U}}
+\newcommand{\bBV}{{\bbmbboldserif V}}
+\newcommand{\bBW}{{\bbmbboldserif W}}
+\newcommand{\bBX}{{\bbmbboldserif X}}
+\newcommand{\bBY}{{\bbmbboldserif Y}}
+\newcommand{\bBZ}{{\bbmbboldserif Z}}
+\newcommand{\bBa}{{\bbmbboldserif a}}
+\newcommand{\bBb}{{\bbmbboldserif b}}
+\newcommand{\bBc}{{\bbmbboldserif c}}
+\newcommand{\bBd}{{\bbmbboldserif d}}
+\newcommand{\bBe}{{\bbmbboldserif e}}
+\newcommand{\bBf}{{\bbmbboldserif f}}
+\newcommand{\bBg}{{\bbmbboldserif g}}
+\newcommand{\bBh}{{\bbmbboldserif h}}
+\newcommand{\bBi}{{\bbmbboldserif i}}
+\newcommand{\bBj}{{\bbmbboldserif j}}
+\newcommand{\bBk}{{\bbmbboldserif k}}
+\newcommand{\bBl}{{\bbmbboldserif l}}
+\newcommand{\bBm}{{\bbmbboldserif m}}
+\newcommand{\bBn}{{\bbmbboldserif n}}
+\newcommand{\bBo}{{\bbmbboldserif o}}
+\newcommand{\bBp}{{\bbmbboldserif p}}
+\newcommand{\bBq}{{\bbmbboldserif q}}
+\newcommand{\bBr}{{\bbmbboldserif r}}
+\newcommand{\bBs}{{\bbmbboldserif s}}
+\newcommand{\bBt}{{\bbmbboldserif t}}
+\newcommand{\bBu}{{\bbmbboldserif u}}
+\newcommand{\bBv}{{\bbmbboldserif v}}
+\newcommand{\bBw}{{\bbmbboldserif w}}
+\newcommand{\bBx}{{\bbmbboldserif x}}
+\newcommand{\bBy}{{\bbmbboldserif y}}
+\newcommand{\bBz}{{\bbmbboldserif z}}
+
+% bbm blackboard bold sans
+\DeclareMathAlphabet{\bbmbboldsans}{U}{bbmss}{m}{n}
+\newcommand{\BBA}{{\bbmbboldsans A}}
+\newcommand{\BBB}{{\bbmbboldsans B}}
+\newcommand{\BBC}{{\bbmbboldsans C}}
+\newcommand{\BBD}{{\bbmbboldsans D}}
+\newcommand{\BBE}{{\bbmbboldsans E}}
+\newcommand{\BBF}{{\bbmbboldsans F}}
+\newcommand{\BBG}{{\bbmbboldsans G}}
+\newcommand{\BBH}{{\bbmbboldsans H}}
+\newcommand{\BBI}{{\bbmbboldsans I}}
+\newcommand{\BBJ}{{\bbmbboldsans J}}
+\newcommand{\BBK}{{\bbmbboldsans K}}
+\newcommand{\BBL}{{\bbmbboldsans L}}
+\newcommand{\BBM}{{\bbmbboldsans M}}
+\newcommand{\BBN}{{\bbmbboldsans N}}
+\newcommand{\BBO}{{\bbmbboldsans O}}
+\newcommand{\BBP}{{\bbmbboldsans P}}
+\newcommand{\BBQ}{{\bbmbboldsans Q}}
+\newcommand{\BBR}{{\bbmbboldsans R}}
+\newcommand{\BBS}{{\bbmbboldsans S}}
+\newcommand{\BBT}{{\bbmbboldsans T}}
+\newcommand{\BBU}{{\bbmbboldsans U}}
+\newcommand{\BBV}{{\bbmbboldsans V}}
+\newcommand{\BBW}{{\bbmbboldsans W}}
+\newcommand{\BBX}{{\bbmbboldsans X}}
+\newcommand{\BBY}{{\bbmbboldsans Y}}
+\newcommand{\BBZ}{{\bbmbboldsans Z}}
+\newcommand{\BBa}{{\bbmbboldsans a}}
+\newcommand{\BBb}{{\bbmbboldsans b}}
+\newcommand{\BBc}{{\bbmbboldsans c}}
+\newcommand{\BBd}{{\bbmbboldsans d}}
+\newcommand{\BBe}{{\bbmbboldsans e}}
+\newcommand{\BBf}{{\bbmbboldsans f}}
+\newcommand{\BBg}{{\bbmbboldsans g}}
+\newcommand{\BBh}{{\bbmbboldsans h}}
+\newcommand{\BBi}{{\bbmbboldsans i}}
+\newcommand{\BBj}{{\bbmbboldsans j}}
+\newcommand{\BBk}{{\bbmbboldsans k}}
+\newcommand{\BBl}{{\bbmbboldsans l}}
+\newcommand{\BBm}{{\bbmbboldsans m}}
+\newcommand{\BBn}{{\bbmbboldsans n}}
+\newcommand{\BBo}{{\bbmbboldsans o}}
+\newcommand{\BBp}{{\bbmbboldsans p}}
+\newcommand{\BBq}{{\bbmbboldsans q}}
+\newcommand{\BBr}{{\bbmbboldsans r}}
+\newcommand{\BBs}{{\bbmbboldsans s}}
+\newcommand{\BBt}{{\bbmbboldsans t}}
+\newcommand{\BBu}{{\bbmbboldsans u}}
+\newcommand{\BBv}{{\bbmbboldsans v}}
+\newcommand{\BBw}{{\bbmbboldsans w}}
+\newcommand{\BBx}{{\bbmbboldsans x}}
+\newcommand{\BBy}{{\bbmbboldsans y}}
+\newcommand{\BBz}{{\bbmbboldsans z}}
+
+% bbm blackboard bold serif italic
+\DeclareMathAlphabet{\bbmbboldserifitalic}{U}{bbm}{m}{sl}
+\newcommand{\iBA}{{\bbmbboldserifitalic A}}
+\newcommand{\iBB}{{\bbmbboldserifitalic B}}
+\newcommand{\iBC}{{\bbmbboldserifitalic C}}
+\newcommand{\iBD}{{\bbmbboldserifitalic D}}
+\newcommand{\iBE}{{\bbmbboldserifitalic E}}
+\newcommand{\iBF}{{\bbmbboldserifitalic F}}
+\newcommand{\iBG}{{\bbmbboldserifitalic G}}
+\newcommand{\iBH}{{\bbmbboldserifitalic H}}
+\newcommand{\iBI}{{\bbmbboldserifitalic I}}
+\newcommand{\iBJ}{{\bbmbboldserifitalic J}}
+\newcommand{\iBK}{{\bbmbboldserifitalic K}}
+\newcommand{\iBL}{{\bbmbboldserifitalic L}}
+\newcommand{\iBM}{{\bbmbboldserifitalic M}}
+\newcommand{\iBN}{{\bbmbboldserifitalic N}}
+\newcommand{\iBO}{{\bbmbboldserifitalic O}}
+\newcommand{\iBP}{{\bbmbboldserifitalic P}}
+\newcommand{\iBQ}{{\bbmbboldserifitalic Q}}
+\newcommand{\iBR}{{\bbmbboldserifitalic R}}
+\newcommand{\iBS}{{\bbmbboldserifitalic S}}
+\newcommand{\iBT}{{\bbmbboldserifitalic T}}
+\newcommand{\iBU}{{\bbmbboldserifitalic U}}
+\newcommand{\iBV}{{\bbmbboldserifitalic V}}
+\newcommand{\iBW}{{\bbmbboldserifitalic W}}
+\newcommand{\iBX}{{\bbmbboldserifitalic X}}
+\newcommand{\iBY}{{\bbmbboldserifitalic Y}}
+\newcommand{\iBZ}{{\bbmbboldserifitalic Z}}
+\newcommand{\iBa}{{\bbmbboldserifitalic a}}
+\newcommand{\iBb}{{\bbmbboldserifitalic b}}
+\newcommand{\iBc}{{\bbmbboldserifitalic c}}
+\newcommand{\iBd}{{\bbmbboldserifitalic d}}
+\newcommand{\iBe}{{\bbmbboldserifitalic e}}
+\newcommand{\iBf}{{\bbmbboldserifitalic f}}
+\newcommand{\iBg}{{\bbmbboldserifitalic g}}
+\newcommand{\iBh}{{\bbmbboldserifitalic h}}
+\newcommand{\iBi}{{\bbmbboldserifitalic i}}
+\newcommand{\iBj}{{\bbmbboldserifitalic j}}
+\newcommand{\iBk}{{\bbmbboldserifitalic k}}
+\newcommand{\iBl}{{\bbmbboldserifitalic l}}
+\newcommand{\iBm}{{\bbmbboldserifitalic m}}
+\newcommand{\iBn}{{\bbmbboldserifitalic n}}
+\newcommand{\iBo}{{\bbmbboldserifitalic o}}
+\newcommand{\iBp}{{\bbmbboldserifitalic p}}
+\newcommand{\iBq}{{\bbmbboldserifitalic q}}
+\newcommand{\iBr}{{\bbmbboldserifitalic r}}
+\newcommand{\iBs}{{\bbmbboldserifitalic s}}
+\newcommand{\iBt}{{\bbmbboldserifitalic t}}
+\newcommand{\iBu}{{\bbmbboldserifitalic u}}
+\newcommand{\iBv}{{\bbmbboldserifitalic v}}
+\newcommand{\iBw}{{\bbmbboldserifitalic w}}
+\newcommand{\iBx}{{\bbmbboldserifitalic x}}
+\newcommand{\iBy}{{\bbmbboldserifitalic y}}
+\newcommand{\iBz}{{\bbmbboldserifitalic z}}
+
+% bbm blackboard bold sans italic
+\DeclareMathAlphabet{\bbmbboldsansitalic}{U}{bbmss}{m}{it}
+\newcommand{\IBA}{{\bbmbboldsansitalic A}}
+\newcommand{\IBB}{{\bbmbboldsansitalic B}}
+\newcommand{\IBC}{{\bbmbboldsansitalic C}}
+\newcommand{\IBD}{{\bbmbboldsansitalic D}}
+\newcommand{\IBE}{{\bbmbboldsansitalic E}}
+\newcommand{\IBF}{{\bbmbboldsansitalic F}}
+\newcommand{\IBG}{{\bbmbboldsansitalic G}}
+\newcommand{\IBH}{{\bbmbboldsansitalic H}}
+\newcommand{\IBI}{{\bbmbboldsansitalic I}}
+\newcommand{\IBJ}{{\bbmbboldsansitalic J}}
+\newcommand{\IBK}{{\bbmbboldsansitalic K}}
+\newcommand{\IBL}{{\bbmbboldsansitalic L}}
+\newcommand{\IBM}{{\bbmbboldsansitalic M}}
+\newcommand{\IBN}{{\bbmbboldsansitalic N}}
+\newcommand{\IBO}{{\bbmbboldsansitalic O}}
+\newcommand{\IBP}{{\bbmbboldsansitalic P}}
+\newcommand{\IBQ}{{\bbmbboldsansitalic Q}}
+\newcommand{\IBR}{{\bbmbboldsansitalic R}}
+\newcommand{\IBS}{{\bbmbboldsansitalic S}}
+\newcommand{\IBT}{{\bbmbboldsansitalic T}}
+\newcommand{\IBU}{{\bbmbboldsansitalic U}}
+\newcommand{\IBV}{{\bbmbboldsansitalic V}}
+\newcommand{\IBW}{{\bbmbboldsansitalic W}}
+\newcommand{\IBX}{{\bbmbboldsansitalic X}}
+\newcommand{\IBY}{{\bbmbboldsansitalic Y}}
+\newcommand{\IBZ}{{\bbmbboldsansitalic Z}}
+\newcommand{\IBa}{{\bbmbboldsansitalic a}}
+\newcommand{\IBb}{{\bbmbboldsansitalic b}}
+\newcommand{\IBc}{{\bbmbboldsansitalic c}}
+\newcommand{\IBd}{{\bbmbboldsansitalic d}}
+\newcommand{\IBe}{{\bbmbboldsansitalic e}}
+\newcommand{\IBf}{{\bbmbboldsansitalic f}}
+\newcommand{\IBg}{{\bbmbboldsansitalic g}}
+\newcommand{\IBh}{{\bbmbboldsansitalic h}}
+\newcommand{\IBi}{{\bbmbboldsansitalic i}}
+\newcommand{\IBj}{{\bbmbboldsansitalic j}}
+\newcommand{\IBk}{{\bbmbboldsansitalic k}}
+\newcommand{\IBl}{{\bbmbboldsansitalic l}}
+\newcommand{\IBm}{{\bbmbboldsansitalic m}}
+\newcommand{\IBn}{{\bbmbboldsansitalic n}}
+\newcommand{\IBo}{{\bbmbboldsansitalic o}}
+\newcommand{\IBp}{{\bbmbboldsansitalic p}}
+\newcommand{\IBq}{{\bbmbboldsansitalic q}}
+\newcommand{\IBr}{{\bbmbboldsansitalic r}}
+\newcommand{\IBs}{{\bbmbboldsansitalic s}}
+\newcommand{\IBt}{{\bbmbboldsansitalic t}}
+\newcommand{\IBu}{{\bbmbboldsansitalic u}}
+\newcommand{\IBv}{{\bbmbboldsansitalic v}}
+\newcommand{\IBw}{{\bbmbboldsansitalic w}}
+\newcommand{\IBx}{{\bbmbboldsansitalic x}}
+\newcommand{\IBy}{{\bbmbboldsansitalic y}}
+\newcommand{\IBz}{{\bbmbboldsansitalic z}}
+
+% Raph Smith’s Formal Script
+\DeclareMathAlphabet{\rsfsfont}{U}{rsfs}{m}{n}
+\def\rsfsfontbold#1{\pmb{\rsfsfont{#1}}}
+\newcommand{\RSA}{{\rsfsfont A}}
+\newcommand{\RSB}{{\rsfsfont B}}
+\newcommand{\RSC}{{\rsfsfont C}}
+\newcommand{\RSD}{{\rsfsfont D}}
+\newcommand{\RSE}{{\rsfsfont E}}
+\newcommand{\RSF}{{\rsfsfont F}}
+\newcommand{\RSG}{{\rsfsfont G}}
+\newcommand{\RSH}{{\rsfsfont H}}
+\newcommand{\RSI}{{\rsfsfont I}}
+\newcommand{\RSJ}{{\rsfsfont J}}
+\newcommand{\RSK}{{\rsfsfont K}}
+\newcommand{\RSL}{{\rsfsfont L}}
+\newcommand{\RSM}{{\rsfsfont M}}
+\newcommand{\RSN}{{\rsfsfont N}}
+\newcommand{\RSO}{{\rsfsfont O}}
+\newcommand{\RSP}{{\rsfsfont P}}
+\newcommand{\RSQ}{{\rsfsfont Q}}
+\newcommand{\RSR}{{\rsfsfont R}}
+\newcommand{\RSS}{{\rsfsfont S}}
+\newcommand{\RST}{{\rsfsfont T}}
+\newcommand{\RSU}{{\rsfsfont U}}
+\newcommand{\RSV}{{\rsfsfont V}}
+\newcommand{\RSW}{{\rsfsfont W}}
+\newcommand{\RSX}{{\rsfsfont X}}
+\newcommand{\RSY}{{\rsfsfont Y}}
+\newcommand{\RSZ}{{\rsfsfont Z}}
+
+% Raph Smith’s Formal Script bold
+\newcommand{\BSA}{{\rsfsfontbold A}}
+\newcommand{\BSB}{{\rsfsfontbold B}}
+\newcommand{\BSC}{{\rsfsfontbold C}}
+\newcommand{\BSD}{{\rsfsfontbold D}}
+\newcommand{\BSE}{{\rsfsfontbold E}}
+\newcommand{\BSF}{{\rsfsfontbold F}}
+\newcommand{\BSG}{{\rsfsfontbold G}}
+\newcommand{\BSH}{{\rsfsfontbold H}}
+\newcommand{\BSI}{{\rsfsfontbold I}}
+\newcommand{\BSJ}{{\rsfsfontbold J}}
+\newcommand{\BSK}{{\rsfsfontbold K}}
+\newcommand{\BSL}{{\rsfsfontbold L}}
+\newcommand{\BSM}{{\rsfsfontbold M}}
+\newcommand{\BSN}{{\rsfsfontbold N}}
+\newcommand{\BSO}{{\rsfsfontbold O}}
+\newcommand{\BSP}{{\rsfsfontbold P}}
+\newcommand{\BSQ}{{\rsfsfontbold Q}}
+\newcommand{\BSR}{{\rsfsfontbold R}}
+\newcommand{\BSS}{{\rsfsfontbold S}}
+\newcommand{\BST}{{\rsfsfontbold T}}
+\newcommand{\BSU}{{\rsfsfontbold U}}
+\newcommand{\BSV}{{\rsfsfontbold V}}
+\newcommand{\BSW}{{\rsfsfontbold W}}
+\newcommand{\BSX}{{\rsfsfontbold X}}
+\newcommand{\BSY}{{\rsfsfontbold Y}}
+\newcommand{\BSZ}{{\rsfsfontbold Z}}
+
+% Calligraphic
+\newcommand{\CA}{{\mathcal A}}
+\newcommand{\CB}{{\mathcal B}}
+\newcommand{\CC}{{\mathcal C}}
+\newcommand{\CD}{{\mathcal D}}
+\newcommand{\CE}{{\mathcal E}}
+\newcommand{\CF}{{\mathcal F}}
+\newcommand{\CG}{{\mathcal G}}
+\newcommand{\CH}{{\mathcal H}}
+\newcommand{\CI}{{\mathcal I}}
+\newcommand{\CJ}{{\mathcal J}}
+\newcommand{\CK}{{\mathcal K}}
+\newcommand{\CL}{{\mathcal L}}
+\newcommand{\CM}{{\mathcal M}}
+\newcommand{\CN}{{\mathcal N}}
+\newcommand{\CO}{{\mathcal O}}
+\newcommand{\CP}{{\mathcal P}}
+\newcommand{\CQ}{{\mathcal Q}}
+\newcommand{\CR}{{\mathcal R}}
+\newcommand{\CS}{{\mathcal S}}
+\newcommand{\CT}{{\mathcal T}}
+\newcommand{\CU}{{\mathcal U}}
+\newcommand{\CV}{{\mathcal V}}
+\newcommand{\CW}{{\mathcal W}}
+\newcommand{\CX}{{\mathcal X}}
+\newcommand{\CY}{{\mathcal Y}}
+\newcommand{\CZ}{{\mathcal Z}}
+
+% Calligraphic bold
+\newcommand{\CBA}{{\boldsymbol{\mathcal A}}}
+\newcommand{\CBB}{{\boldsymbol{\mathcal B}}}
+\newcommand{\CBC}{{\boldsymbol{\mathcal C}}}
+\newcommand{\CBD}{{\boldsymbol{\mathcal D}}}
+\newcommand{\CBE}{{\boldsymbol{\mathcal E}}}
+\newcommand{\CBF}{{\boldsymbol{\mathcal F}}}
+\newcommand{\CBG}{{\boldsymbol{\mathcal G}}}
+\newcommand{\CBH}{{\boldsymbol{\mathcal H}}}
+\newcommand{\CBI}{{\boldsymbol{\mathcal I}}}
+\newcommand{\CBJ}{{\boldsymbol{\mathcal J}}}
+\newcommand{\CBK}{{\boldsymbol{\mathcal K}}}
+\newcommand{\CBL}{{\boldsymbol{\mathcal L}}}
+\newcommand{\CBM}{{\boldsymbol{\mathcal M}}}
+\newcommand{\CBN}{{\boldsymbol{\mathcal N}}}
+\newcommand{\CBO}{{\boldsymbol{\mathcal O}}}
+\newcommand{\CBP}{{\boldsymbol{\mathcal P}}}
+\newcommand{\CBQ}{{\boldsymbol{\mathcal Q}}}
+\newcommand{\CBR}{{\boldsymbol{\mathcal R}}}
+\newcommand{\CBS}{{\boldsymbol{\mathcal S}}}
+\newcommand{\CBT}{{\boldsymbol{\mathcal T}}}
+\newcommand{\CBU}{{\boldsymbol{\mathcal U}}}
+\newcommand{\CBV}{{\boldsymbol{\mathcal V}}}
+\newcommand{\CBW}{{\boldsymbol{\mathcal W}}}
+\newcommand{\CBX}{{\boldsymbol{\mathcal X}}}
+\newcommand{\CBY}{{\boldsymbol{\mathcal Y}}}
+\newcommand{\CBZ}{{\boldsymbol{\mathcal Z}}}
+
+% Fraktur
+\DeclareMathAlphabet{\frakfont}{U}{euf}{m}{n}
+\newcommand{\frakA}{{\frakfont A}}
+\newcommand{\frakB}{{\frakfont B}}
+\newcommand{\frakC}{{\frakfont C}}
+\newcommand{\frakD}{{\frakfont D}}
+\newcommand{\frakE}{{\frakfont E}}
+\newcommand{\frakF}{{\frakfont F}}
+\newcommand{\frakG}{{\frakfont G}}
+\newcommand{\frakH}{{\frakfont H}}
+\newcommand{\frakI}{{\frakfont I}}
+\newcommand{\frakJ}{{\frakfont J}}
+\newcommand{\frakK}{{\frakfont K}}
+\newcommand{\frakL}{{\frakfont L}}
+\newcommand{\frakM}{{\frakfont M}}
+\newcommand{\frakN}{{\frakfont N}}
+\newcommand{\frakO}{{\frakfont O}}
+\newcommand{\frakP}{{\frakfont P}}
+\newcommand{\frakQ}{{\frakfont Q}}
+\newcommand{\frakR}{{\frakfont R}}
+\newcommand{\frakS}{{\frakfont S}}
+\newcommand{\frakT}{{\frakfont T}}
+\newcommand{\frakU}{{\frakfont U}}
+\newcommand{\frakV}{{\frakfont V}}
+\newcommand{\frakW}{{\frakfont W}}
+\newcommand{\frakX}{{\frakfont X}}
+\newcommand{\frakY}{{\frakfont Y}}
+\newcommand{\frakZ}{{\frakfont Z}}
+\newcommand{\fraka}{{\frakfont a}}
+\newcommand{\frakb}{{\frakfont b}}
+\newcommand{\frakc}{{\frakfont c}}
+\newcommand{\frakd}{{\frakfont d}}
+\newcommand{\frake}{{\frakfont e}}
+\newcommand{\frakf}{{\frakfont f}}
+\newcommand{\frakg}{{\frakfont g}}
+\newcommand{\frakh}{{\frakfont h}}
+\newcommand{\fraki}{{\frakfont i}}
+\newcommand{\frakj}{{\frakfont j}}
+\newcommand{\frakk}{{\frakfont k}}
+\newcommand{\frakl}{{\frakfont l}}
+\newcommand{\frakm}{{\frakfont m}}
+\newcommand{\frakn}{{\frakfont n}}
+\newcommand{\frako}{{\frakfont o}}
+\newcommand{\frakp}{{\frakfont p}}
+\newcommand{\frakq}{{\frakfont q}}
+\newcommand{\frakr}{{\frakfont r}}
+\newcommand{\fraks}{{\frakfont s}}
+\newcommand{\frakt}{{\frakfont t}}
+\newcommand{\fraku}{{\frakfont u}}
+\newcommand{\frakv}{{\frakfont v}}
+\newcommand{\frakw}{{\frakfont w}}
+\newcommand{\frakx}{{\frakfont x}}
+\newcommand{\fraky}{{\frakfont y}}
+\newcommand{\frakz}{{\frakfont z}}
+
+% Fraktur bold
+\DeclareMathAlphabet{\frakfontbold}{U}{euf}{b}{n}
+\newcommand{\BfrakA}{{\frakfontbold A}}
+\newcommand{\BfrakB}{{\frakfontbold B}}
+\newcommand{\BfrakC}{{\frakfontbold C}}
+\newcommand{\BfrakD}{{\frakfontbold D}}
+\newcommand{\BfrakE}{{\frakfontbold E}}
+\newcommand{\BfrakF}{{\frakfontbold F}}
+\newcommand{\BfrakG}{{\frakfontbold G}}
+\newcommand{\BfrakH}{{\frakfontbold H}}
+\newcommand{\BfrakI}{{\frakfontbold I}}
+\newcommand{\BfrakJ}{{\frakfontbold J}}
+\newcommand{\BfrakK}{{\frakfontbold K}}
+\newcommand{\BfrakL}{{\frakfontbold L}}
+\newcommand{\BfrakM}{{\frakfontbold M}}
+\newcommand{\BfrakN}{{\frakfontbold N}}
+\newcommand{\BfrakO}{{\frakfontbold O}}
+\newcommand{\BfrakP}{{\frakfontbold P}}
+\newcommand{\BfrakQ}{{\frakfontbold Q}}
+\newcommand{\BfrakR}{{\frakfontbold R}}
+\newcommand{\BfrakS}{{\frakfontbold S}}
+\newcommand{\BfrakT}{{\frakfontbold T}}
+\newcommand{\BfrakU}{{\frakfontbold U}}
+\newcommand{\BfrakV}{{\frakfontbold V}}
+\newcommand{\BfrakW}{{\frakfontbold W}}
+\newcommand{\BfrakX}{{\frakfontbold X}}
+\newcommand{\BfrakY}{{\frakfontbold Y}}
+\newcommand{\BfrakZ}{{\frakfontbold Z}}
+\newcommand{\Bfraka}{{\frakfontbold a}}
+\newcommand{\Bfrakb}{{\frakfontbold b}}
+\newcommand{\Bfrakc}{{\frakfontbold c}}
+\newcommand{\Bfrakd}{{\frakfontbold d}}
+\newcommand{\Bfrake}{{\frakfontbold e}}
+\newcommand{\Bfrakf}{{\frakfontbold f}}
+\newcommand{\Bfrakg}{{\frakfontbold g}}
+\newcommand{\Bfrakh}{{\frakfontbold h}}
+\newcommand{\Bfraki}{{\frakfontbold i}}
+\newcommand{\Bfrakj}{{\frakfontbold j}}
+\newcommand{\Bfrakk}{{\frakfontbold k}}
+\newcommand{\Bfrakl}{{\frakfontbold l}}
+\newcommand{\Bfrakm}{{\frakfontbold m}}
+\newcommand{\Bfrakn}{{\frakfontbold n}}
+\newcommand{\Bfrako}{{\frakfontbold o}}
+\newcommand{\Bfrakp}{{\frakfontbold p}}
+\newcommand{\Bfrakq}{{\frakfontbold q}}
+\newcommand{\Bfrakr}{{\frakfontbold r}}
+\newcommand{\Bfraks}{{\frakfontbold s}}
+\newcommand{\Bfrakt}{{\frakfontbold t}}
+\newcommand{\Bfraku}{{\frakfontbold u}}
+\newcommand{\Bfrakv}{{\frakfontbold v}}
+\newcommand{\Bfrakw}{{\frakfontbold w}}
+\newcommand{\Bfrakx}{{\frakfontbold x}}
+\newcommand{\Bfraky}{{\frakfontbold y}}
+\newcommand{\Bfrakz}{{\frakfontbold z}}
+
+% euscript cursive
+\DeclareMathAlphabet{\euscriptfont}{U}{eus}{m}{n}
+\newcommand{\eulA}{{\euscriptfont A}}
+\newcommand{\eulB}{{\euscriptfont B}}
+\newcommand{\eulC}{{\euscriptfont C}}
+\newcommand{\eulD}{{\euscriptfont D}}
+\newcommand{\eulE}{{\euscriptfont E}}
+\newcommand{\eulF}{{\euscriptfont F}}
+\newcommand{\eulG}{{\euscriptfont G}}
+\newcommand{\eulH}{{\euscriptfont H}}
+\newcommand{\eulI}{{\euscriptfont I}}
+\newcommand{\eulJ}{{\euscriptfont J}}
+\newcommand{\eulK}{{\euscriptfont K}}
+\newcommand{\eulL}{{\euscriptfont L}}
+\newcommand{\eulM}{{\euscriptfont M}}
+\newcommand{\eulN}{{\euscriptfont N}}
+\newcommand{\eulO}{{\euscriptfont O}}
+\newcommand{\eulP}{{\euscriptfont P}}
+\newcommand{\eulQ}{{\euscriptfont Q}}
+\newcommand{\eulR}{{\euscriptfont R}}
+\newcommand{\eulS}{{\euscriptfont S}}
+\newcommand{\eulT}{{\euscriptfont T}}
+\newcommand{\eulU}{{\euscriptfont U}}
+\newcommand{\eulV}{{\euscriptfont V}}
+\newcommand{\eulW}{{\euscriptfont W}}
+\newcommand{\eulX}{{\euscriptfont X}}
+\newcommand{\eulY}{{\euscriptfont Y}}
+\newcommand{\eulZ}{{\euscriptfont Z}}
+
+% euscript cursive bold
+\DeclareMathAlphabet{\euscriptfontbold}{U}{eus}{b}{n}
+\newcommand{\BeulA}{{\euscriptfontbold A}}
+\newcommand{\BeulB}{{\euscriptfontbold B}}
+\newcommand{\BeulC}{{\euscriptfontbold C}}
+\newcommand{\BeulD}{{\euscriptfontbold D}}
+\newcommand{\BeulE}{{\euscriptfontbold E}}
+\newcommand{\BeulF}{{\euscriptfontbold F}}
+\newcommand{\BeulG}{{\euscriptfontbold G}}
+\newcommand{\BeulH}{{\euscriptfontbold H}}
+\newcommand{\BeulI}{{\euscriptfontbold I}}
+\newcommand{\BeulJ}{{\euscriptfontbold J}}
+\newcommand{\BeulK}{{\euscriptfontbold K}}
+\newcommand{\BeulL}{{\euscriptfontbold L}}
+\newcommand{\BeulM}{{\euscriptfontbold M}}
+\newcommand{\BeulN}{{\euscriptfontbold N}}
+\newcommand{\BeulO}{{\euscriptfontbold O}}
+\newcommand{\BeulP}{{\euscriptfontbold P}}
+\newcommand{\BeulQ}{{\euscriptfontbold Q}}
+\newcommand{\BeulR}{{\euscriptfontbold R}}
+\newcommand{\BeulS}{{\euscriptfontbold S}}
+\newcommand{\BeulT}{{\euscriptfontbold T}}
+\newcommand{\BeulU}{{\euscriptfontbold U}}
+\newcommand{\BeulV}{{\euscriptfontbold V}}
+\newcommand{\BeulW}{{\euscriptfontbold W}}
+\newcommand{\BeulX}{{\euscriptfontbold X}}
+\newcommand{\BeulY}{{\euscriptfontbold Y}}
+\newcommand{\BeulZ}{{\euscriptfontbold Z}}
+
+% bold italic numbers
+\newcommand{\Bzero }{{\boldsymbol{\mathit 0}}}
+\newcommand{\Bone  }{{\boldsymbol{\mathit 1}}}
+\newcommand{\Btwo  }{{\boldsymbol{\mathit 2}}}
+\newcommand{\Bthree}{{\boldsymbol{\mathit 3}}}
+\newcommand{\Bfour }{{\boldsymbol{\mathit 4}}}
+\newcommand{\Bfive }{{\boldsymbol{\mathit 5}}}
+\newcommand{\Bsix  }{{\boldsymbol{\mathit 6}}}
+\newcommand{\Bseven}{{\boldsymbol{\mathit 7}}}
+\newcommand{\Beight}{{\boldsymbol{\mathit 8}}}
+\newcommand{\Bnine }{{\boldsymbol{\mathit 9}}}
+
+% bold upright numbers
+\newcommand{\Vzero }{{\boldsymbol 0}}
+\newcommand{\Vone  }{{\boldsymbol 1}}
+\newcommand{\Vtwo  }{{\boldsymbol 2}}
+\newcommand{\Vthree}{{\boldsymbol 3}}
+\newcommand{\Vfour }{{\boldsymbol 4}}
+\newcommand{\Vfive }{{\boldsymbol 5}}
+\newcommand{\Vsix  }{{\boldsymbol 6}}
+\newcommand{\Vseven}{{\boldsymbol 7}}
+\newcommand{\Veight}{{\boldsymbol 8}}
+\newcommand{\Vnine }{{\boldsymbol 9}}
+
+% bbold blackboard bold numbers
+\newcommand{\IIzero }{{\bboldbbold 0}}
+\newcommand{\IIone  }{{\bboldbbold 1}}
+\newcommand{\IItwo  }{{\bboldbbold 2}}
+\newcommand{\IIthree}{{\bboldbbold 3}}
+\newcommand{\IIfour }{{\bboldbbold 4}}
+\newcommand{\IIfive }{{\bboldbbold 5}}
+\newcommand{\IIsix  }{{\bboldbbold 6}}
+\newcommand{\IIseven}{{\bboldbbold 7}}
+\newcommand{\IIeight}{{\bboldbbold 8}}
+\newcommand{\IInine }{{\bboldbbold 9}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Macros for easy bracket handling %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\jump}{\jumpi}              % [[ ... ]]
+\newcommand{\sbr}[1]{\left[#1\right]}   % Square BRackets
+\newcommand{\rbr}[1]{\left(#1\right)}   % Round  BRackets
+\newcommand{\cbr}[1]{\left\{#1\right\}} % Curly  BRackets
+\newcommand{\ave}[1]{\left\langle\mkern1mu #1\mkern1mu\right\rangle}    % < ... >
+\def\jumpi#1{%
+   \setbox8\hbox{$\left[\llap{$#1$}\right[$}%
+   \left[\kern-0.3\wd8\left[#1\right]\kern-0.3\wd8\right]%
+}
+
+% Mathematical operators
 \newcommand{\variation}[2]{\frac{\delta #1}{\delta #2}} % variation shorthand
-\newcommand{\cpartd}[2]{\cfrac{\partial #1}{\partial #2}} % partial derivative
 \newcommand{\partd}[2]{\frac{\partial #1}{\partial #2}} % partial derivative
+\newcommand{\partdrb}[2]{\frac{\partial}{\partial #2}\rbr{#1}} % partial
+\newcommand{\partdsb}[2]{\frac{\partial}{\partial #2}\sbr{#1}} % partial
+\newcommand{\cpartd}[2]{\cfrac{\partial #1}{\partial #2}} % partial derivative
+                                % derivative where the first operand is in
+                                % separate brackets
+% \newcommand{\partdd}[2]{\frac{\partial^2 #1}{\partial #2}} % double partial derivative
 \newcommand{\deriv}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}} % derivative
-\newcommand{\assem}{\bm{\mathsf{A}}} % assembly symbol
-\newcommand{\bero}{\mathbf{0}} % bold zero
-\newcommand{\bone}{\mathbf{1}} % bold one
-\newcommand{\Lin}{\mathrm{Lin}\ \xspace} % linearization operator
-\newcommand{\dV}{\ \mathrm{d}V} % differential volume
-\newcommand{\dA}{\ \mathrm{d}A} % differential area
-\newcommand{\dx}{\ \mathrm{d}x} % differential length
+\newcommand{\assem}{\mathsf{A}} % assembly symbol
+%\newcommand{\assem}{\mathlarger{\mathlarger{\mathlarger{\mathsf{A}}}}} % assembly symbol
 \newcommand{\evat}{\bigg|} % evaluate at
-\newcommand{\onetwo}{\frac{1}{2}} % one over two
-\newcommand{\threetwo}{\frac{3}{2}} % three over two
 \newcommand{\degree}{\ensuremath{^{\circ}}\xspace} % degree symbol
+
+% Special fractions and roots
+\newcommand{\half}{{\textstyle\mthin\frac{1}{2}\mthin}}              % 1/2
+\newcommand{\third}{{\textstyle\mthin\frac{1}{3}\mthin}}             % 1/3
+\newcommand{\fourth}{{\textstyle\mthin\frac{1}{4}\mthin}}            % 1/4
+\newcommand{\fifth}{{\textstyle\mthin\frac{1}{5}\mthin}}             % 1/5
+\newcommand{\sixth}{{\textstyle\mthin\frac{1}{6}\mthin}}             % 1/6
+\newcommand{\seventh}{{\textstyle\mthin\frac{1}{7}\mthin}}           % 1/7
+\newcommand{\eighth}{{\textstyle\mthin\frac{1}{8}\mthin}}            % 1/8
+\newcommand{\ninth}{{\textstyle\mthin\frac{1}{9}\mthin}}             % 1/9
+\newcommand{\tenth}{{\textstyle\mthin\frac{1}{10}\mthin}}            % 1/10
+\newcommand{\twothree}{{\textstyle\mthin\frac{2}{3}\mthin}}          % 2/3
+\newcommand{\threetwo}{{\textstyle\mthin\frac{3}{2}\mthin}}          % 3/2
+\newcommand{\sqonetwo}{{\textstyle\mthin\sqrt{\frac{1}{2}}\mthin}}   % sqrt(1/2)
+\newcommand{\sqonethree}{{\textstyle\mthin\sqrt{\frac{1}{3}}\mthin}} % sqrt(1/3)
+\newcommand{\sqtwothree}{{\textstyle\mthin\sqrt{\frac{2}{3}}\mthin}} % sqrt(2/3)
+\newcommand{\sqthreetwo}{{\textstyle\mthin\sqrt{\frac{3}{2}}\mthin}} % sqrt(3/2)
+\def\mthin{\mkern\thinmuskip}
+
+% \DeclareRobustCommand*{\cal}{\@fontswitch{\relax}{\mathcal}}
+% \newcommand{\textenv}{%
+%   \ifmmode%
+%      \expandafter%
+%      \math@text%
+%   \else%
+%      \expandafter%
+%      \mbox%
+%   \fi%
+% }
+
+\makeatletter
+\newcommand{\linedot}[1]{\dot{\overline{#1}}}                 % dot time derivative with line
+\newcommand{\DIV}{\mathop{\operator@font DIV}}                % DIV
+\newcommand{\Div}{\mathop{\operator@font Div}}                % Div
+\renewcommand{\div}{\mathop{\operator@font div}}              % div
+\newcommand{\curl}{{\mathop{\operator@font curl}}}            % curl
+\newcommand{\rot}{{\mathop{\operator@font rot}}}              % rotation
+\newcommand{\proj}{{\mathop{\operator@font proj}}}            % projection
+\newcommand{\sign}{{\mathop{\operator@font sign}}}            % sign
+\newcommand{\unit}{{\mathop{\operator@font unit}}}            % unit
+\renewcommand{\arg}{\mathop{\operator@font arg}}              % arg
+\newcommand{\Arg}{\mathop{\operator@font Arg}}                % Arg
+\newcommand{\sym}{\mathop{\operator@font sym}}                % sym
+\newcommand{\TR}{\mathop{\operator@font TR}}                  % TR
+\newcommand{\tr}{\mathop{\operator@font tr}}                  % tr
+\newcommand{\trial}{\mathop{\operator@font trial}}            % trial
+\newcommand{\DEV}{\mathop{\operator@font DEV}}                % DEV
+\newcommand{\dev}{\mathop{\operator@font dev}}                % dev
+\newcommand{\GRAD}{\mathop{\operator@font GRAD}}              % GRAD
+\newcommand{\Grad}{\mathop{\operator@font Grad}}              % Grad
+\newcommand{\grad}{\mathop{\operator@font grad}}              % grad
+\newcommand{\Lin}{\mathop{\operator@font Lin}}                % Lin
+\newcommand{\lin}{\mathop{\operator@font lin}}                % lin
+\newcommand{\skw}{\mathop{\operator@font skw}}               % skew
+\newcommand{\loc}{\mathop{\operator@font int}}                % int
+\newcommand{\cof}{\mathop{\operator@font cof}}                % cof
+\newcommand{\reac}{\mathop{\operator@font reac}}              % reac
+\newcommand{\pind}{\mathop{\operator@font pind}}              % pind
+\newcommand{\ndim}{\mathop{n_{\operator@font dim}}}           % dim
+\newcommand{\diag}{\mathop{\operator@font diag}}              % diag
+\newcommand{\veci}[1]{#1_1,\ldots,#1_n}                       % []_1,..,[]_n
+\newcommand{\dV}{\mkern\medmuskip dV}                         % dV
+\newcommand{\dA}{\mkern\medmuskip dA}                         % dA
+\newcommand{\dS}{\mkern\medmuskip dS}                         % dS
+\newcommand{\dx}{\mkern\medmuskip dx}                         % dx
+\newcommand{\jumpl}{\mathopen{[\mkern-2.5mu[}}                % [[
+\newcommand{\jumpr}{\mathclose{]\mkern-2.5mu]}}               % ]]
+\newcommand{\Abs}[1]{\left|#1\right|}                         % Betrag |#1|
+\newcommand{\Norm}[1]{\left\|#1\right\|}                      % Norm   ||#1||
+% \newcommand{\rve}{\textenv{$\cal RVE$}}                       % RVE
+% \newcommand{\rpg}{\textenv{$\cal RPG$}}                       % RPG
+% \newcommand{\ehs}{\textenv{$\cal EHS$}}                       % EHS
+% \newcommand{\so}{\textenv{$\cal SO$}}                         % SO
+% \newcommand{\mo}{\textenv{$\cal MO$}}                         % MO
+% \newcommand{\othree}{\textenv{$\cal O$\it(3)\/}}              % O(3)
+% \newcommand{\sothree}{\textenv{$\cal SO$\it(3)\/}}            % SO(3)
+% \newcommand{\slthree}{\textenv{$\cal S\mkern-1mu L$\it(3)\/}} % SL(3)
+% \newcommand{\AND}{\quad\textenv{and}\quad}                    % and
+% \newcommand{\WITH}{\quad\textenv{with}\quad}                  % with
+% \newcommand{\UND}{\quad\textenv{und}\quad}                    % und
+% \newcommand{\MIT}{\quad\textenv{mit}\quad}                    % mit
+% \newcommand{\com}{\quad\textenv{,}\quad}                      % ... , ...
+\makeatother
+
+% transpose macros
+\makeatletter
+\def\tra{\@ifnextchar[{\@@transpose}{\@transpose}} % \tra and \tra[]
+\def\@@transpose[#1]{^{\mathsf{#1T}}}
+\def\@transpose{^\mathsf{T}}
+\def\tratop#1{^{\stackrel{#1}{\mathsf{T}}}} % \tratop[]
+\makeatother
+
+% \makeatletter
+% \newcommand{\tra}{\@ifnextchar[{\@@transpose}{\@ifnextchar({\@@@transpose}{\@transpose}}}
+% \def\@@@transpose(#1){^{\stackrel{#1}{\mathsf{T}}}}
+% \def\@@transpose[#1]{^{\mathsf{#1T}}}
+% \def\@transpose{^\mathsf{T}}
+% \makeatother
+
+% \newcommand{\tran}[1]{^{\stackrel{#1}{\mathsf{T}}}}
+
+%\def\@transpose#1{^{\stackrel{#1}{\mathsf{T}}}}
 
 
 % Following macros are borrowed from the package schule2e. Very useful
 % for typesetting row and column vectors easily.
 % Usage: \cvec{1;2;3;4}. The difference between \cvec and \vcvec (and
-% also \rvec and \vrvec are the type of brackets. 
+% also \rvec and \vrvec are the type of brackets.
 
 \makeatletter
 
@@ -382,7 +1065,7 @@
   \left|\hskip-\arraycolsep%
     \begin{array}{#1}\vekZe@lten{#2}\end{array}%
   \hskip-\arraycolsep\right|}
-
+% tabularx is required for the definition of \col@sep
 \def\vekZe@lten#1{\xvekZe@lten#1;vekL@stLinee;}
 \def\vekL@stLinee{vekL@stLinee}
 \def\xvekZe@lten#1;{\def\temp{#1}%
@@ -395,13 +1078,13 @@
   \fi}
 \makeatother
 
-% Shortcut macro for vector bases 
+% Shortcut macro for vector bases
 % (e.g. e_i dyadic e_j dyadic ... and so on)
 % Usage: \basis[vector(default is bold e)]{indices}
 
 \makeatletter
 \def\basis{\@ifnextchar[\@basis%
-        {\@basis[\boe]}}
+        {\@basis[\Ve]}}
 \def\@basis[#1]#2{%
         \begingroup
         \catcode`\ 12
@@ -416,7 +1099,7 @@
                 {\@basisvector_{#1}}%
         \fi
         \ifx\relax#2\relax
-                \let\next\relax 
+                \let\next\relax
         \else
                 \let\next\iterbasis {\,\otimes\,}
         \fi
@@ -427,11 +1110,13 @@
 \catcode`\ 10
 \makeatother
 
-% Shorthand for equation
-\newcommand{\eqn}[1]{
-  \begin{equation}
-    #1
-  \end{equation}
-}
+% How to define a macro with an optional {} argument
 
+% \def\temp#1{#1\unskip}\ifx\temp\empty
+%   <EMPTY>%
+% \else
+%   <NON EMPTY>%
+% \fi
 
+% \edef\temp{\unexpanded\expandafter{\temp{}}}
+% \temp{}

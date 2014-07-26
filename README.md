@@ -1,8 +1,9 @@
-msym-latex
-==========
+# lazyeqn
 
-Short for Math Symbols, this package aims to provide useful macros for
-typesetting mechanics related documents in LaTeX. 
+Provides useful math macros for the lazy.
 
-Peek at the file for more detail. More documentation will be available
-hopefully in time.
+##### Documentation
+
+The documentation is supposed to have all the information needed to use this
+package efficiently.
+To compile the documentation, run `make`, or compile `lazyeqn.tex` any way you want.
