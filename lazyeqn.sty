@@ -48,6 +48,7 @@
       {\hbox{$\mathsurround0pt\scriptscriptstyle#1$}}%
 }}
 
+\newcommand{\eps}{\epsilon}
 \newcommand{\vareps}{\varepsilon}
 \newcommand{\varthe}{\vartheta}
 
@@ -904,17 +905,20 @@
 % Mathematical operators
 \newcommand{\variation}[2]{\frac{\delta #1}{\delta #2}}
 \newcommand{\partd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\epartd}[2]{\partial_{#2} #1}
 \newcommand{\partdrb}[2]{\frac{\partial}{\partial #2}\rbr{#1}}
 \newcommand{\partdsb}[2]{\frac{\partial}{\partial #2}\sbr{#1}}
 \newcommand{\cpartd}[2]{\cfrac{\partial #1}{\partial #2}}
 \newcommand{\ddt}{\frac{\Ud}{\Ud t}}
 \newcommand{\ddelt}{\frac{\partial}{\partial t}}
 \newcommand{\deriv}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\ederiv}[2]{D_{#2} #1}
 \newcommand{\assem}{\mathsf{A}}
 %\newcommand{\assem}{\mathlarger{\mathlarger{\mathlarger{\mathsf{A}}}}}
 \newcommand{\evat}{\bigg|}
 \newcommand{\degree}{\ensuremath{^{\circ}}\xspace}
-
+\newcommand{\suml}[2]{\sum\limits_{#1}^{#2}}
+\newcommand{\dyc}{\otimes}
 % Special fractions and roots
 % \newcommand{\half}{{\mthin\frac{1}{2}\mthin}}
 % \newcommand{\third}{{\mthin\frac{1}{3}\mthin}}
@@ -948,6 +952,19 @@
 \newcommand{\sqonethree}{{\textstyle\mthin\sqrt{\frac{1}{3}}\mthin}}
 \newcommand{\sqtwothree}{{\textstyle\mthin\sqrt{\frac{2}{3}}\mthin}}
 \newcommand{\sqthreetwo}{{\textstyle\mthin\sqrt{\frac{3}{2}}\mthin}}
+
+% Roman letters
+\newcommand{\Rone}{\UI}
+\newcommand{\Rtwo}{\UI\hspace{-0.1em}\UI}
+\newcommand{\Rthree}{\UI\hspace{-0.1em}\UI\hspace{-0.1em}\UI}
+\newcommand{\Rfour}{\UI\hspace{-0.15em}\UV}
+\newcommand{\Rvarfour}{\UI\hspace{-0.13em}\UI\hspace{-0.13em}\UI\hspace{-0.13em}\UI}
+\newcommand{\Rfive}{\UV}
+\newcommand{\Rsix}{\UV\hspace{-0.15em}\UI}
+\newcommand{\Rseven}{\UV\hspace{-0.15em}\UI\hspace{-0.12em}\UI}
+\newcommand{\Reight}{\UV\hspace{-0.18em}\UI\hspace{-0.15em}\UI\hspace{-0.15em}\UI}
+\newcommand{\Rnine}{\UI\hspace{-0.15em}\UX}
+\newcommand{\Rten}{\UX}
 
 \makeatletter
 \newcommand{\linedot}[1]{\dot{\overline{#1}}}
@@ -1000,6 +1017,7 @@
 \newcommand{\sothree}{\ensuremath{{\cal SO}(3)\/}}
 \newcommand{\slthree}{\ensuremath{{\cal S\mkern-1mu L}(3)\/}}
 \newcommand{\AND}{\ensuremath{\quad\textup{and}\quad}}
+\newcommand{\OR}{\ensuremath{\quad\textup{or}\quad}}
 \newcommand{\WITH}{\ensuremath{\quad\textup{with}\quad}}
 \newcommand{\com}{\ensuremath{\quad\textup{,}\quad}}
 \makeatother
