@@ -903,16 +903,19 @@
 
 \newcommand{\rbdot}{\rbr{\cdot}}
 % Mathematical operators
-\newcommand{\variation}[2]{\frac{\delta #1}{\delta #2}}
+\newcommand{\vartn}[2]{\frac{\delta #1}{\delta #2}}
 \newcommand{\partd}[2]{\frac{\partial #1}{\partial #2}}
 \newcommand{\epartd}[2]{\partial_{#2} #1}
-\newcommand{\partdrb}[2]{\frac{\partial}{\partial #2}\rbr{#1}}
-\newcommand{\partdsb}[2]{\frac{\partial}{\partial #2}\sbr{#1}}
 \newcommand{\cpartd}[2]{\cfrac{\partial #1}{\partial #2}}
+%
 \newcommand{\ddt}{\frac{\Ud}{\Ud t}}
 \newcommand{\ddelt}{\frac{\partial}{\partial t}}
+%
+\newcommand{\ddx}{\frac{\Ud}{\Ud x}}
+\newcommand{\ddelx}{\frac{\partial}{\partial x}}
+%
 \newcommand{\deriv}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
-\newcommand{\ederiv}[2]{D_{#2} #1}
+\newcommand{\ederiv}[2]{\UD_{#2} #1}
 \newcommand{\assem}{\mathsf{A}}
 %\newcommand{\assem}{\mathlarger{\mathlarger{\mathlarger{\mathsf{A}}}}}
 \newcommand{\evat}{\bigg|}
@@ -1016,10 +1019,11 @@
 \newcommand{\othree}{\ensuremath{{\cal O}(3)\/}}
 \newcommand{\sothree}{\ensuremath{{\cal SO}(3)\/}}
 \newcommand{\slthree}{\ensuremath{{\cal S\mkern-1mu L}(3)\/}}
-\newcommand{\AND}{\ensuremath{\quad\textup{and}\quad}}
-\newcommand{\OR}{\ensuremath{\quad\textup{or}\quad}}
-\newcommand{\WITH}{\ensuremath{\quad\textup{with}\quad}}
-\newcommand{\com}{\ensuremath{\quad\textup{,}\quad}}
+\newcommand{\eqand}{\ensuremath{\quad\textup{and}\quad}}
+\newcommand{\eqor}{\ensuremath{\quad\textup{or}\quad}}
+\newcommand{\eqwith}{\ensuremath{\quad\textup{with}\quad}}
+\newcommand{\eqcomma}{\ensuremath{\quad\textup{,}\quad}}
+\newcommand{\eqsemi}{\ensuremath{\quad\textup{;}\quad}}
 \makeatother
 
 % transpose macros
