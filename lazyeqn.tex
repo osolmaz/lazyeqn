@@ -58,10 +58,106 @@
 \makeatother
 
 \title{\texttt{lazyeqn}\textnormal{ --- equation macros for \LaTeXe}}
-\author{Onur Solmaz}
+\author{H.O. Solmaz}
 \begin{document}
 \maketitle
-\section{Symbols}
+
+\section{Introduction}
+
+People who use \LaTeX{} everyday eventually realize that vanilla \LaTeX{} with
+amsmath and similar packages is not sufficiently rich with operators or
+symbols to enable abstraction that is necessary for typing fast---at least not
+fast enough. Most of these people realize that their typing involves a lot of
+repetition which can be reduced through abstraction. They define macros for
+symbols, operators, and anything that can be thought up which makes sense in the
+formulatory context.
+
+It cannot be expected from amsmath---which is the primary package for
+typesetting math---to include such \emph{contextual macros}. Its purpose is to
+constitute the robust and elegant basis for which the contextual macros are
+supposed to be built upon; and that it succeeds in. Nevertheless I have
+witnessed the acts of a lot of colleagues of mine who are not aware of such
+capabilities, and do everything the hard, vanilla way.
+
+Surely, independent of their disciplines, Physicists, Chemists, Engineers,
+Mathematicians, Computer Scientists etc. all use some sorts of mathematics.
+Specifically, they solve equation systems, differential equations, algebraic
+equations of different sorts, which all require utilization of different symbols
+in individual contexts. These disciplines often intersect, and can benefit from
+a common package which shall provide all the symbols required by respective
+contexts. \texttt{lazyeqn} aims to be that package. It is about standardization and
+comfort. It reduces the number of characters you are supposed to type by 50\%.
+
+Check out the examples section to see how using \texttt{lazyeqn} can simplify
+your life.
+\section{Examples}
+
+Let's start with a simple and minimalist example.
+Poisson's equation in Cartesian coordinates is written as
+%
+\begin{equation}
+  \left( \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} +
+  \frac{\partial^2}{\partial z^2} \right)\varphi(x,y,z) = f(x,y,z).
+\end{equation}
+%
+I took this example directly from Wikipedia, where the MediaWiki plugin
+\texttt{texvc} validates the equation using a weird parser written in OCaml,
+creates a \LaTeX{} file which contains only that equation and compiles it into a
+PNG. I explain all this, because there are no options to use any packages for
+equations in Wikipedia, and everything must be vanilla amsmath. As such, the
+equation above is typeset with the following code
+%
+\begin{verbatim}
+\begin{equation}
+  \left(\frac{\partial^2}{\partial x^2}+\frac{\partial^2}{\partial y^2}+
+  \frac{\partial^2}{\partial z^2}\right)\varphi(x,y,z)=f(x,y,z)
+\end{equation}
+\end{verbatim}
+%
+Now, with \texttt{lazyeqn}, it becomes
+%
+% \begin{equation}
+%   \rbr{\partdd{}{x}+\partdd{}{y} + \partdd{}{z}}\varphi(x,y,z) = f(x,y,z)
+% \end{equation}
+%
+\begin{verbatim}
+\begin{equation}
+  \rbr{\partdd{}{x}+\partdd{}{y}+\partdd{}{z}}\varphi(x,y,z)=f(x,y,z)
+\end{equation}
+\end{verbatim}
+%
+To compare, vanilla amsmath description has 134 characters, and with
+\texttt{lazyeqn} the number reduces to 72. That is almost a \textbf{50\% reduction}!
+
+Moving onto an example which uses letter symbols (like bold, calligraphic etc.).
+The symmetric fourth-order identity tensor is written as
+%
+\begin{equation}
+  \BFI^{(s)} =\half(\delta_{ik}~\delta_{jl}+\delta_{il}~\delta_{jk})~\basis{ijkl}
+\end{equation}
+%
+With vanilla amsmath, it is
+\begin{verbatim}
+\begin{equation}
+  \boldsymbol{\mathsf{I}}^{(s)}=\frac{1}{2}~(\delta_{ik}~\delta_{jl}+
+  \delta_{il}~\delta_{jk})~\mathbf{e}_i\otimes\mathbf{e}_j\otimes
+  \mathbf{e}_k\otimes\mathbf{e}_l
+\end{equation}
+\end{verbatim}
+%
+However with \texttt{lazyeqn} it becomes
+%
+\begin{verbatim}
+\begin{equation}
+  \BFI =\half(\delta_{ik}~\delta_{jl}+\delta_{il}~\delta_{jk})~\basis{ijkl}
+\end{equation}
+\end{verbatim}
+%
+The reduction ratio this time is 79 to 164, which is 51\% reduction in number of
+characters. It is arguable that time is vary valuable, but with
+\texttt{lazyeqn}, you can type twice as fast, without taking into account
+the additional time required to debug a code twice the size it should be.
+\section{Symbol Macros}
 
 This package aims to make typing of symbols much easier by providing some macros
 prefixing conventions for different math alphabets. For example to type in a
@@ -105,6 +201,8 @@ for alphabets in which this is possible.
   \texttt{bbm} blackboard bold serif & \texttt{bbm} & \verb+\bB+ & $\bBA\bBB\bBC\bBd\bBe\bBf$\\
   \texttt{bbm} blackboard bold sans italic & \texttt{bbm} & \verb+\IB+ & $\IBA\IBB\IBC\IBd\IBe\IBf$\\
   \texttt{bbm} blackboard bold serif italic & \texttt{bbm} & \verb+\iB+ & $\iBA\iBB\iBC\iBd\iBe\iBf$\\
+  Sans serif & none & \verb+\F+ & $\FA\FB\FC\Fd\Fe\Ff$\\
+  Bold sans serif & none & \verb+\F+ & $\BFA\BFB\BFC\BFd\BFe\BFf$\\
   Raph Smith’s Formal Script (uppercase only) & \texttt{rsfs} & \verb+\RS+ & $\RSA\RSB\RSC$\\
   Raph Smith’s Formal Script bold (uppercase only) & \texttt{rsfs} & \verb+\BS+ & $\BSA\BSB\BSC$\\
   \texttt{euscript} cursive (uppercase only) & \texttt{euscript} & \verb+\eul+ & $\eulA\eulB\eulC$\\
@@ -119,7 +217,7 @@ for alphabets in which this is possible.
 \label{tb:math}
 \end{table}
 
-\section{Macros}
+\section{Operator Macros}
 
 \subsection{Braces}
 
@@ -156,9 +254,12 @@ for alphabets in which this is possible.
 \scm{\var}{Variational operator d}{$\var a$}
 \scm{\vartn}{Variation}{$\vartn{a}{b}$}
 \scm{\partd}{Partial derivative}{$\partd{a}{b}$}
+\scm{\partdd}{Double partial derivative}{$\partdd{a}{b}$}
 \scm{\epartd}{Euler type partial derivative}{$\epartd{a}{b}$}
-\scm{\ederiv}{Euler type derivative}{$\ederiv{a}{b}$}
 \scm{\cpartd}{Partial derivative with \texttt{cfrac}}{$\cpartd{a}{b}$}
+\scm{\deriv}{Derivative}{$\deriv{a}{b}$}
+\scm{\derivd}{Double derivative}{$\derivd{a}{b}$}
+\scm{\ederiv}{Euler type derivative}{$\ederiv{a}{b}$}
 %
 \scm{\ddt}{Time derivative}{$\ddt x$}
 \scm{\ddelt}{Partial Time derivative}{$\ddelt x$}
@@ -166,11 +267,11 @@ for alphabets in which this is possible.
 \scm{\ddx}{Arbitrary derivative}{$\ddx a$}
 \scm{\ddelx}{Arbitrary partial derivative}{$\ddelx a$}
 %
-\scm{\deriv}{Derivative}{$\deriv{a}{b}$}
 \scm{\assem}{Assembly symbol}{$\assem$}
 \scm{\evat}{Evaluated at}{$a\evat_{b=0}$}
 \scm{\degree}{Degree symbol}{\degree{}C}
-\scm{\suml{}{}{}}{Summation made easier}{$\suml{i=1}{3}$}
+\scm{\suml}{Summation made easier, with limits}{$\suml{i=1}{3}$}
+\scm{\sumn}{Summation made easier, with nolimits}{$\sumn{i=1}{3}$}
 \scm{\crs}{Cross product (\texttt{times} shortcut)}{$\crs$}
 \scm{\dyc}{Dyadic product (\texttt{otimes} shortcut)}{$\dyc$}
 \scm{\linedot}{Time integral with overline}{$\linedot{\UA}$}
