@@ -12,6 +12,7 @@
 \usepackage{relsize}
 \usepackage{amsmath}
 \usepackage{tabularx}
+\usepackage{rotating}
 % \usepackage{unicode-math}
 % \usepackage{upgreek}
 
@@ -1011,25 +1012,33 @@
    \left[\kern-0.3\wd8\left[#1\right]\kern-0.3\wd8\right]%
 }
 
-\newcommand{\dif}{\mathsf{d}}
+\newcommand{\dif}{\mathsf{d}\mkern 0.8mu}
+
+\newcommand{\del}{\text{\rotatebox[origin=t]{20}{\scalebox{0.95}[1]{$\partial$}}}\mkern -0.7mu}
+
+% \makeatletter
+% \newif\ifkp@upRm% is used in the .fd-file of jkp
+% \DeclareSymbolFont{Letters}{OML}{jkp}{m}{n}
+% \DeclareMathSymbol{\del}{\mathord}{Letters}{128}
+% \makeatother
+
 \newcommand{\var}{\delta}
 \newcommand{\rbdot}{\rbr{\hspace{0.12em}\cdot\hspace{0.12em}}}
 % Mathematical operators
 \newcommand{\vartn}[2]{\frac{\var #1}{\var #2}}
-\newcommand{\partd}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\partdd}[2]{\frac{\partial^2 #1}{\partial #2^2}}
-\newcommand{\epartd}[2]{\partial_{#2} #1}
-\newcommand{\cpartd}[2]{\cfrac{\partial #1}{\partial #2}}
+\newcommand{\partd}[2]{\frac{\del #1}{\del #2}}
+\newcommand{\partdd}[2]{\frac{\del\mkern -1.5mu^2 #1}{\del #2\mkern 1mu ^2}}
+\newcommand{\epartd}[2]{\del\mkern -1mu_{#2}\mkern 1.5mu #1}
 %
 \newcommand{\ddt}{\frac{\dif}{\dif t}}
-\newcommand{\ddelt}{\frac{\partial}{\partial t}}
+\newcommand{\ddelt}{\frac{\del}{\del t}}
 %
 \newcommand{\ddx}{\frac{\dif}{\dif x}}
-\newcommand{\ddelx}{\frac{\partial}{\partial x}}
+\newcommand{\ddelx}{\frac{\del}{\del x}}
 %
-\newcommand{\deriv}[2]{\frac{\dif #1}{\dif #2}}
-\newcommand{\derivd}[2]{\frac{\dif^2 #1}{\dif #2^2}}
-\newcommand{\ederiv}[2]{{\mathsf{D}}_{#2} #1}
+\newcommand{\deriv}[2]{\frac{\dif\mkern 1mu #1}{\dif\mkern 1mu #2}}
+\newcommand{\derivd}[2]{\frac{\dif^2 #1}{\dif\mkern 1mu #2\mkern 1.5mu^2}}
+\newcommand{\ederiv}[2]{{\mathsf{D}}\mkern 1mu_{#2}\mkern 1.5mu #1}
 \newcommand{\assem}{\mathsf{A}}
 %\newcommand{\assem}{\mathlarger{\mathlarger{\mathlarger{\mathsf{A}}}}}
 \newcommand{\evat}{\bigg|}
@@ -1144,12 +1153,26 @@
 \makeatother
 
 % transpose macros
+% \makeatletter
+% \def\tra{\@ifnextchar[{\@@transpose}{\@transpose}} % \tra and \tra[]
+% \def\@@transpose[#1]{^{\mathsf{#1T}}}
+% \def\@transpose{^\mathsf{T}}
+% \def\tratop#1{^{\stackrel{#1}{\mathsf{T}}}} % \tratop[]
+% \makeatother
+
 \makeatletter
-\def\tra{\@ifnextchar[{\@@transpose}{\@transpose}} % \tra and \tra[]
-\def\@@transpose[#1]{^{\mathsf{#1T}}}
-\def\@transpose{^\mathsf{T}}
-\def\tratop#1{^{\stackrel{#1}{\mathsf{T}}}} % \tratop[]
+\newcommand{\raisemath}[1]{\mathpalette{\raisem@th{#1}}}
+\newcommand{\raisem@th}[3]{\raisebox{#1}{$#2#3$}}
 \makeatother
+
+% \def\transposesymbol{\top}
+\def\transposesymbol{\raisemath{-0.09ex}{\mathsf{T}}}
+
+\def\tra{^{\transposesymbol}}
+\def\trab#1{^{#1\transposesymbol}}
+\def\traf#1{^{\transposesymbol#1}}
+\def\trabf#1#2{^{#1\transposesymbol#2}}
+\def\trat#1{^{\stackrel{#1}{\transposesymbol}}} % \tratop[]
 
 % Following macros are borrowed from the package schule2e. Very useful
 % for typesetting row and column vectors easily.
