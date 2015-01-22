@@ -1144,12 +1144,12 @@
 \newcommand{\othree}{\ensuremath{{\cal O}(3)\/}}
 \newcommand{\sothree}{\ensuremath{{\cal SO}(3)\/}}
 \newcommand{\slthree}{\ensuremath{{\cal S\mkern-1mu L}(3)\/}}
-\newcommand{\eqand}{\ensuremath{\quad\textup{and}\quad}}
-\newcommand{\eqor}{\ensuremath{\quad\textup{or}\quad}}
-\newcommand{\eqwith}{\ensuremath{\quad\textup{with}\quad}}
-\newcommand{\eqcomma}{\ensuremath{\quad\textup{,}\quad}}
-\newcommand{\eqsemi}{\ensuremath{\quad\textup{;}\quad}}
 \newcommand{\quadd}[1]{\ensuremath{\quad#1\quad}}
+\newcommand{\eqand}{\quadd{\textup{and}}}
+\newcommand{\eqor}{\quadd{\textup{or}}}
+\newcommand{\eqwith}{\quadd{\textup{with}}}
+\newcommand{\eqcomma}{\quadd{\textup{,}}}
+\newcommand{\eqsemi}{\quadd{\textup{;}}}
 \makeatother
 
 % transpose macros
@@ -1173,6 +1173,8 @@
 \def\traf#1{^{\transposesymbol#1}}
 \def\trabf#1#2{^{#1\transposesymbol#2}}
 \def\trat#1{^{\stackrel{#1}{\transposesymbol}}} % \tratop[]
+
+\def\inv{\ensuremath{ ^{-1}}}
 
 % Following macros are borrowed from the package schule2e. Very useful
 % for typesetting row and column vectors easily.
