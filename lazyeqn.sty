@@ -1271,3 +1271,10 @@
 
 % \edef\temp{\unexpanded\expandafter{\temp{}}}
 % \temp{}
+
+\usepackage{stackengine}
+\def\stacktype{L}
+\stackMath
+\def\dcrs{\mathrel{\abovebaseline[-.4ex]{\rotatebox{45}{\stackon[0pt]{%
+\stackon[0pt]{\rule[.15em]{0.6em}{.05em}}{\rule[.4em]{0.6em}{.05em}}%
+}{\rule{.05em}{0.6em}\rule{.23em}{0pt}\rule{.05em}{0.6em}}}}}}
