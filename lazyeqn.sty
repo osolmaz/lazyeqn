@@ -1023,9 +1023,36 @@
 
 % Macros for easy bracket handling
 \newcommand{\sbr}[1]{\left[#1\right]}
+\newcommand{\sbrn}[1]{[#1]}
+\newcommand{\sbrbig}[1]{\big[#1\big]}
+\newcommand{\sbrBig}[1]{\Big[#1\Big]}
+\newcommand{\sbrbigg}[1]{\bigg[#1\bigg]}
+\newcommand{\sbrBigg}[1]{\Bigg[#1\Bigg]}
+%
 \newcommand{\rbr}[1]{\left(#1\right)}
+\newcommand{\rbrn}[1]{(#1)}
+\newcommand{\rbrbig}[1]{\big(#1\big)}
+\newcommand{\rbrBig}[1]{\Big(#1\Big)}
+\newcommand{\rbrbigg}[1]{\bigg(#1\bigg)}
+\newcommand{\rbrBigg}[1]{\Bigg(#1\Bigg)}
+%
 \newcommand{\cbr}[1]{\left\{#1\right\}}
-\newcommand{\abr}[1]{\left\langle\mkern1mu #1\mkern1mu\right\rangle}
+\newcommand{\cbrn}[1]{\{#1\}}
+\newcommand{\cbrbig}[1]{\big\{#1\big\}}
+\newcommand{\cbrBig}[1]{\Big\{#1\Big\}}
+\newcommand{\cbrbigg}[1]{\bigg\{#1\bigg\}}
+\newcommand{\cbrBigg}[1]{\Bigg\{#1\Bigg\}}
+% \newcommand{\cbr}[1]{\left\{#1\right\}}
+%
+% \newcommand{\abr}[1]{\left\langle\mkern1mu #1\mkern1mu\right\rangle}
+\newcommand{\abr}[1]{\left\langle\mkern1mu #1 \mkern1mu\right\rangle}
+\newcommand{\abrn}[1]{\langle\mkern1mu #1 \mkern1mu\rangle}
+\newcommand{\abrbig}[1]{\big\langle\mkern1mu #1 \mkern1mu\big\rangle}
+\newcommand{\abrBig}[1]{\Big\langle\mkern1mu #1 \mkern1mu\Big\rangle}
+\newcommand{\abrbigg}[1]{\bigg\langle\mkern1mu #1 \mkern1mu\bigg\rangle}
+\newcommand{\abrBigg}[1]{\Bigg\langle\mkern1mu #1 \mkern1mu\Bigg\rangle}
+
+%
 \def\dbr#1{%
    \setbox8\hbox{$\left[\llap{$#1$}\right[$}%
    \left[\kern-0.3\wd8\left[#1\right]\kern-0.3\wd8\right]%
