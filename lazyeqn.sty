@@ -1059,6 +1059,7 @@
 }
 
 \newcommand{\dif}{\mathsf{d}\mkern 0.8mu}
+\newcommand{\Dif}{\mathsf{D}\mkern 0.8mu}
 
 \newcommand{\del}{\text{\rotatebox[origin=t]{20}{\scalebox{0.95}[1]{$\partial$}}}\mkern -0.7mu}
 
@@ -1083,8 +1084,10 @@
 \newcommand{\ddelx}{\frac{\del}{\del x}}
 %
 \newcommand{\deriv}[2]{\frac{\dif\mkern 1mu #1}{\dif\mkern 1mu #2}}
-\newcommand{\derivd}[2]{\frac{\dif^2 #1}{\dif\mkern 1mu #2\mkern 1.5mu^2}}
-\newcommand{\ederiv}[2]{{\mathsf{D}}\mkern 1mu_{#2}\mkern 1.5mu #1}
+\newcommand{\dderiv}[2]{\frac{\dif^2 #1}{\dif\mkern 1mu #2\mkern 1.5mu^2}}
+\newcommand{\Deriv}[2]{\frac{\Dif\mkern 1mu #1}{\Dif\mkern 1mu #2}}
+\newcommand{\DDeriv}[2]{\frac{\Dif^2 #1}{\Dif\mkern 1mu #2\mkern 1.5mu^2}}
+\newcommand{\ederiv}[2]{{\Dif}\mkern 1mu_{#2}\mkern 1.5mu #1}
 \newcommand{\assem}{\mathsf{A}}
 %\newcommand{\assem}{\mathlarger{\mathlarger{\mathlarger{\mathsf{A}}}}}
 \newcommand{\evat}{\bigg|}
