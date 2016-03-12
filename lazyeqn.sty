@@ -130,6 +130,19 @@
 \newcommand{\BPsi    }{\ensuremath \boldsymbol \Psi        \xspace}
 \newcommand{\BOmega  }{\ensuremath \boldsymbol \Omega      \xspace}
 
+% Slanted uppercase Greek
+\newcommand{\SGamma  }{\ensuremath \mathit{\Gamma}      \xspace}
+\newcommand{\SDelta  }{\ensuremath \mathit{\Delta}      \xspace}
+\newcommand{\STheta  }{\ensuremath \mathit{\Theta}      \xspace}
+\newcommand{\SLambda }{\ensuremath \mathit{\Lambda}     \xspace}
+\newcommand{\SXi     }{\ensuremath \mathit{\Xi}         \xspace}
+\newcommand{\SPi     }{\ensuremath \mathit{\Pi}         \xspace}
+\newcommand{\SSigma  }{\ensuremath \mathit{\Sigma}      \xspace}
+\newcommand{\SUpsilon}{\ensuremath \mathit{\Upsilon}    \xspace}
+\newcommand{\SPhi    }{\ensuremath \mathit{\Phi}        \xspace}
+\newcommand{\SPsi    }{\ensuremath \mathit{\Psi}        \xspace}
+\newcommand{\SOmega  }{\ensuremath \mathit{\Omega}      \xspace}
+
 % Roman (upright) Latin
 \newcommand{\Ua}{\ensuremath{\mathrm{a}}\xspace}
 \newcommand{\Ub}{\ensuremath{\mathrm{b}}\xspace}
@@ -1150,6 +1163,14 @@
 \makeatletter
 \newcommand{\linedot}[1]{\dot{\overline{#1}}}
 
+% Over-prime
+\newcommand{\ovp}[1]{\overset{\prime}{#1}}
+\newcommand{\ovpp}[1]{\overset{\prime\prime}{#1}}
+
+% Over-dot
+\newcommand*{\LargerDot}{\raisebox{-0.25ex}{\scalebox{0.37}{$\bullet$}}}
+\newcommand*{\ovd}[1]{\overset{\LargerDot}{#1}}
+\newcommand*{\ovdd}[1]{\overset{\LargerDot\mkern .5mu\LargerDot}{#1}}
 
 % \renewcommand{\div}{\mathop{\operator@font div}}
 % \renewcommand{\arg}{\mathop{\operator@font arg}}
