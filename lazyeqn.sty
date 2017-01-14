@@ -6,63 +6,12 @@
 
 % xspace is required to ensure trailing spaces after macros, when used
 % without curly braces
-% \usepackage{amsmath, amssymb, amscd, MnSymbol,mathrsfs}
-% \usepackage{amsmath,amsbsy}
 \usepackage{xspace}
 \usepackage{relsize}
 \usepackage{amsmath}
 \usepackage{tabularx}
 \usepackage{graphicx}
 \usepackage{rotating}
-
-% \usepackage{unicode-math}
-% \usepackage{upgreek}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Different math symbols, latin and greek %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\AtBeginDocument{%
-   \@ifundefined{pmb}{\def\pmb{\pmbi}}{}%
-   \@ifundefined{boldsymbol}{\def\boldsymbol{\boldsymboli}}{}%
-}
-
-\def\pmbi{\ifmmode\else\expandafter\pmbii\fi\mathpalette\pmbiii}
-\def\pmbii#1#2#3{%
-   \leavevmode\setbox0\hbox{#3}%
-   \kern-.024em\copy0\kern-\wd0%
-   \kern+.024em\raise+.012em\copy0\kern-\wd0%
-   \kern+.024em\copy0\kern-\wd0%
-   \kern-.024em\raise-.012em\box0%
-}
-\def\pmbiii#1#2{%
-   \setbox0\hbox{$\mathsurround0pt#1\mkern.3mu$}%
-   \setbox1\hbox{$\mathsurround0pt#1{#2}$}%
-   \mkern-.4mu\copy1\kern-\wd1%
-   \mkern+.4mu\raise+\wd0\copy1\kern-\wd1%
-   \mkern+.4mu\copy1\kern-\wd1%
-   \mkern-.4mu\raise-\wd0\box1%
-}%
-
-\def\boldsymboli#1{{%
-   \let\@nomath\@gobble\mathversion{bold}%
-   \mathchoice%
-      {\hbox{$\mathsurround0pt\displaystyle#1$}}%
-      {\hbox{$\mathsurround0pt\textstyle#1$}}%
-      {\hbox{$\mathsurround0pt\scriptstyle#1$}}%
-      {\hbox{$\mathsurround0pt\scriptscriptstyle#1$}}%
-}}
-
-\newcommand{\eps}{\epsilon}
-\newcommand{\vareps}{\varepsilon}
-\newcommand{\varthe}{\vartheta}
-
-\DeclareSymbolFont{sfoperators}{OT1}{cmss}{m}{n}
-\DeclareSymbolFontAlphabet{\mathsf}{sfoperators}
-
-\makeatletter
-\def\operator@font{\mathgroup\symsfoperators}
-\makeatother
 
 \makeatletter
 \newcommand\RedeclareMathOperator{%
@@ -81,7 +30,6 @@
 }
 \@onlypreamble\RedeclareMathOperator
 \makeatother
-
 
 % Macros for easy bracket handling
 \newcommand{\sbr}[1]{\left[#1\right]}
