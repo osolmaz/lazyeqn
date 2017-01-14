@@ -1,4 +1,7 @@
 \documentclass[DIV15]{scrartcl}
+% \usepackage[osf,sc]{mathpazo}
+% \usepackage{eulervm}
+
 \usepackage{lazyeqn}
 \usepackage{booktabs}
 \makeatletter
@@ -80,214 +83,142 @@
 \makeatother
 
 \title{\texttt{lazyeqn}\textnormal{ --- equation macros for \LaTeXe}}
-\author{H.O. Solmaz}
+\author{H.\ Onur Solmaz}
 \begin{document}
 \maketitle
 
-\section{Introduction}
+% \section{Introduction}
 
-People who use \LaTeX{} everyday eventually realize that vanilla \LaTeX{} with
-amsmath and similar packages is not sufficiently rich with operators or
-symbols to enable abstraction that is necessary for typing fast---at least not
-fast enough. Most of these people realize that their typing involves a lot of
-repetition which can be reduced through abstraction. They define macros for
-symbols, operators, and anything that can be thought up which makes sense in the
-formulatory context.
+% People who use \LaTeX{} everyday eventually realize that vanilla \LaTeX{} with
+% amsmath and similar packages is not sufficiently rich with operators or
+% symbols to enable abstraction that is necessary for typing fast---at least not
+% fast enough. Most of these people realize that their typing involves a lot of
+% repetition which can be reduced through abstraction. They define macros for
+% symbols, operators, and anything that can be thought up which makes sense in the
+% formulatory context.
 
-It cannot be expected from amsmath---which is the primary package for
-typesetting math---to include such \emph{contextual macros}. Its purpose is to
-constitute the robust and elegant basis for which the contextual macros are
-supposed to be built upon; and that it succeeds in. Nevertheless I have
-witnessed the acts of a lot of colleagues of mine who are not aware of such
-capabilities, and do everything the hard, vanilla way.
+% It cannot be expected from amsmath---which is the primary package for
+% typesetting math---to include such \emph{contextual macros}. Its purpose is to
+% constitute the robust and elegant basis for which the contextual macros are
+% supposed to be built upon; and that it succeeds in. Nevertheless I have
+% witnessed the acts of a lot of colleagues of mine who are not aware of such
+% capabilities, and do everything the hard, vanilla way.
 
-Surely, independent of their disciplines, Physicists, Chemists, Engineers,
-Mathematicians, Computer Scientists etc. all use some sorts of mathematics.
-Specifically, they solve equation systems, differential equations, algebraic
-equations of different sorts, which all require utilization of different symbols
-in individual contexts. These disciplines often intersect, and can benefit from
-a common package which shall provide all the symbols required by respective
-contexts. \texttt{lazyeqn} aims to be that package. It is about standardization and
-comfort. It reduces the number of characters you are supposed to type by 50\%.
+% Surely, independent of their disciplines, Physicists, Chemists, Engineers,
+% Mathematicians, Computer Scientists etc. all use some sorts of mathematics.
+% Specifically, they solve equation systems, differential equations, algebraic
+% equations of different sorts, which all require utilization of different symbols
+% in individual contexts. These disciplines often intersect, and can benefit from
+% a common package which shall provide all the symbols required by respective
+% contexts. \texttt{lazyeqn} aims to be that package. It is about standardization and
+% comfort. It reduces the number of characters you are supposed to type by 50\%.
 
-Check out the examples section to see how using \texttt{lazyeqn} can simplify
-your life.
-\section{Examples}
+% Check out the examples section to see how using \texttt{lazyeqn} can simplify
+% your life.
+% \section{Examples}
 
-Let's start with a simple and minimalist example.
-Poisson's equation in Cartesian coordinates is written as
-%
-\begin{equation}
-  \left( \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} +
-  \frac{\partial^2}{\partial z^2} \right)\varphi(x,y,z) = f(x,y,z).
-\end{equation}
-%
-I took this example directly from Wikipedia, where the MediaWiki plugin
-\texttt{texvc} validates the equation using a weird parser written in OCaml,
-creates a \LaTeX{} file which contains only that equation and compiles it into a
-PNG. I explain all this, because there are no options to use any packages for
-equations in Wikipedia, and everything must be vanilla amsmath. As such, the
-equation above is typeset with the following code
-%
-\begin{verbatim}
-\begin{equation}
-  \left(\frac{\partial^2}{\partial x^2}+\frac{\partial^2}{\partial y^2}+
-  \frac{\partial^2}{\partial z^2}\right)\varphi(x,y,z)=f(x,y,z)
-\end{equation}
-\end{verbatim}
-%
-Now, with \texttt{lazyeqn}, it becomes
-%
+% Let's start with a simple and minimalist example.
+% Poisson's equation in Cartesian coordinates is written as
+% %
 % \begin{equation}
-%   \rbr{\partdd{}{x}+\partdd{}{y} + \partdd{}{z}}\varphi(x,y,z) = f(x,y,z)
+%   \left( \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} +
+%   \frac{\partial^2}{\partial z^2} \right)\varphi(x,y,z) = f(x,y,z).
 % \end{equation}
-%
-\begin{verbatim}
-\begin{equation}
-  \rbr{\partdd{}{x}+\partdd{}{y}+\partdd{}{z}}\varphi(x,y,z)=f(x,y,z)
-\end{equation}
-\end{verbatim}
-%
-To compare, vanilla amsmath description has 134 characters, and with
-\texttt{lazyeqn} the number reduces to 72. That is almost a \textbf{50\% reduction}!
+% %
+% I took this example directly from Wikipedia, where the MediaWiki plugin
+% \texttt{texvc} validates the equation using a weird parser written in OCaml,
+% creates a \LaTeX{} file which contains only that equation and compiles it into a
+% PNG. I explain all this, because there are no options to use any packages for
+% equations in Wikipedia, and everything must be vanilla amsmath. As such, the
+% equation above is typeset with the following code
+% %
+% \begin{verbatim}
+% \begin{equation}
+%   \left(\frac{\partial^2}{\partial x^2}+\frac{\partial^2}{\partial y^2}+
+%   \frac{\partial^2}{\partial z^2}\right)\varphi(x,y,z)=f(x,y,z)
+% \end{equation}
+% \end{verbatim}
+% %
+% Now, with \texttt{lazyeqn}, it becomes
+% %
+% % \begin{equation}
+% %   \rbr{\partdd{}{x}+\partdd{}{y} + \partdd{}{z}}\varphi(x,y,z) = f(x,y,z)
+% % \end{equation}
+% %
+% \begin{verbatim}
+% \begin{equation}
+%   \rbr{\partdd{}{x}+\partdd{}{y}+\partdd{}{z}}\varphi(x,y,z)=f(x,y,z)
+% \end{equation}
+% \end{verbatim}
+% %
+% To compare, vanilla amsmath description has 134 characters, and with
+% \texttt{lazyeqn} the number reduces to 72. That is almost a \textbf{50\% reduction}!
 
-Moving onto an example which uses letter symbols (like bold, calligraphic etc.).
-The symmetric fourth-order identity tensor is written as
-%
-\begin{equation}
-  \BFI^{(s)} =\half(\delta_{ik}~\delta_{jl}+\delta_{il}~\delta_{jk})~\basis{ijkl}
-\end{equation}
-%
-With vanilla amsmath, it is
-\begin{verbatim}
-\begin{equation}
-  \boldsymbol{\mathsf{I}}^{(s)}=\frac{1}{2}~(\delta_{ik}~\delta_{jl}+
-  \delta_{il}~\delta_{jk})~\mathbf{e}_i\otimes\mathbf{e}_j\otimes
-  \mathbf{e}_k\otimes\mathbf{e}_l
-\end{equation}
-\end{verbatim}
-%
-However with \texttt{lazyeqn} it becomes
-%
-\begin{verbatim}
-\begin{equation}
-  \BFI =\half(\delta_{ik}~\delta_{jl}+\delta_{il}~\delta_{jk})~\basis{ijkl}
-\end{equation}
-\end{verbatim}
-%
-The reduction ratio this time is 79 to 164, which is 51\% reduction in number of
-characters. It is arguable that time is vary valuable, but with
-\texttt{lazyeqn}, you can type twice as fast, without taking into account
-the additional time required to debug a code twice the size it should be.
-\section{Symbol Macros}
-
-This package aims to make typing of symbols much easier by providing some macros
-prefixing conventions for different math alphabets. For example to type in a
-upright bold A, one can use the \verb+\VA+ macro which prefixes the letter A
-with the macro character \verb+\+ and the letter \verb+V+, which has been chosen
-as the convention for ``upright bold'' math symbols.
-
-These conventions have been chosen to reduce the number of characters typed,
-whereas also to make sure the equations stay readable in code. For example, one might guess
-the letter B might stand for bold and I might stand for italic in some prefixes,
-but the prefixes don't have to make sense for all alphabets.
-For the list of all prefixes for
-specific alphabets, please refer to Table~\ref{tb:math}.
-
-Normal Greek letters are slanted in lowercase and upright in uppercase. To
-obtain bold Greek letters, use the \verb+\B+ prefix, e.g. \verb+\BXi+ for
-uppercase xi and \verb+\Bxi+ for lowercase xi.
-
-Also, \verb+\vareps+ and \verb+\varthe+ macros are defined as shortcuts to \verb+\varepsilon+ and \verb+\vartheta+
-
-For numbers, the written forms can be prefixed to obtain corresponding symbols,
-like \verb+\Vone+ and \verb+\Izero+. Observe the samples in Table~\ref{tb:math}
-for alphabets in which this is possible.
-
-
-\begin{table}[htbp]
-  \centering
-\begin{tabular}{p{14em} l l l}
-  \toprule
-  Name & \LaTeX{} package & Prefix & Sample \\
-  \midrule
-  Italic letters & none & none & $ABCdef$ \\
-  Upright letters & none & \verb+\U+ & $\UA\UB\UC\Ud\Ue\Uf$\\
-  Italic bold letters & none & \verb+\B+ & $\BA\BB\BC\Bd\Be\Bf\Bone\Btwo\Bthree$ \\
-  Upright bold letters & none & \verb+\V+ & $\VA\VB\VC\Vd\Ve\Vf\Vone\Vtwo\Vthree$ \\
-  Sans serif & none & \verb+\F+ & $\FA\FB\FC\Fd\Fe\Ff$\\
-  Bold sans serif & none & \verb+\BF+ & $\BFA\BFB\BFC\BFd\BFe\BFf$\\
-  Calligraphic letters (uppercase only) & none & \verb+\C+ & $\CA\CB\CC$ \\
-  Calligraphic bold letters (uppercase only) & none & \verb+\BC+ & $\BCA\BCB\BCC$ \\
-  AMS blackboard bold (uppercase only) & \texttt{amsfonts} & \verb+\I+ & $\IA\IB\IC$ \\
-  \texttt{bbold} blackboard bold & \texttt{bbold},\texttt{mathbbol} & \verb+\II+ & $\IIA\IIB\IIC\IId\IIe\IIf\IIone\IItwo\IIthree$ \\
-  \texttt{bbm} blackboard bold sans & \texttt{bbm} & \verb+\BB+ & $\BBA\BBB\BBC\BBd\BBe\BBf$ \\
-  \texttt{bbm} blackboard bold serif & \texttt{bbm} & \verb+\bB+ & $\bBA\bBB\bBC\bBd\bBe\bBf$\\
-  \texttt{bbm} blackboard bold sans italic & \texttt{bbm} & \verb+\IB+ & $\IBA\IBB\IBC\IBd\IBe\IBf$\\
-  \texttt{bbm} blackboard bold serif italic & \texttt{bbm} & \verb+\iB+ & $\iBA\iBB\iBC\iBd\iBe\iBf$\\
-  Ralph Smith’s Formal Script (uppercase only) & \texttt{rsfs} & \verb+\ral+ & $\ralA\ralB\ralC$\\
-  Ralph Smith’s Formal Script bold (uppercase only) & \texttt{rsfs} & \verb+\Bral+ & $\BralA\BralB\BralC$\\
-  \texttt{euscript} cursive (uppercase only) & \texttt{euscript} & \verb+\eul+ & $\eulA\eulB\eulC$\\
-  \texttt{euscript} cursive bold (uppercase only) & \texttt{euscript} & \verb+\Beul+ & $\BeulA\BeulB\BeulC$\\
-  Fraktur & \texttt{yfonts} & \verb+\frak+ & $\frakA\frakB\frakC\fraka\frakb\frakc$\\
-  Fraktur bold & \texttt{yfonts} & \verb+\Bfrak+ & $\BfrakA\BfrakB\BfrakC\Bfraka\Bfrakb\Bfrakc$\\
-  \bottomrule
-\end{tabular}
-\caption{Guide for symbol prefixes for latin letters. For more information about math alphabets,
-  please refer to {\em Table 213 -- Math Alphabets} of The
-  Comprehensive \LaTeX{} Symbol List by Scott Pakin.}
-\label{tb:math}
-\end{table}
-
-% \begin{table}[htbp]
-%   \centering
-% \begin{tabular}{p{14em} l l l}
-%   \toprule
-%   Name & \LaTeX{} package & Prefix & Sample \\
-%   \midrule
-%   % Italic capitals letters & none & none & $\SGamma\SDelta\STheta$ \\
-%   \bottomrule
-% \end{tabular}
-% \caption{Guide for symbol prefixes for greek letters.}
-% \label{tb:greek1}
-% \end{table}
+% Moving onto an example which uses letter symbols (like bold, calligraphic etc.).
+% The symmetric fourth-order identity tensor is written as
+% %
+% \begin{equation}
+%   \BFI^{(s)} =\half(\delta_{ik}~\delta_{jl}+\delta_{il}~\delta_{jk})~\basis{ijkl}
+% \end{equation}
+% %
+% With vanilla amsmath, it is
+% \begin{verbatim}
+% \begin{equation}
+%   \boldsymbol{\mathsf{I}}^{(s)}=\frac{1}{2}~(\delta_{ik}~\delta_{jl}+
+%   \delta_{il}~\delta_{jk})~\mathbf{e}_i\otimes\mathbf{e}_j\otimes
+%   \mathbf{e}_k\otimes\mathbf{e}_l
+% \end{equation}
+% \end{verbatim}
+% %
+% However with \texttt{lazyeqn} it becomes
+% %
+% \begin{verbatim}
+% \begin{equation}
+%   \BFI =\half(\delta_{ik}~\delta_{jl}+\delta_{il}~\delta_{jk})~\basis{ijkl}
+% \end{equation}
+% \end{verbatim}
+% %
+% The reduction ratio this time is 79 to 164, which is 51\% reduction in number of
+% characters. It is arguable that time is vary valuable, but with
+% \texttt{lazyeqn}, you can type twice as fast, without taking into account
+% the additional time required to debug a code twice the size it should be.
 
 
 \section{Operator Macros}
 
 \subsection{Braces}
 
-% \scm{\rbr}{Round braces}{$\rbr{\VA}$}
-\scm{\rbr}{Round braces - adaptive}{$\rbr{\VA}$}
-\scm{\rbrn}{Round braces - normal sized}{$\rbrn{\VA}$}
-\scm{\rbrbig}{Round braces - big}{$\rbrbig{\VA}$}
-\scm{\rbrBig}{Round braces - Big}{$\rbrBig{\VA}$}
-\scm{\rbrbigg}{Round braces - bigg}{$\rbrbigg{\VA}$}
-\scm{\rbrBigg}{Round braces - Bigg}{$\rbrBigg{\VA}$}
+% \scm{\rbr}{Round braces}{$\rbr{A}$}
+\scm{\rbr}{Round braces - adaptive}{$\rbr{A}$}
+\scm{\rbrn}{Round braces - normal sized}{$\rbrn{A}$}
+\scm{\rbrbig}{Round braces - big}{$\rbrbig{A}$}
+\scm{\rbrBig}{Round braces - Big}{$\rbrBig{A}$}
+\scm{\rbrbigg}{Round braces - bigg}{$\rbrbigg{A}$}
+\scm{\rbrBigg}{Round braces - Bigg}{$\rbrBigg{A}$}
 %
-\scm{\sbr}{Square brackets - adaptive}{$\sbr{\VA}$}
-\scm{\sbrn}{Square brackets - normal sized}{$\sbrn{\VA}$}
-\scm{\sbrbig}{Square brackets - big}{$\sbrbig{\VA}$}
-\scm{\sbrBig}{Square brackets - Big}{$\sbrBig{\VA}$}
-\scm{\sbrbigg}{Square brackets - bigg}{$\sbrbigg{\VA}$}
-\scm{\sbrBigg}{Square brackets - Bigg}{$\sbrBigg{\VA}$}
+\scm{\sbr}{Square brackets - adaptive}{$\sbr{A}$}
+\scm{\sbrn}{Square brackets - normal sized}{$\sbrn{A}$}
+\scm{\sbrbig}{Square brackets - big}{$\sbrbig{A}$}
+\scm{\sbrBig}{Square brackets - Big}{$\sbrBig{A}$}
+\scm{\sbrbigg}{Square brackets - bigg}{$\sbrbigg{A}$}
+\scm{\sbrBigg}{Square brackets - Bigg}{$\sbrBigg{A}$}
 %
-\scm{\cbr}{Curly braces - adaptive}{$\cbr{\VA}$}
-\scm{\cbrn}{Curly braces - normal sized}{$\cbrn{\VA}$}
-\scm{\cbrbig}{Curly braces - big}{$\cbrbig{\VA}$}
-\scm{\cbrBig}{Curly braces - Big}{$\cbrBig{\VA}$}
-\scm{\cbrbigg}{Curly braces - bigg}{$\cbrbigg{\VA}$}
-\scm{\cbrBigg}{Curly braces - Bigg}{$\cbrBigg{\VA}$}
+\scm{\cbr}{Curly braces - adaptive}{$\cbr{A}$}
+\scm{\cbrn}{Curly braces - normal sized}{$\cbrn{A}$}
+\scm{\cbrbig}{Curly braces - big}{$\cbrbig{A}$}
+\scm{\cbrBig}{Curly braces - Big}{$\cbrBig{A}$}
+\scm{\cbrbigg}{Curly braces - bigg}{$\cbrbigg{A}$}
+\scm{\cbrBigg}{Curly braces - Bigg}{$\cbrBigg{A}$}
 %
-% \scm{\abr}{Angles}{$\abr{\VA}$}
-\scm{\abr}{Angles - adaptive}{$\abr{\VA}$}
-\scm{\abrn}{Angles - normal sized}{$\abrn{\VA}$}
-\scm{\abrbig}{Angles - big}{$\abrbig{\VA}$}
-\scm{\abrBig}{Angles - Big}{$\abrBig{\VA}$}
-\scm{\abrbigg}{Angles - bigg}{$\abrbigg{\VA}$}
-\scm{\abrBigg}{Angles - Bigg}{$\abrBigg{\VA}$}
+% \scm{\abr}{Angles}{$\abr{A}$}
+\scm{\abr}{Angles - adaptive}{$\abr{A}$}
+\scm{\abrn}{Angles - normal sized}{$\abrn{A}$}
+\scm{\abrbig}{Angles - big}{$\abrbig{A}$}
+\scm{\abrBig}{Angles - Big}{$\abrBig{A}$}
+\scm{\abrbigg}{Angles - bigg}{$\abrbigg{A}$}
+\scm{\abrBigg}{Angles - Bigg}{$\abrBigg{A}$}
 
-\scm{\dbr}{Double square braces - adaptive}{$\dbr{\VA}$} % maybe use rrbracket-llbracket from stmaryd?
+\scm{\dbr}{Double square braces - adaptive}{$\dbr{A}$} % maybe use rrbracket-llbracket from stmaryd?
 \scm{\dbrl}{Left double square bracket}{$\dbrl$}
 \scm{\dbrr}{Right double square bracket}{$\dbrr$}
 %
@@ -311,15 +242,15 @@ for alphabets in which this is possible.
 % \scm{Macro}{Explanation}{Example usage}
 %
 \scm{\transposesymbol}{Transpose symbol}{$\transposesymbol$}
-\scm{\tra}{Transpose}{$\VA\tra$}
+\scm{\tra}{Transpose}{$ A\tra$}
 % \scm{\tra[]}{Transpose with preceding argument}{$\tra[-]$}
-\scm{\trab}{Transpose with preceding argument}{$\VA\trab{-}$}
-\scm{\traf}{Transpose with following argument}{$\VA\traf{-1}$}
-\scm{\trabf}{Transpose with preceding and following argument}{$\VA\trabf{-}{-1}$}
-\scm{\trat}{Transpose with argument on top}{$\VA\trat{23}$}
-\scm{\inv}{Inverse}{$\VA\inv$}
-\scm{\invtra}{Invert, transpose}{$\VA\invtra$}
-\scm{\trainv}{Transpose, invert}{$\VA\trainv$}
+\scm{\trab}{Transpose with preceding argument}{$ A\trab{-}$}
+\scm{\traf}{Transpose with following argument}{$ A\traf{-1}$}
+\scm{\trabf}{Transpose with preceding and following argument}{$ A\trabf{-}{-1}$}
+\scm{\trat}{Transpose with argument on top}{$ A\trat{23}$}
+\scm{\inv}{Inverse}{$ A\inv$}
+\scm{\invtra}{Invert, transpose}{$ A\invtra$}
+\scm{\trainv}{Transpose, invert}{$ A\trainv$}
 \scm{\ovd}{Time derivative, over-dot}{$\ovd{a}$}
 \scm{\ovd}{Double over-dot}{$\ovdd{a}$}
 \scm{\ovd}{Spatial derivative, over-prime}{$\ovp{a}$}
@@ -348,39 +279,39 @@ for alphabets in which this is possible.
 \scm{\degree}{Degree symbol}{\degree{}C}
 \scm{\suml}{Summation made easier, with limits}{$\suml{i=1}{3}$}
 \scm{\sumn}{Summation made easier, with nolimits}{$\sumn{i=1}{3}$}
-\scm{\dtp}{Dot product (\texttt{cdot} shortcut)}{$\VA\dtp\VB$}
-\scm{\crs}{Cross product (\texttt{times} shortcut)}{$\VA\crs\VB$}
-\scm{\dcrs}{Double cross product }{$\VA\dcrs\VB$}
-\scm{\dyc}{Dyadic product (\texttt{otimes} shortcut)}{$\VA\dyc\VB$}
-\scm{\linedot}{Time integral with overline}{$\linedot{\UA}$}
-\scm{\DIV}{DIVergence}{$\DIV\VA$}
-\scm{\Div}{Divergence}{$\Div\VA$}
-\scm{\div}{divergence}{$\div\VA$}
-\scm{\curl}{Curl}{$\curl\VA$}
-\scm{\rot}{Rotation}{$\rot\VA$}
-\scm{\proj}{Projection}{$\proj\VA$}
-\scm{\sign}{Sign function}{$\sign\VA$}
-\scm{\unit}{Unit function}{$\unit\VA$}
-\scm{\arg}{arg}{$\arg\VA$}
-\scm{\Arg}{Arg}{$\Arg\VA$}
-\scm{\sym}{Symmetric}{$\sym\VA$}
-\scm{\TR}{TRace}{$\TR\VA$}
-\scm{\tr}{trace}{$\tr\VA$}
-\scm{\trial}{Trial function}{$\trial\VA$}
-\scm{\DEV}{DEViatoric}{$\DEV\VA$}
-\scm{\dev}{deviatoric}{$\dev\VA$}
-\scm{\GRAD}{GRADient}{$\GRAD\VA$}
-\scm{\Grad}{Gradient}{$\Grad\VA$}
-\scm{\grad}{gradient}{$\grad\VA$}
-\scm{\Lin}{Linearization}{$\Lin\VA$}
-\scm{\lin}{linearization}{$\lin\VA$}
-\scm{\skw}{Skew}{$\skw\VA$}
-\scm{\loc}{loc}{$\loc\VA$}
-\scm{\cof}{Cofactor}{$\cof\VA$}
-\scm{\reac}{reac}{$\reac\VA$}
-\scm{\pind}{pind}{$\pind\VA$}
+\scm{\dtp}{Dot product (\texttt{cdot} shortcut)}{$ A\dtp B$}
+\scm{\crs}{Cross product (\texttt{times} shortcut)}{$ A\crs B$}
+\scm{\dcrs}{Double cross product }{$ A\dcrs B$}
+\scm{\dyc}{Dyadic product (\texttt{otimes} shortcut)}{$ A\dyc B$}
+\scm{\linedot}{Time integral with overline}{$\linedot{A}$}
+\scm{\DIV}{DIVergence}{$\DIV A$}
+\scm{\Div}{Divergence}{$\Div A$}
+\scm{\div}{divergence}{$\div A$}
+\scm{\curl}{Curl}{$\curl A$}
+\scm{\rot}{Rotation}{$\rot A$}
+\scm{\proj}{Projection}{$\proj A$}
+\scm{\sign}{Sign function}{$\sign A$}
+\scm{\unit}{Unit function}{$\unit A$}
+\scm{\arg}{arg}{$\arg A$}
+\scm{\Arg}{Arg}{$\Arg A$}
+\scm{\sym}{Symmetric}{$\sym A$}
+\scm{\TR}{TRace}{$\TR A$}
+\scm{\tr}{trace}{$\tr A$}
+\scm{\trial}{Trial function}{$\trial A$}
+\scm{\DEV}{DEViatoric}{$\DEV A$}
+\scm{\dev}{deviatoric}{$\dev A$}
+\scm{\GRAD}{GRADient}{$\GRAD A$}
+\scm{\Grad}{Gradient}{$\Grad A$}
+\scm{\grad}{gradient}{$\grad A$}
+\scm{\Lin}{Linearization}{$\Lin A$}
+\scm{\lin}{linearization}{$\lin A$}
+\scm{\skw}{Skew}{$\skw A$}
+\scm{\loc}{loc}{$\loc A$}
+\scm{\cof}{Cofactor}{$\cof A$}
+\scm{\reac}{reac}{$\reac A$}
+\scm{\pind}{pind}{$\pind A$}
 \scm{\ndim}{ndim}{$\ndim$}
-\scm{\diag}{diag}{$\diag\VA$}
+\scm{\diag}{diag}{$\diag A$}
 \scm{\veci{}}{Indexed list representation}{$\veci{a}$}
 \scm{\dV}{Volume element}{$\dV$}
 \scm{\dv}{Volume element}{$\dv$}
@@ -389,8 +320,8 @@ for alphabets in which this is possible.
 \scm{\dS}{Surface element}{$\dS$}
 \scm{\dx}{Line element}{$\dx$}
 \scm{\dt}{Time difference}{$\dt$}
-\scm{\Abs{}}{Absolute value}{$\Abs{\VA}$}
-\scm{\Norm{}}{Norm}{$\Norm{\VA}$}
+\scm{\Abs{}}{Absolute value}{$\Abs{A}$}
+\scm{\Norm{}}{Norm}{$\Norm{A}$}
 \scm{\basis{}}{Vector bases}{$\basis{ijkl}$}
 \scm{\rbdot}{Operands}{$\div\rbdot$}
 \scm{\so}{Special orthogonal group}{$\so$}
